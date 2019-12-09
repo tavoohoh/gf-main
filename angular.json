@@ -52,7 +52,7 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/scss"
+                "src/sass"
               ]
             },
             "scripts": []
@@ -151,5 +151,8 @@
       }
     }
   },
-  "defaultProject": "gian-faraone"
+  "defaultProject": "gian-faraone",
+  "cli": {
+    "analytics": "6b26e38c-fd65-4e62-a96e-7d49765d2239"
+  }
 }
