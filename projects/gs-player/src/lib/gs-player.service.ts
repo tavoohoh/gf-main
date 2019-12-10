@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { IGsStreamState } from './gs-player.interface';
 import * as moment from 'moment';
-import { IStreamState } from '@app/_interfaces/stream-state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AudioService {
+export class GsPlayerService {
   private stop$ = new Subject();
   private audioObj = new Audio();
   audioEvents = [
@@ -22,7 +22,7 @@ export class AudioService {
     'loadstart'
   ];
 
-  private state: IStreamState = {
+  private state: IGsStreamState = {
     playing: false,
     readableCurrentTime: '',
     readableDuration: '',
@@ -32,13 +32,13 @@ export class AudioService {
     error: false,
   };
 
-  private stateChange: BehaviorSubject<IStreamState> = new BehaviorSubject(
+  private stateChange: BehaviorSubject<IGsStreamState> = new BehaviorSubject(
     this.state
   );
 
   constructor() { }
 
-  getState(): Observable<IStreamState> {
+  getState(): Observable<IGsStreamState> {
     return this.stateChange.asObservable();
   }
 
@@ -140,6 +140,7 @@ export class AudioService {
 
   formatTime(time: number, format: string = 'HH:mm:ss') {
     const momentTime = time * 1000;
+
     return moment.utc(momentTime).format(format);
   }
 

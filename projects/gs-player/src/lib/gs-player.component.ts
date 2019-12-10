@@ -1,57 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { AudioService } from './audio.service';
-import { MusicService } from './music.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { GsPlayerService } from './gs-player.service';
 
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.sass']
+  selector: 'lib-gs-player',
+  templateUrl: './gs-player.component.html',
+  styleUrls: ['./gs-player.component.sass']
 })
-export class PlayerComponent implements OnInit {
-  files: Array<any> = [];
-  state;
-  currentFile: any = {};
+export class GsPlayerComponent implements OnInit {
+  public files: Array<any> = [];
+  public state;
+  public currentFile: any = {};
 
   constructor(
-    public audioService: AudioService,
-    public musicService: MusicService
+    public playerService: GsPlayerService
   ) { }
 
   ngOnInit() {
     // get media files
-    this.musicService.getFiles().subscribe(files => {
-      this.files = files;
-    });
+    // this.musicService.getFiles().subscribe(files => {
+    //   this.files = files;
+    // });
 
     // listen to stream state
-    this.audioService.getState().subscribe(state => {
+    this.playerService.getState().subscribe(state => {
       this.state = state;
     });
   }
 
   playStream(url) {
-    this.audioService.playStream(url).subscribe(events => {
+    this.playerService.playStream(url).subscribe(events => {
       // listening for fun here
     });
   }
 
   openFile(file, index) {
     this.currentFile = { index, file };
-    this.audioService.stop();
+    this.playerService.stop();
     this.playStream(file.url);
   }
 
   pause() {
-    this.audioService.pause();
+    this.playerService.pause();
   }
 
   play() {
-    this.audioService.play();
+    this.playerService.play();
   }
 
   stop() {
-    this.audioService.stop();
+    this.playerService.stop();
   }
 
   next() {
@@ -75,6 +73,7 @@ export class PlayerComponent implements OnInit {
   }
 
   onSliderChangeEnd(change) {
-    this.audioService.seekTo(change.value);
+    this.playerService.seekTo(change.value);
   }
 }
+

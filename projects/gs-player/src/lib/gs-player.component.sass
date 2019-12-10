@@ -1,0 +1,44 @@
+// Colors
+$black: #000000
+$slider: #cfcfcf
+$sliderHover: #bbbbbb
+$sliderThumb: #7e7e7e
+$sliderThumbHover: #686868
+
+// Slider
+.slidecontainer
+  width: 100%
+
+.slider
+  -webkit-appearance: none
+  width: 100%
+  height: 4px
+  background: $slider
+  outline: none
+  opacity: 0.7
+  -webkit-transition: .2s
+  transition: opacity .2s
+
+  &:hover
+    opacity: 1
+    background: $sliderHover
+
+  &::-webkit-slider-thumb
+    -webkit-appearance: none
+    appearance: none
+    width: 8px
+    height: 8px
+    border-radius: 50%
+    background: $sliderThumb
+    cursor: pointer
+    &:hover
+      background: $sliderThumbHover
+
+  &::-moz-range-thumb
+    width: 8px
+    height: 8px
+    border-radius: 50%
+    background: $sliderThumb
+    cursor: pointer
+    &:hover
+      background: $sliderThumbHover
