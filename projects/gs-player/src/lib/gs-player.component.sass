@@ -1,44 +1,122 @@
-// Colors
-$black: #000000
-$slider: #cfcfcf
-$sliderHover: #bbbbbb
-$sliderThumb: #7e7e7e
-$sliderThumbHover: #686868
+/*****************************************\
+  Index
+  - Variables
+  - Player slider
+  - Player layout
+/*****************************************/
 
-// Slider
+/**
+ * Variables
+ */
+$bold: #222
+$light: #444
+$slider: #eee
+$sliderThumb: #eee
+$sliderHover: darken($slider, 10)
+$sliderThumbHover: darken($sliderThumb, 20)
+$transition: .2s ease-in-out
+
+/**
+ * Player slider
+ */
 .slidecontainer
   width: 100%
 
-.slider
-  -webkit-appearance: none
-  width: 100%
-  height: 4px
-  background: $slider
-  outline: none
-  opacity: 0.7
-  -webkit-transition: .2s
-  transition: opacity .2s
-
-  &:hover
-    opacity: 1
-    background: $sliderHover
-
-  &::-webkit-slider-thumb
+  .slider
     -webkit-appearance: none
-    appearance: none
-    width: 8px
-    height: 8px
-    border-radius: 50%
-    background: $sliderThumb
+    width: 100%
+    height: 4px
+    background: $slider
+    border-radius: 12px
+    outline: none
+    opacity: 0.7
     cursor: pointer
-    &:hover
-      background: $sliderThumbHover
+    -webkit-transition: $transition
+    transition: opacity $transition
 
-  &::-moz-range-thumb
-    width: 8px
-    height: 8px
-    border-radius: 50%
-    background: $sliderThumb
-    cursor: pointer
     &:hover
-      background: $sliderThumbHover
+      opacity: 1
+      background: $sliderHover
+
+    &::-webkit-slider-thumb
+      border-color: $sliderThumbHover
+      -webkit-appearance: none
+      appearance: none
+      width: 8px
+      height: 8px
+      border-radius: 50%
+      background: $sliderThumb
+      cursor: pointer
+      &:hover, &:active, &:focus
+        background: $sliderThumbHover
+
+    &::-moz-range-thumb
+      border-color: $sliderThumbHover
+      width: 8px
+      height: 8px
+      border-radius: 50%
+      background: $sliderThumb
+      cursor: pointer
+      &:hover, &:active, &:focus
+        background: $sliderThumbHover
+
+/**
+ * Player layout
+ */
+
+.gs-player
+  padding: 2rem
+
+  .media-title
+    text-align: center
+    font-weight: bold
+    color: $bold
+    margin-bottom: 1rem
+  
+  .media-ui
+    display: grid
+    grid-template-columns: 100px auto 50px
+    gap: 2rem
+
+    @media screen and (max-width: 900px)
+      gap: 1rem
+
+    .media-control, .media-status, .media-list
+      display: grid
+      span
+        align-self: center
+        margin: 0 auto
+
+    .media-control
+      grid-template-columns: repeat(3, 1fr)
+      gap: .5rem
+
+      @media screen and (max-width: 900px)
+        gap: .25rem
+
+    .media-status
+      grid-template-columns: 40px auto 40px
+      gap: 2rem
+
+      @media screen and (max-width: 900px)
+        gap: 1rem
+    
+    // .media-list
+
+/**
+ * Icons/SVG
+ */
+svg.icon
+  cursor: pointer
+  fill: $bold
+  transition: $transition
+  &:hover
+    fill: lighten($bold, 25)
+
+/**
+ * UI status
+ */
+.disabled
+  opacity: .3
+  cursor: default
+  pointer-events: none
