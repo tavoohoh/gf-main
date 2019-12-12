@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 
+import { GsPlayerModule } from 'gs-player';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +19,8 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    GsPlayerModule
   ]
 })
 export class MainModule { }

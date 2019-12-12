@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~9.0.0-rc.5",
     "@angular/platform-browser-dynamic": "~9.0.0-rc.5",
     "@angular/router": "~9.0.0-rc.5",
+    "gs-player": "^0.1.6-beta",
     "hammerjs": "^2.0.8",
     "moment": "^2.24.0",
     "rxjs": "~6.5.3",
