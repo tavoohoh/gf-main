@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerFile, PlayerTheme, PlayerThemeLight } from 'gs-player';
+import { PlayerFile, PlayerTheme, PlayerThemeLight, PlayerConfig } from 'gs-player';
 
 @Component({
   selector: 'app-main',
@@ -9,6 +9,9 @@ import { PlayerFile, PlayerTheme, PlayerThemeLight } from 'gs-player';
 export class MainComponent implements OnInit {
   public files: Array<PlayerFile>;
   public playerTheme: PlayerTheme = PlayerThemeLight;
+  public playerConfig: PlayerConfig = {
+    artistAlbumSeparator: '-'
+  };
 
   constructor() { }
 
