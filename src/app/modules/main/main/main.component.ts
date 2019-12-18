@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { PlayerFile, PlayerTheme, PlayerThemeLight, PlayerConfig } from 'gs-player';
+import { AudioService } from '@app/services/audio.service';
 
 @Component({
   selector: 'app-main',
@@ -13,9 +15,14 @@ export class MainComponent implements OnInit {
     artistAlbumSeparator: '-'
   };
 
-  constructor() { }
+  constructor(
+    private audioService: AudioService
+  ) { }
 
   ngOnInit() {
+    this.audioService.getFiles().subscribe(files => {
+      this.files = files;
+    });
   }
 
 }
