@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 
 import { GsPlayerModule } from 'gs-player';
+import { WidgetsModule } from '@app/_widgets/widgets.module';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
+    WidgetsModule,
     GsPlayerModule
   ]
 })
