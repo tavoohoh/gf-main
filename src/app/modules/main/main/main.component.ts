@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PlayerFile, PlayerTheme, PlayerThemeLight, PlayerConfig } from 'gs-player';
+import { PlayerFile, PlayerTheme, PlayerThemeDark, PlayerConfig, PlayerThemeLight } from 'gs-player';
 import { AudioService } from '@app/services/audio.service';
 
 @Component({
@@ -10,7 +10,10 @@ import { AudioService } from '@app/services/audio.service';
 })
 export class MainComponent implements OnInit {
   public files: Array<PlayerFile>;
-  public playerTheme: PlayerTheme = PlayerThemeLight;
+  public playerTheme: PlayerTheme = {
+    primary: 'red',
+    secondary: 'blue'
+  };
   public playerConfig: PlayerConfig = {
     artistAlbumSeparator: '-'
   };

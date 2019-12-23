@@ -2,31 +2,31 @@ import { NavigationInterface } from '@app/_interfaces';
 
 export const NAVIGATION: Array<NavigationInterface> = [
   {
-    text: 'HOME',
+    text: 'Home',
     url: '/'
   },
   {
-    text: 'BIO',
+    text: 'Bio',
     url: '/bio'
   },
   {
-    text: 'GALLERY',
+    text: 'Gallery',
     url: '/gallery'
   },
   {
-    text: 'MUSIC',
+    text: 'Music',
     url: '/music'
   },
   {
-    text: 'VIDEO',
+    text: 'Video',
     url: '/video'
   },
   {
-    text: 'DATES',
+    text: 'Dates',
     url: '/dates'
   },
   {
-    text: 'CONTACT',
+    text: 'Contact',
     url: '/contact'
   }
 ];
