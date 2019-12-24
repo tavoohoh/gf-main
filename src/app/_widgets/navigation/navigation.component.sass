@@ -1,28 +1,39 @@
 @import 'variables'
 
-h1
-  color: $white
-  text-align: center
-  font-size: 2.2rem
-  margin: 0 0 1rem
-  span
-    color: $gold
-  
-.navbar
-  width: max-content
-  padding: 1rem
+.navigation
+  display: grid
+  grid-template-columns: auto
+  grid-template-rows: min-content min-content
+  height: $navbarHeight
+  width: 100%
+  max-width: $bodyWidth
+  align-content: center
   margin: auto
-  
-  a
-    font-size: .9rem
+
+  h1
     color: $white
-    padding: .25rem .5rem
     text-align: center
-    opacity: .5
-    text-decoration: none
-  
-  a:active, a:focus, a.activeLink
-    opacity: 1
-  
-  a:hover
-    opacity: .75
+    font-size: 2.2rem
+    margin: 0 0 1rem
+    span
+      color: $gold
+    
+  .navbar
+    width: max-content
+    padding: 1rem
+    margin: auto
+    align-content: center
+
+    a
+      font-size: .9rem
+      color: $white
+      padding: .25rem .5rem
+      text-align: center
+      opacity: .5
+      text-decoration: none
+    
+    a:active, a:focus, a.activeLink
+      opacity: 1
+    
+    a:hover
+      opacity: .75

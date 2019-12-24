@@ -1,8 +1,13 @@
-<section class="body">
+<section class="view">
   <app-navigation></app-navigation>
-  <gs-player
-    [files]="files"
-    [playerTheme]="playerTheme"
-    [playerConfig]="playerConfig">
-  </gs-player>
+  <div class="content">
+    <div class="player">
+      <gs-player
+        [files]="files"
+        [playerTheme]="playerTheme"
+        [playerConfig]="'asd'">
+      </gs-player>
+    </div>
+  </div>
+  <app-footer></app-footer>
 </section>

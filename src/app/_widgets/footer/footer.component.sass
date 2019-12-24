@@ -1,0 +1,61 @@
+@import 'variables'
+
+footer
+  background-color: $lightGray
+  padding: 1rem
+  
+  .content
+    display: grid
+    grid-template-columns: max-content auto max-content
+    gap: 1rem
+    height: $footerHeight
+    width: 100%
+    max-width: $bodyWidth
+    margin: 0 auto
+
+    .media,
+    .info,
+    .maillist
+      width: 100%
+      align-self: center
+    
+    .media
+      a
+        display: inline-block
+        margin-right: 1rem
+        &:last-child
+          margin: 0
+        svg
+          fill: $black
+          transition: $transition
+          &:hover
+            fill: $gold
+
+
+    .info
+      font-size: .9rem
+      text-align: center
+
+    .maillist
+      display: grid
+      grid-template-columns: 140px 90px
+      gap: 1rem
+
+      input, button
+        padding: .7rem 1rem
+        border: none
+        outline: none
+
+      input
+        background: rgba(255, 255, 255, .5)
+        color: $black
+        width: 100%
+      
+      button
+        cursor: pointer
+        transition: $transition
+        background-color: $gold
+        color: $white
+
+        &:hover
+          background-color: darken($gold, 5)
