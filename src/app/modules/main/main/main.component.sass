@@ -1,7 +1,15 @@
 @import 'variables'
 
 .view
-  background: $black
+  background-color: $black
+  background-position: 50% 30%
+  background-repeat: no-repeat
+  background-image: url('../../../../assets/images/gian-faraone-image.jpg')
+  background-size: 60%
+
+  @media screen and ( max-width: $mobile)
+    background-size: 140%
+    background-position: 50% 20%
 
   .content
     position: relative

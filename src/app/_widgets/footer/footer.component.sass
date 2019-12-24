@@ -31,7 +31,6 @@ footer
           &:hover
             fill: $gold
 
-
     .info
       font-size: .9rem
       text-align: center
@@ -59,3 +58,13 @@ footer
 
         &:hover
           background-color: darken($gold, 5)
+
+    @media screen and (max-width: $mobile)
+      height: unset
+      grid-template-columns: auto
+      grid-template-rows: repeat(3, min-content)
+
+      .media,
+      .maillist
+        width: max-content
+        margin: auto
