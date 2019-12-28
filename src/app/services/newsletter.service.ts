@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment as ENV } from 'src/environments/environment';
 import { NewsletterSubscription, UserEmailType, UserStatus, UserLanguage } from '@app/_interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class NewsletterService {
     private http: HttpClient
   ) { }
 
-  public signup(email: string) {
+  public signup(email: string): Observable<any> {
     const url = `${ENV.api.newsletter.url}lists/${ENV.api.newsletter.listId}`;
     const body: NewsletterSubscription = {
       members: [
@@ -27,6 +28,6 @@ export class NewsletterService {
       update_existing: false
     };
 
-    this.http.post(url, body);
+    return this.http.post(url, body);
   }
 }

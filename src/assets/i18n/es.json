@@ -1,0 +1,18 @@
+{
+  "SIGN_UP": "Suscribirme",
+  "PROVIDE_VALID_EMAIL_ADDRESS": "Proporcione una dirección de correo electrónico válida",
+  "FOR_BOOKING_INQUIRES": "Para consultas sobre reservas envíenos un correo electrónico a",
+  "NAVIGATION": {
+    "HOME": "Inicio",
+    "BIO": "Bio",
+    "Gallery": "Galería",
+    "Music": "Música",
+    "Video": "Video",
+    "DATES": "Fechas",
+    "CONTACT": "Contacto"
+  },
+  "TOAST": {
+    "THANKS_FOR_SUBSCRIBING": "Gracias por suscribirse",
+    "THERE_WAS_AN_ERROR_TRYING_TO_SUBSCRIBE": "Hubo un error al intentar suscribirse"
+  }
+}

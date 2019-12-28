@@ -45,15 +45,33 @@
     </div>
 
     <div class="info">
-      {{ 'For bookings inquires email us at' }}
+      {{ 'FOR_BOOKING_INQUIRES' | translate }}
       <a href="mailto:booking@gianfaraone.com">booking@gianfaraone.com</a>
     </div>
 
-    <form class="maillist">
-      <input type="text" [placeholder]="'Email Address'">
-      <button type="submit">
-        {{ 'Sign up' }}
-      </button>
-    </form>
+    <ng-container
+      *ngTemplateOutlet="newsLetterSubmited ? newsLetterSubscriptionResult : newsLetterFormTemplate"></ng-container>
   </div>
 </footer>
+
+<ng-template #newsLetterFormTemplate>
+  <form class="newsletter" [formGroup]="newsLetterForm" (ngSubmit)="submitNewsLetterForm()">
+    <input type="text" [placeholder]="'Email Address'">
+    <small class="text-danger" *ngIf="validateEmailField()">
+      {{ 'PROVIDE_VALID_EMAIL_ADDRESS' | translate }}
+    </small>
+    <button type="submit">
+      {{ 'SIGN_UP' | translate }}
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #newsLetterSubscriptionResult>
+  <span [ngClass]="newsLetterFormSuccess ? 'newsletter_success' : 'newsletter_failed'">
+    {{ (
+        newsLetterFormSuccess ?
+        'TOAST.THANKS_FOR_SUBSCRIBING' :
+        'TOAST.THERE_WAS_AN_ERROR_TRYING_TO_SUBSCRIBE'
+      ) | translate }}
+  </span>
+</ng-template>
