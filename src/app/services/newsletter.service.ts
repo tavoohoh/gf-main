@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment as ENV } from 'src/environments/environment';
 import { NewsletterSubscription, UserEmailType, UserStatus, UserLanguage } from '@app/_interfaces';
@@ -15,11 +15,19 @@ export class NewsletterService {
   ) { }
 
   public signup(email: string): Observable<any> {
-    const url = `${ENV.api.newsletter.url}lists/${ENV.api.newsletter.listId}`;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `apikey ${ENV.api.newsletter.key}`
+      })
+    };
+
+    const url = `${ENV.api.newsletter.url}lists/${ENV.api.newsletter.listId}/members`;
     const body: NewsletterSubscription = {
       members: [
         {
-          email_address: email,
+          email_address: email.toLowerCase(),
           email_type: UserEmailType.HTML,
           status: UserStatus.SUBSCRIBED,
           language: UserLanguage[window.localStorage.getItem('userLanguage') || 'en']
@@ -28,6 +36,6 @@ export class NewsletterService {
       update_existing: false
     };
 
-    return this.http.post(url, body);
+    return this.http.post(url, body, httpOptions);
   }
 }

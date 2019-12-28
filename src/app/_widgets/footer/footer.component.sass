@@ -37,7 +37,7 @@ footer
 
     .newsletter
       display: grid
-      grid-template-columns: 140px 90px
+      grid-template-columns: 130px 100px
       gap: 1rem
 
       input, button
@@ -49,6 +49,12 @@ footer
         background: rgba(255, 255, 255, .5)
         color: $black
         width: 100%
+
+      small
+        grid-column: 1 / 3
+        grid-row: 2
+        font-size: .7rem
+        color: $darkRed
       
       button
         cursor: pointer
@@ -68,3 +74,22 @@ footer
       .newsletter
         width: max-content
         margin: auto
+
+        small
+          grid-row: 1
+
+.newsletter_success, .newsletter_failed
+  align-self: center
+  padding: 1rem
+  font-size: .8rem
+  color: $white
+
+  @media screen and (max-width: $mobile)
+    padding: .7rem
+    text-align: center
+
+.newsletter_success
+  background: $gold
+
+.newsletter_failed
+  background: $darkRed

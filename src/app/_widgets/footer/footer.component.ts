@@ -23,30 +23,34 @@ export class FooterComponent implements OnInit {
 
   private initNewsLetterForm() {
     this.newsLetterForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
   public submitNewsLetterForm() {
     if (this.newsLetterForm.invalid) {
-      console.error('form invalid:', this.newsLetterForm);
+      console.error('form invalid:', this.newsLetterForm.controls);
       return;
     }
 
     this.newsLetterSubmited = true;
-    this.newsLetterFormSuccess = true;
 
-    // this.newsLetterService.signup(this.newsLetterForm.controls.email.value)
-    //   .subscribe(
-    //     () => this.newsLetterFormSuccess = true,
-    //     error => {
-    //       this.newsLetterFormSuccess = false;
-    //       console.error('News Letter subscription failed: ', error);
-    //     });
+    this.newsLetterService.signup(this.newsLetterForm.controls.email.value)
+      .subscribe(
+        () => this.newsLetterFormSuccess = true,
+        error => {
+          this.newsLetterFormSuccess = false;
+          console.error('News Letter subscription failed: ', error);
+
+          setTimeout(() => {
+            this.newsLetterSubmited = false;
+            this.newsLetterForm.reset();
+          }, 5000);
+        });
   }
 
   public validateEmailField() {
-    return this.newsLetterForm.controls.email.errors && this.newsLetterForm.controls.email.errors.pattern;
+    return this.newsLetterForm.controls.email.errors && this.newsLetterForm.controls.email.errors.email;
   }
 
 }
