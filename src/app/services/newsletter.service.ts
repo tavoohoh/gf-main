@@ -15,7 +15,7 @@ export class NewsletterService {
   ) { }
 
   public signup(email: string): Observable<any> {
-    const url = `${ENV.api.functions}/newsletter`;
+    const url = `${ENV.api.functions}/members`;
     const body: Member = {
       email_address: email.toLowerCase(),
       email_type: UserEmailType.HTML,
