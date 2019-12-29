@@ -6,7 +6,7 @@ footer
   
   .content
     display: grid
-    grid-template-columns: max-content auto max-content
+    grid-template-columns: 280px auto 280px
     gap: 1rem
     height: $footerHeight
     width: 100%
@@ -14,10 +14,15 @@ footer
     margin: 0 auto
 
     .media,
-    .info,
-    .newsletter
-      width: 100%
+    .newsletter,
+    .loader,
+    .info
+      width: max-content
       align-self: center
+      margin: 0 auto
+
+    .info
+      width: auto
     
     .media
       a
@@ -35,9 +40,15 @@ footer
       font-size: .9rem
       text-align: center
 
+    .loader
+      svg
+        fill: $gold
+        margin: 0 auto
+        animation: spin 2s linear infinite
+
     .newsletter
       display: grid
-      grid-template-columns: 130px 100px
+      grid-template-columns: 2fr 1fr
       gap: 1rem
 
       input, button
@@ -93,3 +104,9 @@ footer
 
 .newsletter_failed
   background: $darkRed
+
+@keyframes spin
+  0%
+    transform: rotateZ(0)
+  100% 
+    transform: rotateZ(360deg)

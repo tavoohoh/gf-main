@@ -9,7 +9,7 @@ import { NewsletterService } from '@app/services/newsletter.service';
 })
 export class FooterComponent implements OnInit {
   public newsLetterForm: FormGroup;
-  public newsLetterFormSuccess: boolean;
+  public newsLetterFormSuccess: string;
   public newsLetterSubmited: boolean;
 
   constructor(
@@ -34,16 +34,18 @@ export class FooterComponent implements OnInit {
     }
 
     this.newsLetterSubmited = true;
-
     this.newsLetterService.signup(this.newsLetterForm.controls.email.value)
       .subscribe(
-        () => this.newsLetterFormSuccess = true,
+        () => {
+          this.newsLetterFormSuccess = 'newsletter_success';
+        },
         error => {
-          this.newsLetterFormSuccess = false;
+          this.newsLetterFormSuccess = 'newsletter_failed';
           console.error('News Letter subscription failed: ', error);
 
           setTimeout(() => {
-            this.newsLetterSubmited = false;
+            this.newsLetterFormSuccess = null;
+            this.newsLetterSubmited = null;
             this.newsLetterForm.reset();
           }, 5000);
         });

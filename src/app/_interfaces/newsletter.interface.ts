@@ -36,8 +36,3 @@ export interface Member {
   ip_opt?: string;
   timestamp_opt?: string;
 }
-
-export interface NewsletterSubscription {
-  members: Array<Member>;
-  update_existing: boolean;
-}
