@@ -14,8 +14,13 @@ export class NewsletterService {
     private http: HttpClient
   ) { }
 
+  public checkHealth(): Observable<any> {
+    const url = `${ENV.api.functions}health`;
+    return this.http.get(url);
+  }
+
   public signup(email: string): Observable<any> {
-    const url = `${ENV.api.functions}/members`;
+    const url = `${ENV.api.functions}members`;
     const body: Member = {
       email_address: email.toLowerCase(),
       email_type: UserEmailType.HTML,
