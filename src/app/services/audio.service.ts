@@ -11,14 +11,12 @@ export class AudioService {
   private files: Array<PlayerFile> = [
     {
       url:
-        // tslint:disable-next-line: max-line-length
         './assets/tracks/mia.mp3',
       name: 'Mia',
       artist: 'Gian Faraone'
     },
     {
       url:
-        // tslint:disable-next-line: max-line-length
         './assets/tracks/dear-sinatra.mp3',
       name: 'Dear Sinatra',
       artist: 'Gian Faraone'
