@@ -3,16 +3,24 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MainComponent } from './main/main.component';
 import { GsPlayerModule } from 'gs-player';
 import { WidgetsModule } from '@app/_widgets/widgets.module';
+
+import { MainComponent } from './main.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainComponent
+    component: MainComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent
+      }
+    ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

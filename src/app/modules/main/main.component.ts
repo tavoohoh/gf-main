@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { PlayerFile, PlayerTheme, PlayerConfig } from 'gs-player';
 import { AudioService } from '@app/services/audio.service';
 
@@ -27,5 +26,4 @@ export class MainComponent implements OnInit {
       this.files = files;
     });
   }
-
 }
