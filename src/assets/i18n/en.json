@@ -1,18 +1,22 @@
 {
-  "SIGN_UP": "Sign up",
-  "PROVIDE_VALID_EMAIL_ADDRESS": "Please provide a valid email address",
-  "FOR_BOOKING_INQUIRES": "For bookings inquires email us at",
+  "CHANGE_LANG": "Español",
   "NAVIGATION": {
     "HOME": "Home",
     "BIO": "Bio",
-    "Gallery": "Gallery",
-    "Music": "Music",
-    "Video": "Video",
+    "GALLERY": "Gallery",
+    "MUSIC": "Music",
+    "VIDEO": "Video",
     "DATES": "Dates",
     "CONTACT": "Contact"
   },
   "TOAST": {
     "THANKS_FOR_SUBSCRIBING": "Thanks for subscribing",
     "THERE_WAS_AN_ERROR_TRYING_TO_SUBSCRIBE": "There was an error trying to subscribe"
+  },
+  "FORM": {
+    "EMAIL": "Email Address",
+    "EMAIL_PLACEHOLDER": "Your Email Address",
+    "EMAIL_ERROR": "Please provide a valid email address",
+    "SIGN_UP": "Sign up"
   }
 }

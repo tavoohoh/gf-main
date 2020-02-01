@@ -56,12 +56,12 @@
 
 <ng-template #newsLetterFormTemplate>
   <form class="newsletter" [formGroup]="newsLetterForm" (ngSubmit)="submitNewsLetterForm()">
-    <input type="text" [placeholder]="'Email Address'" formControlName="email">
+    <input type="text" [placeholder]="'FORM.EMAIL' | translate" formControlName="email">
     <small class="text-danger" *ngIf="validateEmailField()">
-      {{ 'PROVIDE_VALID_EMAIL_ADDRESS' | translate }}
+      {{ 'FORM.EMAIL_ERROR' | translate }}
     </small>
     <button type="submit">
-      {{ 'SIGN_UP' | translate }}
+      {{ 'FORM.SIGN_UP' | translate }}
     </button>
   </form>
 </ng-template>

@@ -1,13 +1,15 @@
 <section class="navigation">
   <h1>Gian <span>Faraone</span></h1>
-  <!-- <nav class="navbar" [style.display]="showMenu ? 'block' : ''">
+  <nav class="navbar" [style.display]="showMenu ? 'block' : ''">
     <a *ngFor="let link of navigation"
       class="navigation-link"
       [class.activeLink]="link.url === activeUrl"
       [routerLink]="link.url"
-      (click)="onHideMenu()"
-    >
+      (click)="onHideMenu()">
       {{ link.text | translate }}
     </a>
-  </nav> -->
+  <button (click)="toggleLanguage()" class="current-lang">
+    {{ 'CHANGE_LANG' | translate }}
+  </button>
+  </nav>
 </section>

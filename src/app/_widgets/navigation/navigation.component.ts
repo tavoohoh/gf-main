@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { NAVIGATION } from '@app/_constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navigation',
@@ -14,6 +15,7 @@ export class NavigationComponent implements OnInit {
   public activeUrl: string;
 
   constructor(
+    private translateService: TranslateService,
     private router: Router
   ) {}
 
@@ -28,5 +30,18 @@ export class NavigationComponent implements OnInit {
 
   public onHideMenu() {
     this.showMenu = false;
+  }
+
+  public toggleLanguage() {
+    let userLanguage = window.localStorage.getItem('userLanguage');
+
+    if (userLanguage === 'en') {
+      userLanguage = 'es';
+    } else {
+      userLanguage = 'en';
+    }
+
+    this.translateService.use(userLanguage);
+    window.localStorage.setItem('userLanguage', userLanguage);
   }
 }

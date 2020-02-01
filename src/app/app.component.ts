@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const userLanguage = window.localStorage.getItem('userLanguage') || 'en';
+    window.localStorage.setItem('userLanguage', userLanguage);
+
     this.translate.setDefaultLang(userLanguage);
     this.translate.use(userLanguage);
   }
