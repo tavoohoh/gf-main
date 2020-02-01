@@ -6,7 +6,7 @@ footer
   
   .content
     display: grid
-    grid-template-columns: 280px auto 280px
+    grid-template-columns: max-content auto max-content
     gap: 1rem
     height: $footerHeight
     width: 100%
@@ -23,6 +23,18 @@ footer
 
     .info
       width: auto
+    
+    .logos
+      width: auto
+      margin: 0 auto
+      display: grid
+      grid-template-columns: min-content min-content
+      gap: 1rem
+
+      img
+        align-self: center
+        height: 40px
+
     
     .media
       a
@@ -88,6 +100,11 @@ footer
 
         small
           grid-row: 1
+      
+      .logos
+        grid-row: 3
+        img
+          height: 30px
 
 .newsletter_success, .newsletter_failed
   align-self: center
