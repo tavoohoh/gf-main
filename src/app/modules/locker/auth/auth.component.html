@@ -1,0 +1,8 @@
+<div class="login">
+  <gs-form
+    *ngIf="formOptions"
+    [formFields]="formFields"
+    [formOptions]="formOptions"
+    (form)="login($event)">
+  </gs-form>
+</div>

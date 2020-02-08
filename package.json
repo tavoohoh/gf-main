@@ -17,6 +17,7 @@
     "@angular/common": "~9.0.0-rc.5",
     "@angular/compiler": "~9.0.0-rc.5",
     "@angular/core": "~9.0.0-rc.5",
+    "@angular/fire": "^6.0.0-rc.1",
     "@angular/forms": "~9.0.0-rc.5",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~9.0.0-rc.5",
@@ -24,6 +25,8 @@
     "@angular/router": "~9.0.0-rc.5",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "firebase": "^7.8.0",
+    "gs-forms": "git+https://bitbucket.org/rappinc/rpp-ngforms-lib.git",
     "gs-player": "^0.2.5",
     "hammerjs": "^2.0.8",
     "moment": "^2.24.0",
@@ -52,6 +55,11 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.6.4"
+    "typescript": "~3.6.4",
+    "@angular-devkit/architect": "^0.900.0-0 || ^0.900.0",
+    "firebase-tools": "^7.12.1",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1"
   }
 }

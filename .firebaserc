@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "gianfaraoneweb"
+  },
+  "targets": {
+    "gianfaraoneweb": {
+      "hosting": {
+        "gian-faraone": [
+          "gianfaraoneweb"
+        ]
+      }
+    }
   }
 }

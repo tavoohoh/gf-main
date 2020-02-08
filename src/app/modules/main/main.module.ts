@@ -61,8 +61,8 @@ const routes: Routes = [
     MainComponent
   ],
   imports: [
-    RouterModule.forChild(routes),
     CommonModule,
+    RouterModule.forChild(routes),
     TranslateModule,
     WidgetsModule,
     GsPlayerModule
