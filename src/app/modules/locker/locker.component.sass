@@ -1,0 +1,59 @@
+@import 'variables'
+  
+.locker
+  display: grid
+  grid: 40px auto / 180px auto
+  height: 100vh
+  width: 100vw
+  background-color: $black
+  color: $white
+
+  .header
+    grid-column: 1 / 3
+    grid-row: 1
+
+    display: grid
+    grid-template-columns: auto min-content
+    background-color: lighten($black, 10)
+    padding: 0 1rem
+
+    .current-user
+      font-size: .8rem
+      align-self: center
+
+    .logout
+      cursor: pointer
+      color: $white
+      align-self: center
+      background-color: transparent
+      border: none
+      outline: none
+
+
+  .sidebar
+    grid-column: 1
+    grid-row: 2
+    
+    padding: 1rem 0
+    background-color: lighten($black, 2)
+
+    .navigation a
+      display: block
+      color: $white
+      text-decoration: none
+      padding: .6rem 1rem
+      font-size: .8rem
+      letter-spacing: .1em
+      text-transform: Capitalize
+      transition: $transition
+
+      &:hover
+        color: $darkGold
+
+    .navigation a.activeLink
+      color: $gold
+
+  .body
+    grid-column: 2
+    grid-row: 2
+    padding: 1rem

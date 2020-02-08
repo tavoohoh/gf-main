@@ -1,1 +1,22 @@
-locker
+<div class="locker">
+  <div class="header">
+    <div class="current-user" *ngIf="userEmail">
+      {{ userEmail }}
+    </div>
+    <button class="logout" type="button" (click)="logout()" *ngIf="userEmail">
+      Logout
+    </button>
+  </div>
+  
+  <div class="sidebar">
+    <div class="navigation">
+      <a *ngFor="let page of pages" [routerLink]="page.url" [class.activeLink]="page.url === activeUrl">
+        {{ page.name }}
+      </a>
+    </div>
+  </div>
+  
+  <div class="body">
+    <router-outlet></router-outlet>
+  </div>
+</div>

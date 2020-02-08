@@ -27,14 +27,7 @@ export class AuthComponent implements OnInit {
 
   public login(form: FormGroup) {
     this.fireAuth.signInWithEmailAndPassword(form.value.email, form.value.password)
-      .then(() => {
-        console.log('done');
-        this.router.navigate(['admin']);
-      });
-  }
-
-  public logout() {
-    this.fireAuth.signOut();
+      .then(() => this.router.navigate(['admin']));
   }
 
 }
