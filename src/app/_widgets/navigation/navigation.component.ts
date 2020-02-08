@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { NAVIGATION } from '@app/_constants';
 import { TranslateService } from '@ngx-translate/core';
+import { HelperService } from '@app/services/helper.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,8 +17,9 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private translateService: TranslateService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private helperService: HelperService
+  ) { }
 
   ngOnInit() {
     this.activeUrl = this.router.url;
@@ -33,15 +35,6 @@ export class NavigationComponent implements OnInit {
   }
 
   public toggleLanguage() {
-    let userLanguage = window.localStorage.getItem('userLanguage');
-
-    if (userLanguage === 'en') {
-      userLanguage = 'es';
-    } else {
-      userLanguage = 'en';
-    }
-
-    this.translateService.use(userLanguage);
-    window.localStorage.setItem('userLanguage', userLanguage);
+    this.helperService.toggleLanguage();
   }
 }

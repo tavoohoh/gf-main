@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { TranslateService } from '@ngx-translate/core';
+import { HelperService } from '@app/services/helper.service';
 
 @Component({
   selector: 'app-locker',
@@ -40,13 +42,16 @@ export class LockerComponent implements OnInit {
   ];
   public activeUrl: string;
   public userEmail: string;
+  public currentLang: string;
 
   constructor(
     private router: Router,
-    private fireAuth: AngularFireAuth
+    private fireAuth: AngularFireAuth,
+    private helperService: HelperService
   ) { }
 
   ngOnInit() {
+    this.currentLang = this.helperService.getCurrentLang();
     this.activeUrl = this.router.url;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -61,5 +66,9 @@ export class LockerComponent implements OnInit {
 
   public logout() {
     this.fireAuth.signOut().then(() => this.router.navigate(['admin/auth']));
+  }
+
+  public toggleLang() {
+    this.helperService.toggleLanguage();
   }
 }

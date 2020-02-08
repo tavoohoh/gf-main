@@ -9,21 +9,18 @@ import { LockerBio } from '@app/_interfaces/locker.interface';
   providedIn: 'root'
 })
 export class LockerService {
-  private language = 'en';
-
   constructor(
     private afs: AngularFirestore
-  ) { }
+  ) {}
 
-  public getLockerBioDocument(): Observable<LockerBio> {
-    const lockerBioDocument: AngularFirestoreDocument<LockerBio> = this.afs.doc<LockerBio>(`bio/${this.language}`);
+  public getLockerBioDocument(language: string): Observable<LockerBio> {
+    const lockerBioDocument: AngularFirestoreDocument<LockerBio> = this.afs.doc<LockerBio>(`bio/${language}`);
     return lockerBioDocument.valueChanges();
   }
 
-  public editLockerBioDocument(bioContent: string): Promise<void> {
-    const lockerBioDocument: AngularFirestoreDocument<LockerBio> = this.afs.doc<LockerBio>(`bio/${this.language}`);
+  public editLockerBioDocument(bioContent: string, language: string): Promise<void> {
+    const lockerBioDocument: AngularFirestoreDocument<LockerBio> = this.afs.doc<LockerBio>(`bio/${language}`);
     return lockerBioDocument.update({ content: bioContent });
   }
-
 
 }

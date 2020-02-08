@@ -8,6 +8,7 @@ import { LockerService } from '@app/services/locker.service';
 })
 export class BioComponent implements OnInit {
   public bio: string;
+  public currentLang = window.localStorage.getItem('userLanguage');
 
   constructor(
     private lockerService: LockerService
@@ -18,7 +19,7 @@ export class BioComponent implements OnInit {
   }
 
   private getBioContent(): void {
-    this.lockerService.getLockerBioDocument()
+    this.lockerService.getLockerBioDocument(this.currentLang)
       .subscribe(bio => {
         this.bio = bio.content;
         console.log(this.bio);

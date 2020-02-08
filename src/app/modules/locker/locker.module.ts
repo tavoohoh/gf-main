@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { TranslateModule } from '@ngx-translate/core';
 
 // modules
 import { SharedModule } from '../shared.module';
@@ -18,6 +19,8 @@ import { LockerMusicComponent } from './locker-music/locker-music.component';
 import { LockerVideoComponent } from './locker-video/locker-video.component';
 import { AuthComponent } from './auth/auth.component';
 import { LockerComponent } from './locker.component';
+import { HelperService } from '@app/services/helper.service';
+import { LockerService } from '@app/services/locker.service';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/auth']);
 const redirectLoggedIn = () => redirectLoggedInTo(['admin']);
@@ -81,11 +84,16 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    TranslateModule,
     ReactiveFormsModule,
+    RouterModule.forChild(routes),
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     SharedModule
+  ],
+  providers: [
+    HelperService,
+    LockerService
   ]
 })
 export class LockerModule { }
