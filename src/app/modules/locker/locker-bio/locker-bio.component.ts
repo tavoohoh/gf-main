@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { LockerService } from '@app/services/locker.service';
 
 @Component({
   selector: 'app-locker-bio',
@@ -21,14 +22,27 @@ export class LockerBioComponent implements OnInit {
     toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat']
   };
 
-  constructor() { }
+  constructor(
+    private lockerService: LockerService
+  ) { }
 
   ngOnInit() {
-
+    this.getBioContent();
   }
 
-  onSubmit() {
-    console.log(this.form.value.bio);
+  private getBioContent(): void {
+    this.lockerService.getLockerBioDocument()
+      .subscribe(bio => {
+        this.form.controls.bio.patchValue(bio.content);
+        this.form.controls.bio.updateValueAndValidity();
+      }, error => console.error(error, 'LockerBioComponent.getBioContent'));
+  }
+
+  public onSubmit(): void {
+    this.lockerService.editLockerBioDocument(this.form.value.bio)
+      .then(bio => {
+        console.log('content updated', bio);
+      }, error => console.error(error, 'LockerBioComponent.onSubmit'));
   }
 
 }
