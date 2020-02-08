@@ -1,1 +1,12 @@
-<p>locker-bio works!</p>
+<h2>
+  Edit bio
+</h2>
+
+<div class="editor">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <textarea [froalaEditor]="options" formControlName="bio"></textarea>
+    <button class="button submit" type="submit">
+      Save
+    </button>
+  </form>
+</div>

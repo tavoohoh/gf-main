@@ -1,0 +1,19 @@
+@import 'variables'
+  
+.button, .submit
+  color: $black
+  background-color: $gold
+  border: none
+  padding: .6rem .8rem
+  cursor: pointer
+  transition: $transition
+
+.submit
+  display: block
+  width: 100%
+  margin: 1rem 0
+  background-color: lighten($black, 10)
+  color: $white
+
+  &:hover
+    background-color: lighten($black, 5)
