@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+
 import { GFormFields, GFormOptions } from 'gs-forms';
 import { AuthForm, LockerFormOptions } from '@app/_forms/locker.forms';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -14,24 +16,21 @@ export class AuthComponent implements OnInit {
   public formOptions: GFormOptions = LockerFormOptions;
 
   constructor(
-    private fireAuth: AngularFireAuth
+    private fireAuth: AngularFireAuth,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.fireAuth.user.subscribe(user => {
-      if (user) {
-
-      }
-    }, error => {
-      console.error(error, 'AuthComponent.fireAuth.user');
-    });
-
     this.formOptions.context.saveButton.text = 'Sign in';
     this.formOptions.layout.columns = 'auto';
   }
 
   public login(form: FormGroup) {
-    this.fireAuth.signInWithEmailAndPassword(form.value.email, form.value.password);
+    this.fireAuth.signInWithEmailAndPassword(form.value.email, form.value.password)
+      .then(() => {
+        console.log('done');
+        this.router.navigate(['admin']);
+      });
   }
 
   public logout() {
