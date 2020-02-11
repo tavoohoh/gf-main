@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerFile, PlayerTheme, PlayerConfig } from 'gs-player';
-import { AudioService } from '@app/services/audio.service';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -10,26 +8,13 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class MainComponent implements OnInit {
   public coverImage: string;
-
-  /* player variables */
-  public files: Array<PlayerFile>;
-  public playerTheme: PlayerTheme = {
-    primary: '#fcf9f8',
-    secondary: '#999999'
-  };
-  public playerConfig: PlayerConfig = {
-    artistAlbumSeparator: '-'
-  };
+  public isHome: boolean;
 
   constructor(
-    private audioService: AudioService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.audioService.getFiles().subscribe(files => {
-      this.files = files;
-    });
     this.subscribeToNavigationEnd();
   }
 
@@ -45,6 +30,9 @@ export class MainComponent implements OnInit {
   private setCoverImage(view: string) {
     if (view === '') {
       view = 'home';
+      this.isHome = true;
+    } else {
+      this.isHome = false;
     }
 
     this.coverImage = `url(./assets/cover/${view}.jpg)`;

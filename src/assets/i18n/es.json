@@ -18,5 +18,11 @@
     "EMAIL_PLACEHOLDER": "Su correo electrónico",
     "EMAIL_ERROR": "Proporcione una dirección de correo electrónico válida",
     "SIGN_UP": "Suscribirme"
-  }
+  },
+  "bio": "Bio",
+  "gallery": "Galería",
+  "music": "Música",
+  "video": "Video",
+  "dates": "Fechas",
+  "contact": "Contacto"
 }

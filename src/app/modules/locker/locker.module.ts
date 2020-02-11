@@ -88,7 +88,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     SharedModule
   ],
   providers: [

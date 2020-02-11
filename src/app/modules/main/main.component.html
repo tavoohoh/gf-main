@@ -1,13 +1,13 @@
 <section class="view" [style.background-image]="coverImage">
   <app-navigation></app-navigation>
-  <div class="content">
-    <router-outlet></router-outlet>
+  <div class="body">
+    <span class="cover"></span>
     <div class="player">
-      <gs-player
-        [files]="files"
-        [playerTheme]="playerTheme"
-        [playerConfig]="playerConfig">
-      </gs-player>
+      <app-player></app-player>
+    </div>
+    <div class="content" [style.display]="isHome ? 'none' : 'block'">
+      <app-title></app-title>
+      <router-outlet></router-outlet>
     </div>
   </div>
   <app-footer></app-footer>

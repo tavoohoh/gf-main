@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { FroalaViewModule } from 'angular-froala-wysiwyg';
 
-import { GsPlayerModule } from 'gs-player';
 import { WidgetsModule } from '@app/_widgets/widgets.module';
 
 import { MainComponent } from './main.component';
@@ -64,8 +64,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     TranslateModule,
-    WidgetsModule,
-    GsPlayerModule
+    FroalaViewModule.forRoot(),
+    WidgetsModule
   ]
 })
 export class MainModule { }

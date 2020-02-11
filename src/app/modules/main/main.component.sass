@@ -10,14 +10,20 @@
     background-size: 140%
     background-position: 50% 20%
 
-  .content
-    position: relative
-    height: $bodyHeight
-    width: 100%
+  .body
+    display: grid
+    grid-template-rows: calc( 100vh - 450px) auto min-content
+    min-height: $bodyHeight
     max-width: $bodyWidth
+    width: 100%
     margin: auto
 
+    .cover
+      grid-row: 1
+
     .player
-      position: absolute
-      width: 100%
-      bottom: 0
+      grid-row: 2
+
+    .content
+      padding-bottom: 2rem
+      grid-row: 3

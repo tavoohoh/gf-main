@@ -22,7 +22,6 @@ export class BioComponent implements OnInit {
     this.lockerService.getLockerBioDocument(this.currentLang)
       .subscribe(bio => {
         this.bio = bio.content;
-        console.log(this.bio);
       }, error => console.error(error, 'BioComponent.getBioContent'));
   }
 }
