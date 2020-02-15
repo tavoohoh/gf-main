@@ -29,6 +29,7 @@
     "firebase": "^7.8.0",
     "gs-forms": "git+https://bitbucket.org/rappinc/rpp-ngforms-lib.git",
     "gs-player": "^0.2.5",
+    "gs-tables": "git+https://tavoohoh@bitbucket.org/tavoohoh/rpp-ngtables-lib.git",
     "hammerjs": "^2.0.8",
     "moment": "^2.24.0",
     "rxjs": "~6.5.3",

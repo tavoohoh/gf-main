@@ -13,31 +13,31 @@ export class LockerComponent implements OnInit {
   public pages: Array<{ url: string; name: string; }> = [
     {
       url: '/admin',
-      name: 'general'
+      name: 'NAVIGATION.GENERAL'
     },
     {
       url: '/admin/bio',
-      name: 'bio'
+      name: 'NAVIGATION.BIO'
     },
     {
       url: '/admin/contact',
-      name: 'contact'
+      name: 'NAVIGATION.CONTACT'
     },
     {
       url: '/admin/dates',
-      name: 'dates'
+      name: 'NAVIGATION.DATES'
     },
     {
       url: '/admin/gallery',
-      name: 'gallery'
+      name: 'NAVIGATION.GALLERY'
     },
     {
       url: '/admin/music',
-      name: 'music'
+      name: 'NAVIGATION.MUSIC'
     },
     {
       url: '/admin/video',
-      name: 'video'
+      name: 'NAVIGATION.VIDEO'
     }
   ];
   public activeUrl: string;

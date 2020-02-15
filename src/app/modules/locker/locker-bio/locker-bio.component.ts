@@ -23,7 +23,17 @@ export class LockerBioComponent implements OnInit, OnDestroy {
   public options: object = {
     placeholderText: 'Edit the bio here',
     // https://www.froala.com/wysiwyg-editor/docs/options#toolbarBottom
-    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'inlineClass']
+    toolbarButtons: {
+      moreText: {
+        buttons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'clearFormatting']
+      },
+      moreParagraph: {
+        buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'lineHeight', 'quote']
+      },
+      moreRich: {
+        buttons: ['insertLink']
+      }
+    }
   };
 
   constructor(

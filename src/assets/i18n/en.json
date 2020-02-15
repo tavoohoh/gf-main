@@ -7,22 +7,26 @@
     "MUSIC": "Music",
     "VIDEO": "Video",
     "DATES": "Dates",
-    "CONTACT": "Contact"
+    "CONTACT": "Contact",
+    "GENERAL": "General"
   },
   "TOAST": {
     "THANKS_FOR_SUBSCRIBING": "Thanks for subscribing",
     "THERE_WAS_AN_ERROR_TRYING_TO_SUBSCRIBE": "There was an error trying to subscribe"
+  },
+  "EDIT": {
+    "BIO": "Edit bio",
+    "GALLERY": "Edit gallery",
+    "MUSIC": "Edit music",
+    "VIDEO": "Edit video",
+    "DATES": "Edit dates",
+    "CONTACT": "Edit contact",
+    "GENERAL": "General settings"
   },
   "FORM": {
     "EMAIL": "Email Address",
     "EMAIL_PLACEHOLDER": "Your Email Address",
     "EMAIL_ERROR": "Please provide a valid email address",
     "SIGN_UP": "Sign up"
-  },
-  "bio": "Bio",
-  "gallery": "Gallery",
-  "music": "Music",
-  "video": "Video",
-  "dates": "Dates",
-  "contact": "Contact"
+  }
 }

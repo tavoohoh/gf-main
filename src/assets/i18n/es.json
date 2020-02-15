@@ -7,7 +7,17 @@
     "MUSIC": "Música",
     "VIDEO": "Video",
     "DATES": "Fechas",
-    "CONTACT": "Contacto"
+    "CONTACT": "Contacto",
+    "GENERAL": "General"
+  },
+  "EDIT": {
+    "BIO": "Editar bio",
+    "GALLERY": "Editar galería",
+    "MUSIC": "Editar música",
+    "VIDEO": "Editar video",
+    "DATES": "Editar fechas",
+    "CONTACT": "Editar contácto",
+    "GENERAL": "Configuración general"
   },
   "TOAST": {
     "THANKS_FOR_SUBSCRIBING": "Gracias por suscribirse",
@@ -17,12 +27,7 @@
     "EMAIL": "Correo Electrónico",
     "EMAIL_PLACEHOLDER": "Su correo electrónico",
     "EMAIL_ERROR": "Proporcione una dirección de correo electrónico válida",
-    "SIGN_UP": "Suscribirme"
-  },
-  "bio": "Bio",
-  "gallery": "Galería",
-  "music": "Música",
-  "video": "Video",
-  "dates": "Fechas",
-  "contact": "Contacto"
+    "SIGN_UP": "Suscribirme",
+    "SAVE": "Guardar"
+  }
 }

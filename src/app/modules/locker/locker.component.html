@@ -23,7 +23,7 @@
   <div class="sidebar">
     <div class="navigation">
       <a *ngFor="let page of pages" [routerLink]="page.url" [class.activeLink]="page.url === activeUrl">
-        {{ page.name }}
+        {{ page.name | translate }}
       </a>
     </div>
   </div>

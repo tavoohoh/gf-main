@@ -27,12 +27,7 @@ export class HelperService {
 
     this.translateService.use(userLanguage);
     window.localStorage.setItem('userLanguage', userLanguage);
-
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl('', { skipLocationChange: true })
-      .then(() => {
-        this.router.navigate([currentRoute]);
-      });
+    window.location.reload();
   }
 
 }
