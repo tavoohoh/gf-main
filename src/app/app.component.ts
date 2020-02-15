@@ -7,7 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private translate: TranslateService) {}
+  constructor(
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     const userLanguage = window.localStorage.getItem('userLanguage') || 'en';

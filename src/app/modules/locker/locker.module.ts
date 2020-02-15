@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FroalaEditorModule } from 'angular-froala-wysiwyg';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { FroalaEditorModule } from 'angular-froala-wysiwyg';
 import 'froala-editor/js/plugins.pkgd.min.js';
 
 // modules
