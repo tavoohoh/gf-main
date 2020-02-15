@@ -1,1 +1,18 @@
 <h2>{{ 'EDIT.GALLERY' | translate }}</h2>
+
+<div class="gallery">
+  <div class="collections">
+    <ng-container *ngIf="gallery">
+      <button 
+        *ngFor="let collection of gallery"
+        type="button"
+        (click)="getGalleryDocuments(collection.id)">
+          {{ collection.title }}
+      </button>
+    </ng-container>
+  </div>
+
+  <div class="detail">
+
+  </div>
+</div>

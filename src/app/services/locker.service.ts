@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import 'firebase/firestore';
 
-import { LockerBio } from '@app/_interfaces/locker.interface';
+import { LockerBio, LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,23 @@ export class LockerService {
   ) {}
 
   public getLockerBioDocument(language: string): Observable<LockerBio> {
-    const lockerBioDocument: AngularFirestoreDocument<LockerBio> = this.afs.doc<LockerBio>(`bio/${language}`);
+    const lockerBioDocument = this.afs.doc<LockerBio>(`bio/${language}`);
     return lockerBioDocument.valueChanges();
   }
 
   public editLockerBioDocument(bioContent: string, language: string): Promise<void> {
-    const lockerBioDocument: AngularFirestoreDocument<LockerBio> = this.afs.doc<LockerBio>(`bio/${language}`);
+    const lockerBioDocument  = this.afs.doc<LockerBio>(`bio/${language}`);
     return lockerBioDocument.update({ content: bioContent });
+  }
+
+  public getLockerGalleryCollection(): Observable<Array<LockerGallery>> {
+    const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
+    return lockerGalleryCollection.valueChanges();
+  }
+
+  public getLockerGalleryDocumentCollection(galleryId: string): Observable<Array<LockerGalleryPhotos>> {
+    const lockerGalleryDocumentCollection = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
+    return lockerGalleryDocumentCollection.valueChanges();
   }
 
 }

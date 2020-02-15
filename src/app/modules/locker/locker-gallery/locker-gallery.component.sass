@@ -1,0 +1,37 @@
+@import 'variables'
+
+.gallery
+  margin-top: 1rem
+  display: grid
+  grid-template-columns: 200px auto
+  gap: 1rem
+
+  .collections
+    background: lighten($black, 2)
+    padding: 1rem
+
+    button
+      display: block
+      width: 100%
+      text-align: left
+      background: none
+      border: none
+      outline: none
+      color: #ffffff
+      cursor: pointer
+      padding: .8rem 1rem
+      font-weight: bold
+      text-transform: uppercase
+      border-bottom: 1px solid lighten($black, 10)
+      line-height: 1
+      margin: 0
+      
+      &:last-child
+        border: none
+
+      &:hover
+        background-color: lighten($black, 4)
+
+  .detail
+      
+    

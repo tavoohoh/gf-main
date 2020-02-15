@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GsFormsModule } from 'gs-forms';
-import { gsFormStyles } from '@app/_constants';
+import { GsTablesModule } from 'gs-tables';
+import { gsFormStyles, gsTablesStyles } from '@app/_constants';
 
 @NgModule({
   imports: [
     CommonModule,
-    GsFormsModule.forRoot(gsFormStyles)
+    GsFormsModule.forRoot(gsFormStyles),
+    GsTablesModule.forRoot(gsTablesStyles)
   ],
   exports: [
-    GsFormsModule
+    GsFormsModule,
+    GsTablesModule
   ]
 })
 export class SharedModule { }
