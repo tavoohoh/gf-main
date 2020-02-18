@@ -27,6 +27,7 @@
     "EMAIL": "Email Address",
     "EMAIL_PLACEHOLDER": "Your Email Address",
     "EMAIL_ERROR": "Please provide a valid email address",
-    "SIGN_UP": "Sign up"
+    "SIGN_UP": "Sign up",
+    "ADD": "Add"
   }
 }

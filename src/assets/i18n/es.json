@@ -28,6 +28,7 @@
     "EMAIL_PLACEHOLDER": "Su correo electrónico",
     "EMAIL_ERROR": "Proporcione una dirección de correo electrónico válida",
     "SIGN_UP": "Suscribirme",
-    "SAVE": "Guardar"
+    "SAVE": "Guardar",
+    "ADD": "Agregar"
   }
 }

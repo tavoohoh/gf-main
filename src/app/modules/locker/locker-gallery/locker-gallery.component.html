@@ -1,18 +1,41 @@
 <h2>{{ 'EDIT.GALLERY' | translate }}</h2>
 
 <div class="gallery">
+
+  <!-- menu -->
   <div class="collections">
     <ng-container *ngIf="gallery">
       <button 
         *ngFor="let collection of gallery"
         type="button"
-        (click)="getGalleryDocuments(collection.id)">
+        (click)="getGalleryPhotos(collection.id)">
           {{ collection.title }}
       </button>
     </ng-container>
+    <button
+      class="add-btn"
+      type="button"
+      (click)="addNewGallery()">
+        {{ 'FORM.ADD' | translate }}
+    </button>
   </div>
 
-  <div class="detail">
+  <!-- content -->
+  <div class="content">
+    <ng-container [ngSwitch]="viewContent">
 
+      <div class="content-detail" *ngSwitchCase="viewType.DETAIL">
+        Gallery detail
+      </div>
+
+      <div class="content-add" *ngSwitchCase="viewType.GALLERY">
+        Add gallery
+      </div>
+
+      <div class="content-add" *ngSwitchCase="viewType.PHOTO">
+        Add photo
+      </div>
+
+    </ng-container>
   </div>
 </div>
