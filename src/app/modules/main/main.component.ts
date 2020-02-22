@@ -35,6 +35,6 @@ export class MainComponent implements OnInit {
       this.isHome = false;
     }
 
-    this.coverImage = `url(./assets/cover/${view}.jpg)`;
+    this.coverImage = `view-${view}`;
   }
 }

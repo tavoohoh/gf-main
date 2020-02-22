@@ -1,7 +1,6 @@
-<section class="view" [style.background-image]="coverImage">
+<section class="view">
   <app-navigation></app-navigation>
   <div class="body">
-    <span class="cover"></span>
     <div class="player">
       <app-player></app-player>
     </div>
@@ -10,5 +9,6 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+  <div class="background" [class]="coverImage"></div>
   <app-footer></app-footer>
 </section>

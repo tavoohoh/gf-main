@@ -1,14 +1,27 @@
 @import 'variables'
 
 .view
+  position: relative
   background-color: $black
-  background-repeat: no-repeat
-  background-image: url('../../../assets/cover/home.jpg')
-  background-size: 100%
+  z-index: 1
 
-  @media screen and ( max-width: $mobile)
-    background-size: 140%
-    background-position: 50% 20%
+  app-navigation,
+  app-footer,
+  .body
+    position: relative
+    z-index: 2
+
+  .background
+    position: absolute
+    top: 0
+    z-index: 1
+
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    height: 100vh
+    width: 100%
+    max-height: 100vh
 
   .body
     display: grid
@@ -18,12 +31,59 @@
     width: 100%
     margin: auto
 
-    .cover
+    .covers
       grid-row: 1
 
     .player
       grid-row: 2
 
     .content
-      padding-bottom: 2rem
+      padding: 0 2rem 1rem
       grid-row: 3
+
+
+.background.view-home
+  background-image: url('../../../assets/covers/hom-1-dk-lg.jpg')
+
+.background.view-bio
+  background-image: url('../../../assets/covers/bio-1-dk-lg.jpg')
+
+
+@media screen and (max-width: 1440px)
+  .background.view-home
+    background-image: url('../../../assets/covers/hom-2-dk-md.jpg')
+
+  .background.view-bio
+    background-image: url('../../../assets/covers/bio-2-dk-md.jpg')
+
+
+@media screen and (max-width: 1280px)
+  .background.view-home
+    background-image: url('../../../assets/covers/hom-3-dk-sm.jpg')
+
+  .background.view-bio
+    background-image: url('../../../assets/covers/bio-3-dk-sm.jpg')
+
+
+@media screen and (max-width: 1024px)
+  .background.view-home
+    background-image: url('../../../assets/covers/hom-4-dk-xs.jpg')
+
+  .background.view-bio
+    background-image: url('../../../assets/covers/bio-4-dk-xs.jpg')
+
+
+@media screen and (max-width: 640px)
+  .background.view-home
+    background-image: url('../../../assets/covers/hom-5-mo-md.jpg')
+
+  .background.view-bio
+    background-image: url('../../../assets/covers/bio-5-mo-md.jpg')
+
+
+@media screen and (max-width: 436px)
+  .background.view-home
+    background-image: url('../../../assets/covers/hom-6-mo-sm.jpg')
+
+  .background.view-bio
+    background-image: url('../../../assets/covers/bio-6-mo-sm.jpg')
