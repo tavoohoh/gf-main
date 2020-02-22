@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { NAVIGATION } from '@app/_constants';
-import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from '@app/services/helper.service';
 
 @Component({
@@ -14,23 +13,39 @@ export class NavigationComponent implements OnInit {
   public navigation = NAVIGATION;
   public showMenu: boolean;
   public activeUrl: string;
+  public isHome: boolean;
 
   constructor(
-    private translateService: TranslateService,
     private router: Router,
     private helperService: HelperService
   ) { }
 
   ngOnInit() {
     this.activeUrl = this.router.url;
+    this.isHomeView(this.router.url.split('/').reverse()[0]);
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.activeUrl = event.url;
+
+        this.isHomeView(event.url.split('/').reverse()[0]);
       }
     });
   }
 
-  public onHideMenu() {
+  private isHomeView(view: string) {
+    if (view === '') {
+      this.isHome = true;
+    } else {
+      this.isHome = false;
+    }
+  }
+
+  public toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
+
+  public hideMenu() {
     this.showMenu = false;
   }
 

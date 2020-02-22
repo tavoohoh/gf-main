@@ -17,8 +17,27 @@
     margin: 0 0 1rem
     span
       color: $gold
-    
+
+  .menu-btn
+    z-index: 1
+    display: none
+    outline: none
+    background: none
+    padding: none
+    box-shadow: none
+    border: none
+    cursor: pointer
+
+    grid-column: 2
+
+    svg
+      fill: $white
+
+      &:hover
+        opacity: 0.8
+
   .navbar
+    display: block
     width: max-content
     padding: 1rem
     margin: auto
@@ -48,3 +67,46 @@
       color: $gold
       a:hover
         opacity: .75
+
+  .menu-display
+    display: block
+
+.navigation-alternative
+  grid-template-columns: auto min-content
+  grid-template-rows: auto
+  padding: 2rem
+
+  h1
+    text-align: left
+
+@media screen and ( max-width: 1024px )
+  .navigation
+    align-content: baseline
+    padding-top: 2rem
+
+    h1
+      font-size: 2.6rem
+
+    .menu-btn
+      display: block
+
+    .navbar
+      display: none
+      position: fixed
+      top: 0
+      right: 0
+      gap: 1rem
+      min-width: 100vw
+      min-height: 100vh
+      width: 100%
+      background-color: rgba(0,0,0,.9)
+
+      a,
+      button
+        font-size: 1.2rem
+        margin: 0!important
+        padding: 0!important
+
+    .menu-display
+      display: grid
+      

@@ -1,15 +1,36 @@
-<section class="navigation">
+<section
+  class="navigation"
+  [class.navigation-alternative]="!isHome">
+
   <h1>Gian <span>Faraone</span></h1>
-  <nav class="navbar" [style.display]="showMenu ? 'block' : ''">
+
+  <!-- navigation -->
+  <nav
+    class="navbar"
+    [class.menu-display]="showMenu">
+
     <a *ngFor="let link of navigation"
       class="navigation-link"
       [class.activeLink]="link.url === activeUrl"
       [routerLink]="link.url"
-      (click)="onHideMenu()">
+      (click)="hideMenu()">
       {{ link.text | translate }}
     </a>
-  <button (click)="toggleLanguage()" class="current-lang">
-    {{ 'CHANGE_LANG' | translate }}
-  </button>
+
+    <button (click)="toggleLanguage()" class="current-lang">
+      {{ 'CHANGE_LANG' | translate }}
+    </button>
   </nav>
+
+  <!-- menu button -->
+  <button class="menu-btn" type="button" (click)="toggleMenu()">
+    <svg *ngIf="!showMenu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
+    </svg>
+
+    <svg *ngIf="showMenu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/>
+    </svg>
+  </button>
+
 </section>
