@@ -12,7 +12,7 @@ export class AudioService {
     {
       url:
         './assets/tracks/mia.mp3',
-      name: 'Mia',
+      name: 'Mía',
       artist: 'Gian Faraone'
     },
     {

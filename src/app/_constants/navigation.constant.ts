@@ -9,24 +9,24 @@ export const NAVIGATION: Array<NavigationInterface> = [
     text: 'NAVIGATION.BIO',
     url: '/bio'
   },
-  {
-    text: 'NAVIGATION.GALLERY',
-    url: '/gallery'
-  },
-  {
-    text: 'NAVIGATION.MUSIC',
-    url: '/music'
-  },
-  {
-    text: 'NAVIGATION.VIDEO',
-    url: '/video'
-  },
-  {
-    text: 'NAVIGATION.DATES',
-    url: '/dates'
-  },
-  {
-    text: 'NAVIGATION.CONTACT',
-    url: '/contact'
-  }
+  // {
+  //   text: 'NAVIGATION.GALLERY',
+  //   url: '/gallery'
+  // },
+  // {
+  //   text: 'NAVIGATION.MUSIC',
+  //   url: '/music'
+  // },
+  // {
+  //   text: 'NAVIGATION.VIDEO',
+  //   url: '/video'
+  // },
+  // {
+  //   text: 'NAVIGATION.DATES',
+  //   url: '/dates'
+  // },
+  // {
+  //   text: 'NAVIGATION.CONTACT',
+  //   url: '/contact'
+  // }
 ];
