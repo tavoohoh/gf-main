@@ -22,6 +22,7 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
   public gallery: Array<LockerGallery>;
   public galleryPhotos: Array<LockerGalleryPhotos>;
   public viewContent: ViewType;
+  public currentTitle = '';
   public viewType = ViewType;
 
   constructor(
@@ -44,7 +45,6 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(gallery => {
         this.gallery = gallery;
-        console.log(gallery);
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerGalleryComponent.getGallery');
@@ -52,13 +52,15 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
       });
   }
 
-  public getGalleryPhotos(galleryId: string) {
+  public getGalleryPhotos(gallery: LockerGallery) {
     this.loader.start();
-    this.lockerService.getLockerGalleryDocumentCollection(galleryId)
+    this.lockerService.getLockerGalleryDocumentCollection(gallery.id)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
         console.log(galleryDocuments);
         this.viewContent = ViewType.DETAIL;
+        this.galleryPhotos = galleryDocuments;
+        this.currentTitle = gallery.title;
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerGalleryComponent.getGalleryPhotos');
@@ -68,6 +70,7 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
 
   public addNewGallery() {
     this.viewContent = ViewType.GALLERY;
+    this.currentTitle = '';
     console.log(this.viewContent, 'should be add gallery');
   }
 

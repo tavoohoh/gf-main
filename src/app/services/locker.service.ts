@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import 'firebase/firestore';
 
 import { LockerBio, LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,13 @@ export class LockerService {
 
   public getLockerGalleryDocumentCollection(galleryId: string): Observable<Array<LockerGalleryPhotos>> {
     const lockerGalleryDocumentCollection = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
-    return lockerGalleryDocumentCollection.valueChanges();
+    return lockerGalleryDocumentCollection.snapshotChanges().pipe(map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as LockerGalleryPhotos;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    }));
   }
 
 }

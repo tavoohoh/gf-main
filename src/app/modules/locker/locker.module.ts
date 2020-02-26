@@ -21,7 +21,6 @@ import { LockerVideoComponent } from './locker-video/locker-video.component';
 import { AuthComponent } from './auth/auth.component';
 import { LockerComponent } from './locker.component';
 import { HelperService } from '@app/services/helper.service';
-import { LockerService } from '@app/services/locker.service';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/auth']);
 const redirectLoggedIn = () => redirectLoggedInTo(['admin']);
@@ -92,8 +91,7 @@ const routes: Routes = [
     SharedModule
   ],
   providers: [
-    HelperService,
-    LockerService
+    HelperService
   ]
 })
 export class LockerModule { }

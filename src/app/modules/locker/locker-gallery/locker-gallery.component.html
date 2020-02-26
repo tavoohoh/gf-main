@@ -5,12 +5,14 @@
   <!-- menu -->
   <div class="collections">
     <ng-container *ngIf="gallery">
-      <button 
-        *ngFor="let collection of gallery"
-        type="button"
-        (click)="getGalleryPhotos(collection.id)">
-          {{ collection.title }}
-      </button>
+      <ng-container *ngFor="let collection of gallery">
+        <button
+          [class.active]="currentTitle === collection.title"
+          type="button"
+          (click)="getGalleryPhotos(collection)">
+            {{ collection.title }}
+        </button>
+      </ng-container>
     </ng-container>
     <button
       class="add-btn"
@@ -25,7 +27,15 @@
     <ng-container [ngSwitch]="viewContent">
 
       <div class="content-detail" *ngSwitchCase="viewType.DETAIL">
-        Gallery detail
+        <div class="image" *ngFor="let image of galleryPhotos">
+          {{ image.id }}
+        </div>
+
+        <button
+          class="add-btn"
+          type="button">
+            {{ 'FORM.ADD_IMAGE' | translate }}
+        </button>
       </div>
 
       <div class="content-add" *ngSwitchCase="viewType.GALLERY">
