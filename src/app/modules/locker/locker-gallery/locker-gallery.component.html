@@ -27,15 +27,25 @@
     <ng-container [ngSwitch]="viewContent">
 
       <div class="content-detail" *ngSwitchCase="viewType.DETAIL">
-        <div class="image" *ngFor="let image of galleryPhotos">
-          {{ image.id }}
+
+        <div class="image-container">
+          <div class="image-card" *ngFor="let image of galleryPhotos">
+            <div class="image" [style.background-image]="image.img"></div>
+            <div class="actions">
+              <button type="button">
+                {{ 'FORM.DELETE' | translate }}
+              </button>
+            </div>
+          </div>
         </div>
 
-        <button
-          class="add-btn"
-          type="button">
-            {{ 'FORM.ADD_IMAGE' | translate }}
-        </button>
+        <div class="image-container-actions">
+          <button
+            class="add-btn"
+            type="button">
+              {{ 'FORM.ADD_IMAGE' | translate }}
+          </button>
+        </div>
       </div>
 
       <div class="content-add" *ngSwitchCase="viewType.GALLERY">

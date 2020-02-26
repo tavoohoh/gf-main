@@ -9,5 +9,5 @@ export interface LockerGallery {
 
 export interface LockerGalleryPhotos {
   id: string;
-  img: string;
+  img: any;
 }

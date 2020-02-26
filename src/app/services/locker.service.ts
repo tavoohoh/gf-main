@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import 'firebase/firestore';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { LockerBio, LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
 import { map } from 'rxjs/operators';
@@ -11,7 +12,8 @@ import { map } from 'rxjs/operators';
 })
 export class LockerService {
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private sanitizer: DomSanitizer
   ) {}
 
   public getLockerBioDocument(language: string): Observable<LockerBio> {
@@ -29,13 +31,14 @@ export class LockerService {
     return lockerGalleryCollection.valueChanges();
   }
 
-  public getLockerGalleryDocumentCollection(galleryId: string): Observable<Array<LockerGalleryPhotos>> {
+  public getLockerGalleryDocumentCollection(galleryId: string): Observable<LockerGalleryPhotos[]> {
     const lockerGalleryDocumentCollection = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
     return lockerGalleryDocumentCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as LockerGalleryPhotos;
+        const img = this.sanitizer.bypassSecurityTrustStyle(`url(${data.img})`);
         const id = a.payload.doc.id;
-        return { id, ...data };
+        return { id, img };
       });
     }));
   }
