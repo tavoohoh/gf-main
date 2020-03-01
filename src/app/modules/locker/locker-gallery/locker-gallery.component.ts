@@ -20,6 +20,7 @@ enum ViewType {
 export class LockerGalleryComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
   public gallery: Array<LockerGallery>;
+  private galleryId: string;
   public galleryPhotos: Array<LockerGalleryPhotos>;
   public viewContent: ViewType;
   public currentTitle = '';
@@ -57,7 +58,7 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
     this.lockerService.getLockerGalleryDocumentCollection(gallery.id)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
-        console.log(galleryDocuments);
+        this.galleryId = gallery.id;
         this.viewContent = ViewType.DETAIL;
         this.galleryPhotos = galleryDocuments;
         this.currentTitle = gallery.title;
@@ -74,14 +75,33 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
     console.log(this.viewContent, 'should be add gallery');
   }
 
-  public onAddNewGallery() {}
+  public onAddNewGallery() { }
 
-  public onDeleteGallery() {}
+  public onDeleteGallery() { }
 
   public addNewGalleryPhoto() {
     this.viewContent = ViewType.PHOTO;
   }
 
-  public onAddNewGalleryPhoto() {}
+  public onAddImage($event: any): void {
+    if (!$event.target.files || !$event.target.files[0]) {
+      return;
+    }
+
+    this.loader.start();
+    const file: File = $event.target.files[0];
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      const base64Image = reader.result;
+      this.lockerService.sendLockerGalleryImage(this.galleryId, base64Image)
+        .then(() => this.loader.stop())
+        .catch(error => {
+          this.loader.stop();
+          console.error(error, 'LockerGalleryComponent.onAddImage');
+        });
+    };
+  }
 
 }

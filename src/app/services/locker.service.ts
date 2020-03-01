@@ -43,4 +43,9 @@ export class LockerService {
     }));
   }
 
+  public async sendLockerGalleryImage(galleryId: string, img: string | ArrayBuffer): Promise<boolean> {
+    const lockerGalleryImage = this.afs.collection<{ img: string | ArrayBuffer }>(`gallery/${galleryId}/photos`);
+    return await lockerGalleryImage.add({ img }).then(() => true);
+  }
+
 }
