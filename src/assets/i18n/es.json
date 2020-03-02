@@ -29,6 +29,9 @@
     "EMAIL_ERROR": "Proporcione una dirección de correo electrónico válida",
     "SIGN_UP": "Suscribirme",
     "SAVE": "Guardar",
-    "ADD": "Agregar"
+    "ADD": "Agregar",
+    "ADD_IMAGE": "Agregar imagen",
+    "ADD_GALLERY": "Agregar galería",
+    "DELETE": "Eliminar"
   }
 }
