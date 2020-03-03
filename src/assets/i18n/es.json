@@ -32,6 +32,7 @@
     "ADD": "Agregar",
     "ADD_IMAGE": "Agregar imagen",
     "ADD_GALLERY": "Agregar galería",
+    "GALLERY_NAME": "Nombre de la galería",
     "DELETE": "Eliminar"
   }
 }

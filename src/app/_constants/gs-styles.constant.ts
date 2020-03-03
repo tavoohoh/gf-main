@@ -1,5 +1,4 @@
 import { GStyles } from 'gs-forms';
-import { GTableStyles } from 'gs-tables';
 
 export const gsFormStyles: GStyles = {
   color: {
@@ -31,19 +30,5 @@ export const gsFormStyles: GStyles = {
       borderColor: '#b0a89b',
       borderRadius: '0'
     },
-  }
-};
-
-export const gsTablesStyles: GTableStyles = {
-  color: '#fcf9f8',
-  primaryColor: '#faba53',
-  secondaryColor: 'transparent',
-  neutralColor: '#757574',
-  whiteColor: null,
-  fontSize: '1rem',
-  padding: '.6rem',
-  buttom: {
-    color: '#181818',
-    background: '#faba53'
   }
 };

@@ -1,15 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GTable, GTableRowAction } from 'gs-tables';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
+import { GFormFields, GFormOptions } from 'gs-forms';
+import { LockerFormOptions, AddGalleryForm } from '@app/_forms/locker.forms';
+import { FormGroup } from '@angular/forms';
 
 enum ViewType {
   GALLERY = 'GALLERY',
-  DETAIL = 'DETAIL',
-  PHOTO = 'PHOTO'
+  DETAIL = 'DETAIL'
 }
 
 @Component({
@@ -22,9 +23,11 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
   public gallery: Array<LockerGallery>;
   private galleryId: string;
   public galleryPhotos: Array<LockerGalleryPhotos>;
-  public viewContent: ViewType;
+  public viewContent: ViewType = ViewType.GALLERY;
   public currentTitle = '';
   public viewType = ViewType;
+  public formAddGalleryFields: GFormFields = AddGalleryForm;
+  public formOptions: GFormOptions = LockerFormOptions;
 
   constructor(
     private lockerService: LockerService,
@@ -33,6 +36,8 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getGallery();
+    this.formOptions.context.saveButton.text = 'FORM.ADD_GALLERY';
+    this.formOptions.layout.columns = 'auto';
   }
 
   ngOnDestroy() {
@@ -70,18 +75,15 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
   }
 
   public addNewGallery() {
+    this.viewContent = null;
     this.viewContent = ViewType.GALLERY;
     this.currentTitle = '';
     console.log(this.viewContent, 'should be add gallery');
   }
 
-  public onAddNewGallery() { }
+  public onAddNewGallery(form: FormGroup) { }
 
   public onDeleteGallery() { }
-
-  public addNewGalleryPhoto() {
-    this.viewContent = ViewType.PHOTO;
-  }
 
   public onAddImage($event: any): void {
     if (!$event.target.files || !$event.target.files[0]) {

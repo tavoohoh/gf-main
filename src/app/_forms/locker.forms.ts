@@ -37,3 +37,13 @@ export const AuthForm: GFormFields = [
     }
   })
 ];
+
+export const AddGalleryForm: GFormFields = [
+  new GTextField({
+    model: 'name',
+    placeholder: 'FORM.GALLERY_NAME',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  })
+];

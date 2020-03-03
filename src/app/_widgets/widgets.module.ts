@@ -8,6 +8,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { PlayerComponent } from './player/player.component';
 import { TitleComponent } from './title/title.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TitleComponent } from './title/title.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,

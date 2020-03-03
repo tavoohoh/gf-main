@@ -31,6 +31,7 @@
     "ADD": "Add",
     "ADD_IMAGE": "Add image",
     "ADD_GALLERY": "Add gallery",
+    "GALLERY_NAME": "Gallery name",
     "DELETE": "Delete"
   }
 }

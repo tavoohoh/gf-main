@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { GsFormsModule } from 'gs-forms';
+// import { GsTablesModule } from 'gs-tables';
+import { gsFormStyles } from '@app/_constants';
 import { FroalaEditorModule } from 'angular-froala-wysiwyg';
 import 'froala-editor/js/plugins.pkgd.min.js';
-
-// modules
-import { SharedModule } from '../shared.module';
 
 // components
 import { LockerGeneralComponent } from './locker-general/locker-general.component';
@@ -88,7 +88,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     FroalaEditorModule.forRoot(),
-    SharedModule
+    GsFormsModule.forRoot(gsFormStyles)
+    // GsTablesModule.forRoot(gsTablesStyles)
   ],
   providers: [
     HelperService
