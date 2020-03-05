@@ -31,7 +31,7 @@
         <div class="image-card" *ngFor="let photo of galleryPhotos">
           <div class="image" [style.background-image]="photo.img"></div>
           <div class="actions">
-            <button type="button" (click)="onDeleteGalleryPhoto(photo)">
+            <button type="button" (click)="openAlert(photo, 'deleteGalleryAlert')">
               {{ 'FORM.DELETE' | translate }}
             </button>
           </div>
@@ -67,3 +67,17 @@
 
 <input #imageInput class="hiddenInput" type="file" id="imageInput" accept="image/png, image/jpeg"
   (change)="onAddImage($event)" />
+
+<!-- delete gallery photo alert -->
+<app-alert id="deleteGalleryAlert" [title]="'ACTIONS.CONFIRM_DELETE_GALLERY_PHOTO.TITLE' | translate">
+  <p>{{ 'ACTIONS.CONFIRM_DELETE_GALLERY_PHOTO.CONTENT' | translate }}</p>
+
+  <div class="gs-alert-actions">
+    <button (click)="closeAlert('deleteGalleryAlert')">
+      {{ 'FORM.CANCEL' | translate }}
+    </button>
+    <button class="btn-confirm" (click)="onDeleteGalleryPhoto()">
+      {{ 'FORM.DELETE' | translate }}
+    </button>
+  </div>
+</app-alert>

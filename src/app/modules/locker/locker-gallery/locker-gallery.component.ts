@@ -7,6 +7,7 @@ import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.inte
 import { GFormFields, GFormOptions } from 'gs-forms';
 import { LockerFormOptions, AddGalleryForm } from '@app/_forms/locker.forms';
 import { FormGroup } from '@angular/forms';
+import { AlertService } from '@app/_widgets/alert';
 
 enum ViewType {
   GALLERY = 'GALLERY',
@@ -28,10 +29,12 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
   public viewType = ViewType;
   public formAddGalleryFields: GFormFields = AddGalleryForm;
   public formOptions: GFormOptions = LockerFormOptions;
+  private alertContext: any;
 
   constructor(
     private lockerService: LockerService,
-    private loader: NgxUiLoaderService
+    private loader: NgxUiLoaderService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -116,14 +119,36 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
       this.lockerService.addLockerGalleryImage(this.galleryId, base64Image)
         .then(() => this.loader.stop())
         .catch(error => {
-          this.loader.stop();
           console.error(error, 'LockerGalleryComponent.onAddImage');
+          this.loader.stop();
         });
     };
   }
 
-  public onDeleteGalleryPhoto(photo: LockerGalleryPhotos) {
-    console.log(photo);
+  public openAlert(alertContext: any, id: string) {
+    this.alertContext = alertContext;
+    this.alertService.open(id);
+  }
+
+  public closeAlert(id: string) {
+    this.alertContext = null;
+    this.alertService.close(id);
+  }
+
+  public onDeleteGalleryPhoto() {
+    this.loader.start();
+    const photo = this.alertContext;
+
+    this.lockerService.deleteLockerGalleryImage(this.galleryId, photo.id)
+    .then(() => {
+      this.closeAlert('deleteGalleryAlert');
+      this.loader.stop();
+    })
+    .catch(error => {
+      console.error(error, 'LockerGalleryComponent.onDeleteGalleryPhoto');
+      this.closeAlert('deleteGalleryAlert');
+      this.loader.stop();
+    });
   }
 
 }

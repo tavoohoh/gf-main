@@ -32,6 +32,13 @@
     "ADD_IMAGE": "Add image",
     "ADD_GALLERY": "Add gallery",
     "GALLERY_NAME": "Gallery name",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "CANCEL": "Cancel"
+  },
+  "ACTIONS": {
+    "CONFIRM_DELETE_GALLERY_PHOTO": {
+      "TITLE": "Remove image from gallery",
+      "CONTENT": "This image will be permanently deleted. Are you sure you want to continue?"
+    }
   }
 }

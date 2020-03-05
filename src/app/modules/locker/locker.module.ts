@@ -10,6 +10,9 @@ import { gsFormStyles } from '@app/_constants';
 import { FroalaEditorModule } from 'angular-froala-wysiwyg';
 import 'froala-editor/js/plugins.pkgd.min.js';
 
+// Modules
+import { AlertModule } from '@app/_widgets/alert';
+
 // components
 import { LockerGeneralComponent } from './locker-general/locker-general.component';
 import { LockerBioComponent } from './locker-bio/locker-bio.component';
@@ -88,7 +91,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     FroalaEditorModule.forRoot(),
-    GsFormsModule.forRoot(gsFormStyles)
+    GsFormsModule.forRoot(gsFormStyles),
+    AlertModule
     // GsTablesModule.forRoot(gsTablesStyles)
   ],
   providers: [

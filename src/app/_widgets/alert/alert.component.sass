@@ -1,0 +1,73 @@
+@import 'variables'
+
+/** MODAL STYLES
+ * https://jasonwatmore.com/post/2019/07/12/angular-8-custom-modal-window-dialog-box
+ */
+app-alert
+  /* modals are hidden by default */
+  display: none
+
+  .gs-alert
+    /* modal container fixed across whole screen */
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+
+    /* z-index must be higher than .gs-alert-background */
+    z-index: 1000
+    
+    /* enables scrolling for tall modals */
+    overflow: auto
+
+    .gs-alert-body
+      padding: 1rem
+      background-color: lighten($black, 60)
+      margin: 100px auto 0
+      max-width: 360px
+      border-radius: 0.4rem
+
+      h3
+        margin-bottom: 2rem
+
+      .gs-alert-actions
+        margin-top: 2rem
+        width: max-content
+        margin-left: auto
+
+        button
+          padding: 6px
+          border: none
+          outline: none
+          background-color: lighten($black, 80)
+          cursor: pointer
+          margin-left: 1rem
+          font-weight: bold
+
+          &.btn-confirm
+            color: $white
+            background-color: $darkGold
+
+          &:hover
+            opacity: 0.8
+
+  .gs-alert-background
+    /* modal background fixed across whole screen */
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+
+    /* semi-transparent black  */
+    background-color: #000
+    opacity: 0.75
+    
+    /* z-index must be below .gs-alert and above everything else  */
+    z-index: 900
+
+body.gs-alert-open
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden
+

@@ -43,15 +43,19 @@ export class LockerService {
     }));
   }
 
+  public async addLockerGallery(gallery: LockerGallery): Promise<boolean> {
+    const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
+    return await lockerGalleryCollection.doc(gallery.id).set(gallery).then(() => true);
+  }
+
   public async addLockerGalleryImage(galleryId: string, img: string | ArrayBuffer): Promise<boolean> {
     const lockerGalleryImage = this.afs.collection<{ img: string | ArrayBuffer }>(`gallery/${galleryId}/photos`);
     return await lockerGalleryImage.add({ img }).then(() => true);
   }
 
-  public async addLockerGallery(gallery: LockerGallery): Promise<boolean> {
-
-    const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
-    return await lockerGalleryCollection.doc(gallery.id).set(gallery).then(() => true);
+  public async deleteLockerGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {
+    const lockerGalleryImage = this.afs.doc(`gallery/${galleryId}/photos/${galleryImageId}`);
+    return await lockerGalleryImage.delete().then(() => true);
   }
 
 }
