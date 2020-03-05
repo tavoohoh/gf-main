@@ -4,8 +4,8 @@
 
   <!-- menu -->
   <div class="collections">
-    <ng-container *ngIf="gallery">
-      <ng-container *ngFor="let collection of gallery">
+    <ng-container *ngIf="galleryCollections">
+      <ng-container *ngFor="let collection of galleryCollections">
         <button
           [class.active]="currentTitle === collection.title"
           type="button"
@@ -28,10 +28,10 @@
     <div class="content-detail" *ngIf="viewContent === viewType.DETAIL">
 
       <div class="image-container">
-        <div class="image-card" *ngFor="let image of galleryPhotos">
-          <div class="image" [style.background-image]="image.img"></div>
+        <div class="image-card" *ngFor="let photo of galleryPhotos">
+          <div class="image" [style.background-image]="photo.img"></div>
           <div class="actions">
-            <button type="button">
+            <button type="button" (click)="onDeleteGalleryPhoto(photo)">
               {{ 'FORM.DELETE' | translate }}
             </button>
           </div>

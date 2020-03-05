@@ -21,7 +21,7 @@ enum ViewType {
 export class LockerGalleryComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
   private galleryId: string;
-  public gallery: Array<LockerGallery>;
+  public galleryCollections: Array<LockerGallery>;
   public galleryPhotos: Array<LockerGalleryPhotos>;
   public viewContent: ViewType;
   public currentTitle = '';
@@ -35,7 +35,7 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.getGallery();
+    this.getGalleryCollections();
     this.formOptions.context.saveButton.text = 'FORM.ADD_GALLERY';
     this.formOptions.layout.columns = 'auto';
   }
@@ -45,12 +45,12 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  private getGallery() {
+  private getGalleryCollections() {
     this.loader.start();
     this.lockerService.getLockerGalleryCollection()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(gallery => {
-        this.gallery = gallery;
+      .subscribe(galleryCollections => {
+        this.galleryCollections = galleryCollections;
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerGalleryComponent.getGallery');
@@ -120,6 +120,10 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
           console.error(error, 'LockerGalleryComponent.onAddImage');
         });
     };
+  }
+
+  public onDeleteGalleryPhoto(photo: LockerGalleryPhotos) {
+    console.log(photo);
   }
 
 }
