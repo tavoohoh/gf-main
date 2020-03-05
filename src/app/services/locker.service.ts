@@ -43,9 +43,15 @@ export class LockerService {
     }));
   }
 
-  public async sendLockerGalleryImage(galleryId: string, img: string | ArrayBuffer): Promise<boolean> {
+  public async addLockerGalleryImage(galleryId: string, img: string | ArrayBuffer): Promise<boolean> {
     const lockerGalleryImage = this.afs.collection<{ img: string | ArrayBuffer }>(`gallery/${galleryId}/photos`);
     return await lockerGalleryImage.add({ img }).then(() => true);
+  }
+
+  public async addLockerGallery(gallery: LockerGallery): Promise<boolean> {
+
+    const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
+    return await lockerGalleryCollection.doc(gallery.id).set(gallery).then(() => true);
   }
 
 }
