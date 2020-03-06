@@ -21,7 +21,7 @@ export class BioComponent implements OnInit {
   private getBioContent(): void {
     this.lockerService.getLockerBioDocument(this.currentLang)
       .subscribe(bio => {
-        this.bio = bio.content;
+        this.bio = bio.content.split('<p data-f-id="pbf"')[0] || bio.content;
       }, error => console.error(error, 'BioComponent.getBioContent'));
   }
 }

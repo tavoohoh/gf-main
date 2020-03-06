@@ -40,5 +40,8 @@
       "TITLE": "Remove image from gallery",
       "CONTENT": "This image will be permanently deleted. Are you sure you want to continue?"
     }
+  },
+  "CONTACT": {
+    "FOR_BOOKING_INQUIRIES": "For booking inquiries"
   }
 }
