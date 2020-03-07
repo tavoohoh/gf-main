@@ -30,4 +30,9 @@ export class HelperService {
     window.location.reload();
   }
 
+  public setLanguage(lang: string) {
+    this.translateService.use(lang);
+    window.localStorage.setItem('userLanguage', lang);
+    window.location.reload();
+  }
 }

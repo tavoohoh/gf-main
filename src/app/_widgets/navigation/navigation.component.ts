@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { NAVIGATION } from '@app/_constants';
-import { HelperService } from '@app/services/helper.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,8 +15,7 @@ export class NavigationComponent implements OnInit {
   public isHome: boolean;
 
   constructor(
-    private router: Router,
-    private helperService: HelperService
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -49,7 +47,4 @@ export class NavigationComponent implements OnInit {
     this.showMenu = false;
   }
 
-  public toggleLanguage() {
-    this.helperService.toggleLanguage();
-  }
 }

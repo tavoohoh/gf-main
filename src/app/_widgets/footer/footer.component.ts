@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NewsletterService } from '@app/services/newsletter.service';
+import { HelperService } from '@app/services/helper.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +15,8 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private newsLetterService: NewsletterService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private helperService: HelperService
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,10 @@ export class FooterComponent implements OnInit {
 
   public validateEmailField() {
     return this.newsLetterForm.controls.email.errors && this.newsLetterForm.controls.email.errors.email;
+  }
+
+  public setLanguage(lang: string) {
+    this.helperService.setLanguage(lang);
   }
 
 }

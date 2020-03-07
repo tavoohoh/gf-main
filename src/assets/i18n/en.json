@@ -1,5 +1,4 @@
 {
-  "CHANGE_LANG": "Español",
   "NAVIGATION": {
     "HOME": "Home",
     "BIO": "Bio",
@@ -36,6 +35,7 @@
     "CANCEL": "Cancel"
   },
   "ACTIONS": {
+    "DOWNLOAD_PROMO": "Download promotional PDF",
     "CONFIRM_DELETE_GALLERY_PHOTO": {
       "TITLE": "Remove image from gallery",
       "CONTENT": "This image will be permanently deleted. Are you sure you want to continue?"
@@ -43,5 +43,7 @@
   },
   "CONTACT": {
     "FOR_BOOKING_INQUIRIES": "For booking inquiries"
-  }
+  },
+  "CURRENT_LANG": "EN",
+  "CREDITS": "Made with ♥ by"
 }

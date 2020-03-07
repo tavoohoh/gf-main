@@ -52,7 +52,28 @@
     </div>
 
     <ng-container
-      *ngTemplateOutlet="newsLetterSubmited ? newsLetterSubscriptionResult : newsLetterFormTemplate"></ng-container>
+      *ngTemplateOutlet="newsLetterSubmited ? newsLetterSubscriptionResult : newsLetterFormTemplate">
+    </ng-container>
+  </div>
+
+  <div class="other-content">
+
+    <div class="other-content-container">
+      <div class="lang">
+        <button (click)="setLanguage('es')">ESP</button>
+        <button (click)="setLanguage('en')">ENG</button>
+      </div>
+  
+      <div class="credits">
+        <span>
+          {{ 'CREDITS' | translate }}
+        </span>
+        <a href="http://tavoohoh.com" target="_blank" rel="noopener noreferrer">
+          tavoohoh.com
+        </a>
+      </div>
+    </div>
+
   </div>
 </footer>
 
@@ -62,7 +83,7 @@
     <small class="text-danger" *ngIf="validateEmailField()">
       {{ 'FORM.EMAIL_ERROR' | translate }}
     </small>
-    <button type="submit">
+    <button class="gf-button" type="submit">
       {{ 'FORM.SIGN_UP' | translate }}
     </button>
   </form>

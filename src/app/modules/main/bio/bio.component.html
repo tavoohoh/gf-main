@@ -1,3 +1,14 @@
 <div class="bio-page inner-html-content" *ngIf="bio">
   <div [froalaView]="bio"></div>
+  <div class="download-bio">
+    <a class="gf-button" target="_blank" rel="noopener noreferrer" *ngIf="('CURRENT_LANG' | translate) === 'EN'"
+      [href]="'https://firebasestorage.googleapis.com/v0/b/gianfaraoneweb.appspot.com/o/Gian%20Faraone%20Promo%2C%20EN.pdf?alt=media&token=381360a6-b31b-4d16-ba3c-186d48749b32'">
+      {{ 'ACTIONS.DOWNLOAD_PROMO' | translate }}
+    </a>
+
+    <a class="gf-button" target="_blank" rel="noopener noreferrer" *ngIf="('CURRENT_LANG' | translate) === 'ES'"
+      [href]="'https://firebasestorage.googleapis.com/v0/b/gianfaraoneweb.appspot.com/o/Gian%20Faraone%20Promo%2C%20ES.pdf?alt=media&token=b827de40-f566-45b4-b772-cdbc65809926'">
+      {{ 'ACTIONS.DOWNLOAD_PROMO' | translate }}
+    </a>
+  </div>
 </div>
