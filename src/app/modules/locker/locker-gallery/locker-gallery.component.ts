@@ -21,7 +21,8 @@ enum ViewType {
 })
 export class LockerGalleryComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
-  private galleryId: string;
+  private alertContext: any;
+  public galleryId: string;
   public galleryCollections: Array<LockerGallery>;
   public galleryPhotos: Array<LockerGalleryPhotos>;
   public viewContent: ViewType;
@@ -29,7 +30,6 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
   public viewType = ViewType;
   public formAddGalleryFields: GFormFields = AddGalleryForm;
   public formOptions: GFormOptions = LockerFormOptions;
-  private alertContext: any;
 
   constructor(
     private lockerService: LockerService,
@@ -91,18 +91,16 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
     };
 
     this.lockerService.addLockerGallery(galley)
-    .then(() => {
-      this.formAddGalleryFields = AddGalleryForm;
-      this.getGalleryPhotos(galley);
-      this.loader.stop();
-    })
-    .catch(error => {
-      this.loader.stop();
-      console.error(error, 'LockerGalleryComponent.onAddNewGallery');
-    });
+      .then(() => {
+        this.formAddGalleryFields = AddGalleryForm;
+        this.getGalleryPhotos(galley);
+        this.loader.stop();
+      })
+      .catch(error => {
+        this.loader.stop();
+        console.error(error, 'LockerGalleryComponent.onAddNewGallery');
+      });
   }
-
-  public onDeleteGallery() { }
 
   public onAddImage($event: any): void {
     if (!$event.target.files || !$event.target.files[0]) {
@@ -135,20 +133,36 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
     this.alertService.close(id);
   }
 
+  public onDeleteGallery() {
+    this.loader.start();
+    this.lockerService.deleteLockerGallery(this.galleryId)
+      .then(() => {
+        this.closeAlert('deleteGalleryAlert');
+        this.galleryId = null;
+        this.viewContent = null;
+        this.loader.stop();
+      })
+      .catch(error => {
+        console.error(error, 'LockerGalleryComponent.onDeleteGallery');
+        this.closeAlert('deleteGalleryAlert');
+        this.loader.stop();
+      });
+  }
+
   public onDeleteGalleryPhoto() {
     this.loader.start();
     const photo = this.alertContext;
 
     this.lockerService.deleteLockerGalleryImage(this.galleryId, photo.id)
-    .then(() => {
-      this.closeAlert('deleteGalleryAlert');
-      this.loader.stop();
-    })
-    .catch(error => {
-      console.error(error, 'LockerGalleryComponent.onDeleteGalleryPhoto');
-      this.closeAlert('deleteGalleryAlert');
-      this.loader.stop();
-    });
+      .then(() => {
+        this.closeAlert('deleteGalleryImageAlert');
+        this.loader.stop();
+      })
+      .catch(error => {
+        console.error(error, 'LockerGalleryComponent.onDeleteGalleryPhoto');
+        this.closeAlert('deleteGalleryImageAlert');
+        this.loader.stop();
+      });
   }
 
 }

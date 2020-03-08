@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import 'firebase/firestore';
 import { DomSanitizer } from '@angular/platform-browser';
+import 'firebase/firestore';
 
 import { LockerBio, LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
 import { map } from 'rxjs/operators';
@@ -51,6 +51,11 @@ export class LockerService {
   public async addLockerGalleryImage(galleryId: string, img: string | ArrayBuffer): Promise<boolean> {
     const lockerGalleryImage = this.afs.collection<{ img: string | ArrayBuffer }>(`gallery/${galleryId}/photos`);
     return await lockerGalleryImage.add({ img }).then(() => true);
+  }
+
+  public async deleteLockerGallery(galleryId: string): Promise<boolean> {
+    const lockerGallery = this.afs.doc(`gallery/${galleryId}`);
+    return await lockerGallery.delete().then(() => true);
   }
 
   public async deleteLockerGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {

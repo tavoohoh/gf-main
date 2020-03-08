@@ -24,19 +24,21 @@
 
   <!-- content -->
   <div class="content">
-
     <div class="content-detail" *ngIf="viewContent === viewType.DETAIL">
 
       <div class="image-container">
+
+        <!-- gallery images -->
         <div class="image-card" *ngFor="let photo of galleryPhotos">
           <div class="image" [style.background-image]="photo.img"></div>
           <div class="actions">
-            <button type="button" (click)="openAlert(photo, 'deleteGalleryAlert')">
+            <button type="button" (click)="openAlert(photo, 'deleteGalleryImageAlert')">
               {{ 'FORM.DELETE' | translate }}
             </button>
           </div>
         </div>
 
+        <!-- add image to gallery -->
         <button
           (click)="imageInput.click()"
           class="image-card action-card"
@@ -50,6 +52,15 @@
               </span>
             </div>
         </button>
+
+        <!-- gallery actions -->
+        <div class="gallery-actions">
+          <button (click)="openAlert(galleryId, 'deleteGalleryAlert')"
+            class="gallery-actions-button"
+            type="button">
+            {{ 'FORM.DELETE_GALLERY' | translate }}
+          </button>
+        </div>
       </div>
     </div>
 
@@ -69,14 +80,28 @@
   (change)="onAddImage($event)" />
 
 <!-- delete gallery photo alert -->
-<app-alert id="deleteGalleryAlert" [title]="'ACTIONS.CONFIRM_DELETE_GALLERY_PHOTO.TITLE' | translate">
+<app-alert id="deleteGalleryImageAlert" [title]="'ACTIONS.CONFIRM_DELETE_GALLERY_PHOTO.TITLE' | translate">
   <p>{{ 'ACTIONS.CONFIRM_DELETE_GALLERY_PHOTO.CONTENT' | translate }}</p>
+
+  <div class="gs-alert-actions">
+    <button (click)="closeAlert('deleteGalleryImageAlert')">
+      {{ 'FORM.CANCEL' | translate }}
+    </button>
+    <button class="btn-confirm" (click)="onDeleteGalleryPhoto()">
+      {{ 'FORM.DELETE' | translate }}
+    </button>
+  </div>
+</app-alert>
+
+<!-- delete gallery alert -->
+<app-alert id="deleteGalleryAlert" [title]="'ACTIONS.CONFIRM_DELETE_GALLERY.TITLE' | translate">
+  <p>{{ 'ACTIONS.CONFIRM_DELETE_GALLERY.CONTENT' | translate }}</p>
 
   <div class="gs-alert-actions">
     <button (click)="closeAlert('deleteGalleryAlert')">
       {{ 'FORM.CANCEL' | translate }}
     </button>
-    <button class="btn-confirm" (click)="onDeleteGalleryPhoto()">
+    <button class="btn-confirm" (click)="onDeleteGallery()">
       {{ 'FORM.DELETE' | translate }}
     </button>
   </div>

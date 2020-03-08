@@ -33,6 +33,7 @@
     "ADD_GALLERY": "Agregar galería",
     "GALLERY_NAME": "Nombre de la galería",
     "DELETE": "Eliminar",
+    "DELETE_GALLERY": "Eliminar galería",
     "CANCEL": "Cancelar"
   },
   "ACTIONS": {
@@ -40,6 +41,10 @@
     "CONFIRM_DELETE_GALLERY_PHOTO": {
       "TITLE": "Eliminar imagen de la galería",
       "CONTENT": "Esta imagen se eleminara de forma permanente ¿Esta seguro que desea continuar?"
+    },
+    "CONFIRM_DELETE_GALLERY": {
+      "TITLE": "Eliminar galería",
+      "CONTENT": "Esta galaría se eleminara de forma permanente ¿Esta seguro que desea continuar?"
     }
   },
   "CONTACT": {
