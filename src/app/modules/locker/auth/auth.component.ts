@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { GFormFields, GFormOptions } from 'gs-forms';
 import { AuthForm, LockerFormOptions } from '@app/_forms/locker.forms';
@@ -14,20 +15,30 @@ import { AuthForm, LockerFormOptions } from '@app/_forms/locker.forms';
 export class AuthComponent implements OnInit {
   public formFields: GFormFields = AuthForm;
   public formOptions: GFormOptions = LockerFormOptions;
+  public error: boolean;
 
   constructor(
+    private loader: NgxUiLoaderService,
     private fireAuth: AngularFireAuth,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.formOptions.context.saveButton.text = 'Sign in';
+    this.formOptions.context.saveButton.text = 'ADMIN.LOGIN';
     this.formOptions.layout.columns = 'auto';
   }
 
   public login(form: FormGroup) {
+    this.error = false;
+    this.loader.start();
     this.fireAuth.signInWithEmailAndPassword(form.value.email, form.value.password)
-      .then(() => this.router.navigate(['admin']));
+      .then(() => {
+        this.loader.stop();
+        this.router.navigate(['admin']);
+      }).catch(() => {
+        this.loader.stop();
+        this.error = true;
+      });
   }
 
 }

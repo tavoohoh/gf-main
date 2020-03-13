@@ -49,6 +49,13 @@
   "CONTACT": {
     "FOR_BOOKING_INQUIRIES": "For booking inquiries"
   },
+  "ADMIN": {
+    "LOGIN": "Login",
+    "LOG_OUT": "Logout",
+    "LOGIN_ERROR": "Unable to login with provided credentials",
+    "CURRENT_LANG": "Current language",
+    "CHECK_WEB_SITE": "Go to website"
+  },
   "CURRENT_LANG": "EN",
-  "CREDITS": "Made with ♥ by"
+  "CREDITS": "© 2020 Gian Faraone. All Rights Reserved | Made by"
 }

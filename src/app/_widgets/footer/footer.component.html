@@ -57,24 +57,20 @@
   </div>
 
   <div class="other-content">
-
-    <div class="other-content-container">
-      <div class="lang">
-        <button (click)="setLanguage('es')">ESP</button>
-        <button (click)="setLanguage('en')">ENG</button>
-      </div>
-  
-      <div class="credits">
-        <span>
-          {{ 'CREDITS' | translate }}
-        </span>
-        <a href="http://tavoohoh.com" target="_blank" rel="noopener noreferrer">
-          tavoohoh.com
-        </a>
-      </div>
-    </div>
-
+    <span>
+      {{ 'CREDITS' | translate }}
+    </span>
+    <a href="http://tavoohoh.com" target="_blank" rel="noopener noreferrer">
+      tavoohoh.com
+    </a>
   </div>
+
+  <div class="lang">
+    <button (click)="setLanguage('es')">ESP</button>
+    <span class="lang-divider">|</span>
+    <button (click)="setLanguage('en')">ENG</button>
+  </div>
+
 </footer>
 
 <ng-template #newsLetterFormTemplate>

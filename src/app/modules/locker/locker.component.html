@@ -8,7 +8,7 @@
 
     <!-- current lang -->
     <div class="current-language">
-      Editing for language:
+      {{ 'ADMIN.CURRENT_LANG' | translate }}:
       <button (click)="toggleLang()">
         {{ 'CURRENT_LANG' | translate }}
       </button>
@@ -16,7 +16,7 @@
 
     <!-- logout -->
     <button class="logout" type="button" (click)="logout()" *ngIf="userEmail">
-      Logout
+      {{ 'ADMIN.LOG_OUT' | translate }}
     </button>
   </div>
   
@@ -24,6 +24,9 @@
     <div class="navigation">
       <a *ngFor="let page of pages" [routerLink]="page.url" [class.activeLink]="page.url === activeUrl">
         {{ page.name | translate }}
+      </a>
+      <a routerLink="/" target="_blank" rel="noopener noreferrer">
+        {{ 'ADMIN.CHECK_WEB_SITE' | translate }}
       </a>
     </div>
   </div>

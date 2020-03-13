@@ -1,8 +1,13 @@
 <div class="login">
-  <gs-form
-    *ngIf="formOptions"
-    [formFields]="formFields"
-    [formOptions]="formOptions"
-    (form)="login($event)">
-  </gs-form>
+  <div class="login-content">
+    <gs-form
+      *ngIf="formOptions"
+      [formFields]="formFields"
+      [formOptions]="formOptions"
+      (form)="login($event)">
+    </gs-form>
+    <div class="error-message" *ngIf="error">
+      {{ 'ADMIN.LOGIN_ERROR' | translate }}
+    </div>
+  </div>
 </div>

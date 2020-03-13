@@ -17,3 +17,13 @@ $bodyHeight: calc(100vh - 293px)
 
 // Effects
 $transition: .3s ease-in-out
+
+// Mixins
+@mixin cleanButton()
+  background: none
+  text-decoration: none
+  border: none
+  outline: none
+  cursor: pointer
+  text-transform: uppercase
+  transition: $transition

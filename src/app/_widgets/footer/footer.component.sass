@@ -97,54 +97,38 @@ footer
         img
           height: 30px
 
+  .lang
+    position: absolute
+    top: -32px
+    right: 50%
+    transform: translateX(50%)
+
+    .lang-divider
+      color: $gold
+      display: inline-block
+      margin: 0 .4rem
+
+    button
+      @include cleanButton()
+      color: $gold
+
+      &:hover
+        color: $darkGold
+
   .other-content
+    padding: 2px
+    text-align: center
     background-color: $darkGray
 
-    .other-content-container
-      display: grid
-      grid-template-columns: repeat(2, max-content)
-      gap: 1rem
-      padding: 2px
-      width: max-content
-      margin: auto
-
-      .credits,
-      .credits a,
-      .lang span
-        color: $white
-
-      .credits,
-      .credits a,
-      .lang button
-        font-size: 0.7rem
-
-      .credits
-        align-self: center
-        margin-right: auto
-        margin-top: 4px
-
-      .lang
-        margin-left: auto
-        align-self: center
-        line-height: 1
-
-        span
-          line-height: 1
-          display: inline-block
-          margin: 4px
-
-        button
-          display: inline-block
-          padding: 0
-          margin-right: 10px
-          background: none
-          border: none
-          outline: none
-          color: $darkGold
-          font-weight: bold
-          line-height: 1
-          text-transform: uppercase
-          cursor: pointer
+    a, span
+      line-height: 1
+      font-size: 0.7rem
+      color: lighten($darkGray, 25)
+    
+    a
+      text-decoration: none
+      &:hover
+        text-decoration: underline
 
 .newsletter_success, .newsletter_failed
   align-self: center

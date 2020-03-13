@@ -50,20 +50,15 @@ a
   text-align: justify
 
 .gf-button
+  @include cleanButton()
   display: inline-block
   width: max-content
   padding: .7rem 1rem
-  background: $darkGold
-  text-decoration: none
-  border: none
-  outline: none
+  background: $gold
   color: $white
   font-weight: bold
   line-height: 1
-  text-transform: uppercase
-  cursor: pointer
-  transition: $transition
   font-size: .8rem
 
   &:hover
-    background-color: $gold
+    background-color: $darkGold
