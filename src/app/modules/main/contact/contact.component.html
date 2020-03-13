@@ -4,21 +4,29 @@
       <img src="./assets/logo/gf.svg" alt="GF Logo">
     </div>
   
-    <div class="info">
+    <div class="info" *ngIf="contactInfo">
       <b>
         {{ 'CONTACT.FOR_BOOKING_INQUIRIES' | translate }}
       </b>
       <p>
         USA<span class="pipe-divider">|</span>
-        <a href="tel:+16174703652">+1 (617) 470-3652</a> 
+        <a href="tel:{{ contactInfo.usaPhone.link }}">
+          {{ contactInfo.usaPhone.text }}
+        </a> 
         <span class="pipe-divider">|</span>
-        <a href="mailto:booking@gianfaraone.com">booking@gianfaraone.com</a>
+        <a href="mailto:{{ contactInfo.usaEmail }}">
+          {{ contactInfo.usaEmail }}
+        </a>
       </p>
       <p>
         VEN<span class="pipe-divider">|</span>
-        <a href="tel:+584125836887">+58 (412) 583-6887</a> 
+        <a href="tel:{{ contactInfo.venPhone.link }}">
+          {{ contactInfo.venPhone.text }}
+        </a> 
         <span class="pipe-divider">|</span>
-        <a href="mailto:booking@gianfaraone.com">contrataciones@gianfaraone.com</a>
+        <a href="mailto:{{ contactInfo.venEmail }}">
+          {{ contactInfo.venEmail }}
+        </a>
       </p>
     </div>
   </div>

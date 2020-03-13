@@ -11,10 +11,10 @@ import { HelperService } from '@app/services/helper.service';
 })
 export class LockerComponent implements OnInit {
   public pages: Array<{ url: string; name: string; }> = [
-    {
-      url: '/admin',
-      name: 'NAVIGATION.GENERAL'
-    },
+    // {
+    //   url: '/admin',
+    //   name: 'NAVIGATION.GENERAL'
+    // },
     {
       url: '/admin/bio',
       name: 'NAVIGATION.BIO'

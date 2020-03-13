@@ -17,7 +17,10 @@ enum ViewType {
 @Component({
   selector: 'app-locker-gallery',
   templateUrl: './locker-gallery.component.html',
-  styleUrls: ['./locker-gallery.component.sass']
+  styleUrls: [
+    './locker-gallery.component.sass',
+    '../locker.styles.sass'
+  ]
 })
 export class LockerGalleryComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();

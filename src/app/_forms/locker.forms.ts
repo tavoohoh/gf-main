@@ -3,7 +3,10 @@ import {
   GPasswordField,
   GFormFields,
   GFieldValidatorType,
-  GFormOptions
+  GFormOptions,
+  GPhoneField,
+  GFieldCountryCode,
+  GDivider
 } from 'gs-forms';
 
 export const LockerFormOptions: GFormOptions = {
@@ -44,6 +47,49 @@ export const AddGalleryForm: GFormFields = [
     placeholder: 'FORM.GALLERY_NAME',
     validators: {
       [GFieldValidatorType.REQUIRED]: true
+    },
+  })
+];
+
+export const ContactInfoForm: GFormFields = [
+  new GDivider({
+    model: 'usa',
+    seccionName: 'USA'
+  }),
+  new GPhoneField({
+    model: 'usaPhone',
+    placeholder: 'FORM.PHONE',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+    country: GFieldCountryCode.US
+  }),
+  new GTextField({
+    model: 'usaEmail',
+    placeholder: 'FORM.EMAIL',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true,
+      [GFieldValidatorType.EMAIL]: true
+    },
+  }),
+  new GDivider({
+    model: 'ven',
+    seccionName: 'VEN'
+  }),
+  new GPhoneField({
+    model: 'venPhone',
+    placeholder: 'FORM.PHONE',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+    country: GFieldCountryCode.VE
+  }),
+  new GTextField({
+    model: 'venEmail',
+    placeholder: 'FORM.EMAIL',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true,
+      [GFieldValidatorType.EMAIL]: true
     },
   })
 ];

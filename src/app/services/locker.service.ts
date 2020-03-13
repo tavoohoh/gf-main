@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'firebase/firestore';
 
-import { LockerBio, LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
+import { LockerBio, LockerGallery, LockerGalleryPhotos, LockerContactInfo } from '@app/_interfaces/locker.interface';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -16,16 +16,22 @@ export class LockerService {
     private sanitizer: DomSanitizer
   ) {}
 
+  /**
+   * Bio
+   */
   public getLockerBioDocument(language: string): Observable<LockerBio> {
     const lockerBioDocument = this.afs.doc<LockerBio>(`bio/${language}`);
     return lockerBioDocument.valueChanges();
   }
 
-  public editLockerBioDocument(bioContent: string, language: string): Promise<void> {
+  public setLockerBioDocument(bioContent: string, language: string): Promise<void> {
     const lockerBioDocument  = this.afs.doc<LockerBio>(`bio/${language}`);
     return lockerBioDocument.update({ content: bioContent });
   }
 
+  /**
+   * Gallery
+   */
   public getLockerGalleryCollection(): Observable<Array<LockerGallery>> {
     const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
     return lockerGalleryCollection.valueChanges();
@@ -61,6 +67,19 @@ export class LockerService {
   public async deleteLockerGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {
     const lockerGalleryImage = this.afs.doc(`gallery/${galleryId}/photos/${galleryImageId}`);
     return await lockerGalleryImage.delete().then(() => true);
+  }
+
+  /**
+   * Contact
+   */
+  public getLockerContactInfo(): Observable<LockerContactInfo> {
+    const lockerContactInfo = this.afs.doc<LockerContactInfo>(`contact/info`);
+    return lockerContactInfo.valueChanges();
+  }
+
+  public setLockerContactInfo(contactInfo: LockerContactInfo): Promise<void> {
+    const lockerContactInfo = this.afs.doc<LockerContactInfo>(`contact/info`);
+    return lockerContactInfo.update(contactInfo);
   }
 
 }

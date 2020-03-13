@@ -11,3 +11,17 @@ export interface LockerGalleryPhotos {
   id: string;
   img: any;
 }
+
+export interface LockerPhoneModel {
+  alpha2Code: string;
+  code: string;
+  phone: string;
+}
+
+export interface LockerContactInfo {
+  usaPhone: LockerPhoneModel;
+  venPhone: LockerPhoneModel;
+  usaEmail: string;
+  venEmail: string;
+}
+

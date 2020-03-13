@@ -1,1 +1,12 @@
-<h2>{{ 'EDIT.CONTACT' | translate }}</h2>
+<h2 class="page-title">
+  {{ 'EDIT.CONTACT' | translate }}
+</h2>
+
+<div class="contact">
+  <gs-form
+    *ngIf="formFields && formOptions"
+    [formFields]="formFields"
+    [formOptions]="formOptions"
+    (form)="setContactInfo($event)">
+  </gs-form>
+</div>

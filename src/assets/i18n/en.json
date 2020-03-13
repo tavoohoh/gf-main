@@ -27,13 +27,15 @@
     "EMAIL_PLACEHOLDER": "Your Email Address",
     "EMAIL_ERROR": "Please provide a valid email address",
     "SIGN_UP": "Sign up",
+    "SAVE": "Save",
     "ADD": "Add",
     "ADD_IMAGE": "Add image",
     "ADD_GALLERY": "Add gallery",
     "GALLERY_NAME": "Gallery name",
     "DELETE": "Delete",
     "DELETE_GALLERY": "Delete gallery",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "PHONE": "Phone"
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Download promotional PDF",
@@ -54,7 +56,8 @@
     "LOG_OUT": "Logout",
     "LOGIN_ERROR": "Unable to login with provided credentials",
     "CURRENT_LANG": "Current language",
-    "CHECK_WEB_SITE": "Go to website"
+    "CHECK_WEB_SITE": "Go to website",
+    "WELCOME": "Welcome to the Gian Faraone website administrator.<br>To get started, select an option from the sidebar on the left of the screen."
   },
   "CURRENT_LANG": "EN",
   "CREDITS": "© 2020 Gian Faraone. All Rights Reserved | Made by"

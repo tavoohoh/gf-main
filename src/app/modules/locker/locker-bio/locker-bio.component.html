@@ -1,7 +1,9 @@
-<h2>{{ 'EDIT.BIO' | translate }}</h2>
+<h2 class="page-title">
+  {{ 'EDIT.BIO' | translate }}
+</h2>
 
 <div class="editor">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="setBioContent()">
     <textarea [froalaEditor]="options" formControlName="bio"></textarea>
     <button class="button submit" type="submit">
       {{ 'FORM.SAVE' | translate }}

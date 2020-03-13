@@ -66,14 +66,13 @@ export class LockerBioComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onSubmit(): void {
+  public setBioContent(): void {
     this.loader.start();
-    this.lockerService.editLockerBioDocument(this.form.value.bio, this.currentLang)
-      .then(bio => {
-        console.log('content updated');
+    this.lockerService.setLockerBioDocument(this.form.value.bio, this.currentLang)
+      .then(() => {
         this.loader.stop();
       }, error => {
-        console.error(error, 'LockerBioComponent.onSubmit');
+        console.error(error, 'LockerBioComponent.setBioContent');
         this.loader.stop();
       });
   }

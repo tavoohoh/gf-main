@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit {
     this.formOptions.layout.columns = 'auto';
   }
 
-  public login(form: FormGroup) {
+  public login(form: FormGroup): void {
     this.error = false;
     this.loader.start();
     this.fireAuth.signInWithEmailAndPassword(form.value.email, form.value.password)
