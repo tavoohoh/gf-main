@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'firebase/firestore';
 
-import { LockerBio, LockerGallery, LockerGalleryPhotos, LockerContactInfo } from '@app/_interfaces/locker.interface';
+import { LockerBio, LockerGallery, LockerGalleryPhotos, LockerContactInfo, LockerDate } from '@app/_interfaces/locker.interface';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -80,6 +80,14 @@ export class LockerService {
   public setLockerContactInfo(contactInfo: LockerContactInfo): Promise<void> {
     const lockerContactInfo = this.afs.doc<LockerContactInfo>(`contact/info`);
     return lockerContactInfo.update(contactInfo);
+  }
+
+  /**
+   * Dates
+   */
+  public getLockerDatesCollection(): Observable<Array<LockerDate>> {
+    const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`);
+    return lockerDatesCollection.valueChanges();
   }
 
 }

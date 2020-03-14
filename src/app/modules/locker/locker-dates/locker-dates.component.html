@@ -1,3 +1,32 @@
 <h2 class="page-title">
   {{ 'EDIT.DATES' | translate }}
 </h2>
+
+<div class="locker-view-editor locker-dates">
+
+  <!-- menu -->
+  <div class="collections">
+    <button
+      class="locker-btn add-btn"
+      type="button"
+      (click)="addNewDate()">
+        {{ 'FORM.ADD' | translate }}
+    </button>
+    <ng-container *ngIf="dateCollections">
+      <ng-container *ngFor="let collection of dateCollections">
+        <button
+          class="locker-btn"
+          [class.active]="currentDate === collection.title"
+          type="button"
+          (click)="getDate(collection)">
+            {{ collection.title }}
+        </button>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- content -->
+  <div class="content">
+    
+  </div>
+</div>

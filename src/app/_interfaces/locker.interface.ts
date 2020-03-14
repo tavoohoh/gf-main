@@ -25,3 +25,10 @@ export interface LockerContactInfo {
   venEmail: string;
 }
 
+export interface LockerDate {
+  id: string;
+  title: string;
+  location: string;
+  published: boolean;
+  date: string;
+}

@@ -8,11 +8,7 @@ import { GFormFields, GFormOptions } from 'gs-forms';
 import { LockerFormOptions, AddGalleryForm } from '@app/_forms/locker.forms';
 import { FormGroup } from '@angular/forms';
 import { AlertService } from '@app/_widgets/alert';
-
-enum ViewType {
-  GALLERY = 'GALLERY',
-  DETAIL = 'DETAIL'
-}
+import { ViewType } from '@app/_enums';
 
 @Component({
   selector: 'app-locker-gallery',
@@ -22,7 +18,7 @@ enum ViewType {
     '../locker.styles.sass'
   ]
 })
-export class LockerGalleryComponent implements OnInit, OnDestroy {
+export class LockerGalleryComponent implements OnDestroy, OnInit {
   private destroyed$ = new Subject();
   private alertContext: any;
   public galleryId: string;
@@ -42,8 +38,6 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getGalleryCollections();
-    this.formOptions.context.saveButton.text = 'FORM.ADD_GALLERY';
-    this.formOptions.layout.columns = 'auto';
   }
 
   ngOnDestroy() {
@@ -82,7 +76,7 @@ export class LockerGalleryComponent implements OnInit, OnDestroy {
 
   public addNewGallery() {
     this.viewContent = null;
-    this.viewContent = ViewType.GALLERY;
+    this.viewContent = ViewType.ADD;
     this.currentTitle = '';
   }
 

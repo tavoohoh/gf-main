@@ -1,22 +1,11 @@
 @import 'variables'
 
-.gallery
-  margin-top: 1rem
-  display: grid
-  grid-template-columns: 200px auto
-  gap: 1rem
+.locker-gallery
+  .content .content-detail
+    .image-container-actions
+      margin-top: 2rem
 
-  .collections
-    background: lighten($black, 2)
-    padding: 1rem
-
-  .content
-
-    .content-detail
-      .image-container-actions
-        margin-top: 2rem
-
-      .image-container
+    .image-container
         display: grid
         grid-template-columns: repeat(3, 180px)
         gap: 1rem
@@ -59,41 +48,6 @@
             margin: auto
             display: block
             fill: lighten($black, 2)
-
-    .content-add
-      width: 400px
-      margin: 2rem auto 0
-
-  button
-    display: block
-    width: 100%
-    text-align: left
-    background: none
-    border: none
-    outline: none
-    color: #ffffff
-    cursor: pointer
-    padding: .8rem 1rem
-    font-weight: bold
-    border-bottom: 1px solid lighten($black, 10)
-    line-height: 1
-    margin: 0
-    transition: $transition
-
-    &.add-btn
-      color: $gold
-      text-transform: capitalize
-      font-weight: lighter
-    
-    &:last-child
-      border: none
-
-    &:hover
-      background-color: lighten($black, 4)
-
-    &.active
-      background-color: rgba($gold, .1)
-      pointer-events: none
     
 .hiddenInput
   display: none

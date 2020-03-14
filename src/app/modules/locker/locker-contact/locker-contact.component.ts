@@ -34,8 +34,6 @@ export class LockerContactComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.formOptions.context.saveButton.text = 'FORM.SAVE';
-    this.formOptions.layout.columns = 'auto';
     this.getContactInfo();
   }
 

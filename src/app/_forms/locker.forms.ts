@@ -6,18 +6,20 @@ import {
   GFormOptions,
   GPhoneField,
   GFieldCountryCode,
-  GDivider
+  GDivider,
+  GDatePickerField,
+  GToggleField
 } from 'gs-forms';
 
 export const LockerFormOptions: GFormOptions = {
   onErrorDisableSubmit: true,
   layout: {
-    columns: 'repeat(2, 1fr)',
+    columns: 'auto',
     innerPadding: '0'
   },
   context: {
     saveButton: {
-      text: 'Submit',
+      text: 'FORM.ADD',
       show: true
     }
   }
@@ -91,5 +93,36 @@ export const ContactInfoForm: GFormFields = [
       [GFieldValidatorType.REQUIRED]: true,
       [GFieldValidatorType.EMAIL]: true
     },
+  })
+];
+
+export const DateForm: GFormFields = [
+  new GTextField({
+    model: 'title',
+    label: 'FORM.TITLE',
+    placeholder: 'FORM.TITLE',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'location',
+    label: 'FORM.LOCATION',
+    placeholder: 'FORM.LOCATION',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GDatePickerField({
+    model: 'date',
+    label: 'FORM.DATE',
+    placeholder: 'FORM.DATE',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GToggleField({
+    model: 'published',
+    label: 'FORM.PUBLISH',
   })
 ];
