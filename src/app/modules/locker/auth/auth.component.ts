@@ -6,6 +6,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { GFormFields, GFormOptions } from 'gs-forms';
 import { AuthForm, LockerFormOptions } from '@app/_forms/locker.forms';
+import { AuthService } from '@app/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -20,6 +21,7 @@ export class AuthComponent implements OnInit {
   constructor(
     private loader: NgxUiLoaderService,
     private fireAuth: AngularFireAuth,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -32,9 +34,10 @@ export class AuthComponent implements OnInit {
     this.error = false;
     this.loader.start();
     this.fireAuth.signInWithEmailAndPassword(form.value.email, form.value.password)
-      .then(() => {
+      .then(data => {
+        this.authService.setCurrentUser(data.user.email);
         this.loader.stop();
-        this.router.navigate(['admin']);
+        this.router.navigateByUrl('admin');
       }).catch(() => {
         this.loader.stop();
         this.error = true;

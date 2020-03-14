@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+// import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { GsFormsModule } from 'gs-forms';
@@ -24,22 +24,18 @@ import { LockerVideoComponent } from './locker-video/locker-video.component';
 import { AuthComponent } from './auth/auth.component';
 import { LockerComponent } from './locker.component';
 import { HelperService } from '@app/services/helper.service';
-
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/auth']);
-const redirectLoggedIn = () => redirectLoggedInTo(['admin']);
+import { LockerGuard } from '@app/_guards/locker.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
-    component: AuthComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedIn }
+    component: AuthComponent
   },
   {
     path: '',
     component: LockerComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    canActivate: [LockerGuard],
+    canActivateChild: [LockerGuard],
     children: [
       {
         path: '',
