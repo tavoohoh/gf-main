@@ -47,7 +47,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   private getGalleryCollections() {
     this.loader.start();
-    this.lockerService.getLockerGalleryCollection()
+    this.lockerService.listLockerGalleryCollection()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(galleryCollections => {
         this.galleryCollections = galleryCollections;
@@ -60,7 +60,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   public getGalleryPhotos(gallery: LockerGallery) {
     this.loader.start();
-    this.lockerService.getLockerGalleryDocumentCollection(gallery.id)
+    this.lockerService.getLockerGalleryDocument(gallery.id)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
         this.galleryId = gallery.id;
@@ -87,7 +87,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
       title: form.value.name
     };
 
-    this.lockerService.addLockerGallery(galley)
+    this.lockerService.createLockerGallery(galley)
       .then(() => {
         this.formAddGalleryFields = AddGalleryForm;
         this.getGalleryPhotos(galley);
@@ -111,7 +111,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       const base64Image = reader.result;
-      this.lockerService.addLockerGalleryImage(this.galleryId, base64Image)
+      this.lockerService.createLockerGalleryImage(this.galleryId, base64Image)
         .then(() => this.loader.stop())
         .catch(error => {
           console.error(error, 'LockerGalleryComponent.onAddImage');

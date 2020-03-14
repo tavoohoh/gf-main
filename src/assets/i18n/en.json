@@ -35,7 +35,11 @@
     "DELETE": "Delete",
     "DELETE_GALLERY": "Delete gallery",
     "CANCEL": "Cancel",
-    "PHONE": "Phone"
+    "PHONE": "Phone",
+    "TITLE": "Title",
+    "LOCATION": "Location",
+    "DATE": "Date",
+    "PUBLISH": "Publish"
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Download promotional PDF",

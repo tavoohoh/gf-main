@@ -57,7 +57,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   public getContactInfo() {
     this.loader.start();
-    this.lockerService.getLockerContactInfo()
+    this.lockerService.readLockerContactInfo()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(contactInfo => {
         this.setViewData(contactInfo);

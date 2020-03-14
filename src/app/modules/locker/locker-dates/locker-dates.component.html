@@ -13,13 +13,13 @@
         {{ 'FORM.ADD' | translate }}
     </button>
     <ng-container *ngIf="dateCollections">
-      <ng-container *ngFor="let collection of dateCollections">
+      <ng-container *ngFor="let document of dateCollections">
         <button
           class="locker-btn"
-          [class.active]="currentDate === collection.title"
+          [class.active]="currentDate?.id === document.id"
           type="button"
-          (click)="getDate(collection)">
-            {{ collection.title }}
+          (click)="viewDate(document.id)">
+            {{ document.title }}
         </button>
       </ng-container>
     </ng-container>
@@ -27,6 +27,13 @@
 
   <!-- content -->
   <div class="content">
-    
+    <ng-container *ngIf="viewContent === viewType.ADD || viewContent === viewType.DETAIL">
+      <gs-form
+        *ngIf="formFields && formOptions"
+        [formFields]="formFields"
+        [formOptions]="formOptions"
+        (form)="setDate($event)">
+      </gs-form>
+    </ng-container>
   </div>
 </div>

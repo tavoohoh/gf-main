@@ -29,7 +29,7 @@ export class BioComponent implements OnInit, OnDestroy {
 
   private getBioContent(): void {
     this.loader.start();
-    this.lockerService.getLockerBioDocument(this.currentLang)
+    this.lockerService.readLockerBioDocument(this.currentLang)
       .subscribe(bio => {
         this.bio = bio.content.split('<p data-f-id="pbf"')[0] || bio.content;
         this.loader.stop();

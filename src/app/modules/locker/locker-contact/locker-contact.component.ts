@@ -37,14 +37,14 @@ export class LockerContactComponent implements OnInit, OnDestroy {
     this.getContactInfo();
   }
 
-  private setForm(data: LockerContactInfo) {
+  private setForm(data: LockerContactInfo): void {
     this.formFields = this.gsFormService.patchFormValues(ContactInfoForm, data);
     this.loader.stop();
   }
 
-  public getContactInfo() {
+  public getContactInfo(): void {
     this.loader.start();
-    this.lockerService.getLockerContactInfo()
+    this.lockerService.readLockerContactInfo()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(contactInfo => {
         this.setForm(contactInfo);
@@ -56,7 +56,7 @@ export class LockerContactComponent implements OnInit, OnDestroy {
 
   public setContactInfo(form: FormGroup): void {
     this.loader.start();
-    this.lockerService.setLockerContactInfo({
+    this.lockerService.updateLockerContactInfo({
       usaEmail: form.value.usaEmail,
       usaPhone: form.value.usaPhone,
       venEmail: form.value.venEmail,
