@@ -29,7 +29,7 @@
     "gs-forms": "git+ssh://git@bitbucket.org/rappinc/rpp-ngforms-lib.git",
     "gs-player": "^0.2.5",
     "gs-tables": "git+ssh://git@bitbucket.org/rappinc/rpp-ngtables-core.git#compiled",
-    "ngx-ui-loader": "^8.0.0",
+    "ngx-ui-loader": "^9.0.1",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
