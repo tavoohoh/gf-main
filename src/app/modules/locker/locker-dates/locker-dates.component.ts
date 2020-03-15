@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { LockerService } from '@app/services/locker.service';
 import { AlertService } from '@app/_widgets/alert';
-import { GFormFields, GFormOptions, GsFormsService } from 'gs-forms';
+import { GFormFields, GFormOptions, GsFormsService, GsFormsComponent } from 'gs-forms';
 import { DateForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { takeUntil } from 'rxjs/operators';
 import { LockerDate } from '@app/_interfaces/locker.interface';
@@ -20,6 +20,7 @@ import { FormGroup } from '@angular/forms';
   ]
 })
 export class LockerDatesComponent implements OnDestroy, OnInit {
+  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
   private destroyed$ = new Subject();
   public dateCollections: Array<LockerDate>;
   public currentDate: LockerDate;
@@ -46,26 +47,27 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
   }
 
   public addNewDate(): void {
-    this.viewContent = ViewType.ADD;
-    this.gsFormService.resetForm();
+    if (this.formComponent) {
+      this.formComponent.formActions('reset');
+    }
+
     this.currentDate = null;
     this.formOptions.context.saveButton.text = 'FORM.ADD';
+    this.viewContent = ViewType.ADD;
   }
 
   public viewDate(dateId: string): void {
     this.loader.start();
     this.viewContent = null;
-    this.currentDate = null;
-    this.gsFormService.resetForm();
 
     this.lockerService.readLockerDateDocument(dateId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(currentDate => {
+        this.formFields = this.gsFormService.patchFormValues(DateForm, currentDate);
         this.currentDate = currentDate;
         this.currentDate.id = dateId;
         this.viewContent = ViewType.DETAIL;
         this.formOptions.context.saveButton.text = 'FORM.SAVE';
-        this.formFields = this.gsFormService.patchFormValues(DateForm, currentDate);
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerDatesComponent.viewDate');
@@ -74,6 +76,8 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
   }
 
   public setDate(form: FormGroup): void {
+    this.loader.start();
+
     this.lockerService[this.currentDate ? 'updateLockerDateDocument' : 'createLockerDateDocument']({
       date: {
         title: form.value.title,
@@ -83,9 +87,10 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
       },
       dateId: this.currentDate ? this.currentDate.id : null
     }).then(() => {
-      this.loader.stop();
+      this.viewContent = null;
       this.currentDate = null;
-      this.gsFormService.resetForm();
+      this.formComponent.formActions('reset');
+      this.loader.stop();
     }, error => {
       console.error(error, 'LockerDatesComponent.setDate');
       this.loader.stop();
@@ -101,6 +106,29 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerDatesComponent.getDates');
+        this.loader.stop();
+      });
+  }
+
+  public openAlert(id: string): void {
+    this.alertService.open(id);
+  }
+
+  public closeAlert(id: string): void {
+    this.alertService.close(id);
+  }
+
+  public deleteDate(): void {
+    this.loader.start();
+    this.lockerService.deleteLockerDateDocument(this.currentDate.id)
+      .then(() => {
+        this.viewContent = null;
+        this.currentDate = null;
+        this.loader.stop();
+        this.closeAlert('deleteDateAlert');
+      })
+      .catch(error => {
+        console.error(error, 'LockerDatesComponent.deleteDate');
         this.loader.stop();
       });
   }

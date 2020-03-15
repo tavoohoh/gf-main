@@ -101,6 +101,7 @@ export const DateForm: GFormFields = [
     model: 'title',
     label: 'FORM.TITLE',
     placeholder: 'FORM.TITLE',
+    value: '',
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
@@ -109,6 +110,7 @@ export const DateForm: GFormFields = [
     model: 'location',
     label: 'FORM.LOCATION',
     placeholder: 'FORM.LOCATION',
+    value: '',
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
@@ -117,6 +119,7 @@ export const DateForm: GFormFields = [
     model: 'date',
     label: 'FORM.DATE',
     placeholder: 'FORM.DATE',
+    value: '',
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
@@ -124,5 +127,6 @@ export const DateForm: GFormFields = [
   new GToggleField({
     model: 'published',
     label: 'FORM.PUBLISH',
+    value: false
   })
 ];

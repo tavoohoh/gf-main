@@ -19,7 +19,10 @@
           [class.active]="currentDate?.id === document.id"
           type="button"
           (click)="viewDate(document.id)">
-            {{ document.title }}
+          {{ document.title }}
+          <span class="date-status" *ngIf="document.published">
+            {{ 'FORM.PUBLISHED' | translate }}
+          </span>
         </button>
       </ng-container>
     </ng-container>
@@ -27,13 +30,31 @@
 
   <!-- content -->
   <div class="content">
-    <ng-container *ngIf="viewContent === viewType.ADD || viewContent === viewType.DETAIL">
+    <ng-container *ngIf="viewContent === viewType.DETAIL || viewContent === viewType.ADD">
       <gs-form
         *ngIf="formFields && formOptions"
         [formFields]="formFields"
         [formOptions]="formOptions"
         (form)="setDate($event)">
       </gs-form>
+      <button *ngIf="viewContent === viewType.DETAIL" 
+        class="locker-btn delete-btn centered-btn" (click)="openAlert('deleteDateAlert')">
+        {{ 'FORM.DELETE' | translate }}
+      </button>
     </ng-container>
   </div>
 </div>
+
+<!-- delete date alert -->
+<app-alert id="deleteDateAlert" [title]="'ACTIONS.CONFIRM_DELETE_DATE.TITLE' | translate">
+  <p>{{ 'ACTIONS.CONFIRM_DELETE_DATE.CONTENT' | translate }}</p>
+
+  <div class="gs-alert-actions">
+    <button (click)="closeAlert('deleteDateAlert')">
+      {{ 'FORM.CANCEL' | translate }}
+    </button>
+    <button class="btn-confirm" (click)="deleteDate()">
+      {{ 'FORM.DELETE' | translate }}
+    </button>
+  </div>
+</app-alert>
