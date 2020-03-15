@@ -64,7 +64,6 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
         this.currentDate.id = dateId;
         this.formOptions.context.saveButton.text = 'FORM.SAVE';
         this.viewContent = ViewType.DETAIL;
-        this.formFields = null;
         this.formFields = this.gsFormService.patchFormValues(DateForm, currentDate);
         this.loader.stop();
       }, error => {
@@ -74,7 +73,21 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
   }
 
   public setDate(form: FormGroup): void {
-    console.log(form);
+    this.lockerService[this.currentDate ? 'updateLockerDateDocument' : 'createLockerDateDocument']({
+      date: {
+        title: form.value.title,
+        location: form.value.location,
+        date: form.value.date,
+        published: form.value.published
+      },
+      dateId: this.currentDate ? this.currentDate.id : null
+    }).then(() => {
+      this.loader.stop();
+      this.gsFormService.resetForm();
+    }, error => {
+      console.error(error, 'LockerDatesComponent.setDate');
+      this.loader.stop();
+    });
   }
 
   private getDates(): void {

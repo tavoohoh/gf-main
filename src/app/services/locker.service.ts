@@ -111,19 +111,19 @@ export class LockerService {
     }));
   }
 
-  public async createLockerDateDocument(date: LockerDate): Promise<boolean> {
-    const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`);
-    return await lockerDatesCollection.add(date).then(() => true);
-  }
-
   public readLockerDateDocument(dateId: string): Observable<LockerDate> {
     const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${dateId}`);
     return lockerDatesDocument.valueChanges();
   }
 
-  public async updateLockerDateDocument(date: LockerDate, dateId: string): Promise<boolean> {
-    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${dateId}`);
-    return await lockerDatesDocument.update(date).then(() => true);
+  public async createLockerDateDocument(data: { date: LockerDate, dateId?: string }): Promise<boolean> {
+    const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`);
+    return await lockerDatesCollection.add(data.date).then(() => true);
+  }
+
+  public async updateLockerDateDocument(data: { date: LockerDate, dateId: string }): Promise<boolean> {
+    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${data.dateId}`);
+    return await lockerDatesDocument.update(data.date).then(() => true);
   }
 
   public async deleteLockerDateDocument(dateId: string): Promise<boolean> {
