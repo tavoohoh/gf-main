@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, finalize } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+import 'firebase/firestore';
+
 import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
 import { GFormFields, GFormOptions } from 'gs-forms';
 import { LockerFormOptions, AddGalleryForm } from '@app/_forms/locker.forms';
@@ -32,6 +35,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   constructor(
     private lockerService: LockerService,
+    private storage: AngularFireStorage,
     private loader: NgxUiLoaderService,
     private alertService: AlertService
   ) { }
@@ -106,18 +110,23 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
     this.loader.start();
     const file: File = $event.target.files[0];
-    const reader = new FileReader();
+    const fileRef = this.storage.ref(file.name);
+    const task = this.storage.upload(file.name, file);
 
-    reader.readAsDataURL(file);
-    reader.onload = (e) => {
-      const base64Image = reader.result;
-      this.lockerService.createLockerGalleryImage(this.galleryId, base64Image)
-        .then(() => this.loader.stop())
-        .catch(error => {
-          console.error(error, 'LockerGalleryComponent.onAddImage');
-          this.loader.stop();
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(imageUrl => {
+          this.lockerService.createLockerGalleryImage(this.galleryId, imageUrl)
+          .then(() => this.loader.stop()).catch(error => {
+            console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
+            this.loader.stop();
+          });
         });
-    };
+      })
+    ).subscribe(() => null, error => {
+      this.loader.stop();
+      console.error(error, 'LockerGalleryComponent.onAddImage at task.snapshotChanges');
+    });
   }
 
   public openAlert(alertContext: any, id: string) {

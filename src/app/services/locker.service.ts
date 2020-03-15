@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 import { LockerBio, LockerGallery, LockerGalleryPhotos, LockerContactInfo, LockerDate } from '@app/_interfaces/locker.interface';
 import { map } from 'rxjs/operators';
@@ -13,6 +15,7 @@ import { map } from 'rxjs/operators';
 export class LockerService {
   constructor(
     private afs: AngularFirestore,
+    private storage: AngularFireStorage,
     private sanitizer: DomSanitizer
   ) {}
 
@@ -58,13 +61,18 @@ export class LockerService {
     return await lockerGalleryCollection.doc(gallery.id).set(gallery).then(() => true);
   }
 
+  public async updateLockerGallery(gallery: LockerGallery): Promise<boolean> {
+    const lockerGalleryCollection = this.afs.doc<LockerDate>(`gallery/${gallery.id}`);
+    return await lockerGalleryCollection.update({ title: gallery.title }).then(() => true);
+  }
+
   public async deleteLockerGallery(galleryId: string): Promise<boolean> {
     const lockerGallery = this.afs.doc(`gallery/${galleryId}`);
     return await lockerGallery.delete().then(() => true);
   }
 
-  public async createLockerGalleryImage(galleryId: string, img: string | ArrayBuffer): Promise<boolean> {
-    const lockerGalleryImage = this.afs.collection<{ img: string | ArrayBuffer }>(`gallery/${galleryId}/photos`);
+  public async createLockerGalleryImage(galleryId: string, img?: string): Promise<boolean> {
+    const lockerGalleryImage = this.afs.collection<{ img: string }>(`gallery/${galleryId}/photos`);
     return await lockerGalleryImage.add({ img }).then(() => true);
   }
 

@@ -4,6 +4,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 import { environment } from '../environments/environment';
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     NgxUiLoaderModule
   ],
   providers: [],
