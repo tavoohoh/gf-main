@@ -55,6 +55,7 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
   public viewDate(dateId: string): void {
     this.loader.start();
     this.viewContent = null;
+    this.currentDate = null;
     this.gsFormService.resetForm();
 
     this.lockerService.readLockerDateDocument(dateId)
@@ -62,8 +63,8 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
       .subscribe(currentDate => {
         this.currentDate = currentDate;
         this.currentDate.id = dateId;
-        this.formOptions.context.saveButton.text = 'FORM.SAVE';
         this.viewContent = ViewType.DETAIL;
+        this.formOptions.context.saveButton.text = 'FORM.SAVE';
         this.formFields = this.gsFormService.patchFormValues(DateForm, currentDate);
         this.loader.stop();
       }, error => {
@@ -83,6 +84,7 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
       dateId: this.currentDate ? this.currentDate.id : null
     }).then(() => {
       this.loader.stop();
+      this.currentDate = null;
       this.gsFormService.resetForm();
     }, error => {
       console.error(error, 'LockerDatesComponent.setDate');
