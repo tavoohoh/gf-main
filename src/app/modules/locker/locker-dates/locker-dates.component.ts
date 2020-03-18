@@ -7,7 +7,7 @@ import { AlertService } from '@app/_widgets/alert';
 import { GFormFields, GFormOptions, GsFormsService, GsFormsComponent } from 'gs-forms';
 import { DateForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { takeUntil } from 'rxjs/operators';
-import { LockerDate } from '@app/_interfaces/locker.interface';
+import { LockerDate } from '@app/_interfaces';
 import { ViewType } from '@app/_enums';
 import { FormGroup } from '@angular/forms';
 
@@ -20,15 +20,17 @@ import { FormGroup } from '@angular/forms';
   ]
 })
 export class LockerDatesComponent implements OnDestroy, OnInit {
-  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
   private destroyed$ = new Subject();
-  public dateCollections: Array<LockerDate>;
-  public currentDate: LockerDate;
   public viewContent: ViewType;
   public viewType = ViewType;
-  public dateId: string;
+
+  public dateCollections: Array<LockerDate>;
+  public currentDate: LockerDate;
+
   public formFields: GFormFields = DateForm;
   public formOptions: GFormOptions = LockerFormOptions;
+
+  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
 
   constructor(
     private lockerService: LockerService,

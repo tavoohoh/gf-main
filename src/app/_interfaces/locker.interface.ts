@@ -32,3 +32,9 @@ export interface LockerDate {
   date: string;
   id?: string;
 }
+
+export interface LockerVideo {
+  title: string;
+  url: string;
+  id?: string;
+}
