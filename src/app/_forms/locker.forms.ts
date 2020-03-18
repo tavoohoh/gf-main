@@ -19,7 +19,7 @@ export const LockerFormOptions: GFormOptions = {
   },
   context: {
     saveButton: {
-      text: 'FORM.ADD',
+      text: 'FORM.SAVE',
       show: true
     }
   }
@@ -129,4 +129,25 @@ export const DateForm: GFormFields = [
     label: 'FORM.PUBLISH',
     value: false
   })
+];
+
+export const VideoForm: GFormFields = [
+  new GTextField({
+    model: 'title',
+    label: 'FORM.TITLE',
+    placeholder: 'FORM.TITLE',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'url',
+    label: 'FORM.URL',
+    placeholder: 'FORM.URL',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
 ];

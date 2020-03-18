@@ -9,16 +9,16 @@
     <button
       class="locker-btn add-btn"
       type="button"
-      (click)="addNewDate()">
+      (click)="updateView(viewType.ADD)">
         {{ 'FORM.ADD' | translate }}
     </button>
     <ng-container *ngIf="dateCollections">
       <ng-container *ngFor="let document of dateCollections">
         <button
           class="locker-btn"
-          [class.active]="currentDate?.id === document.id"
+          [class.active]="date?.id === document.id"
           type="button"
-          (click)="viewDate(document.id)">
+          (click)="readDate(document.id)">
           {{ document.title }}
           <span class="date-status" *ngIf="document.published">
             {{ 'FORM.PUBLISHED' | translate }}
@@ -35,7 +35,7 @@
         *ngIf="formFields && formOptions"
         [formFields]="formFields"
         [formOptions]="formOptions"
-        (form)="setDate($event)">
+        (form)="writeDate($event)">
       </gs-form>
       <button *ngIf="viewContent === viewType.DETAIL" 
         class="locker-btn delete-btn centered-btn" (click)="openAlert('deleteDateAlert')">

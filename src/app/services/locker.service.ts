@@ -3,11 +3,18 @@ import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { map } from 'rxjs/operators';
 import 'firebase/firestore';
 import 'firebase/storage';
 
-import { LockerBio, LockerGallery, LockerGalleryPhotos, LockerContactInfo, LockerDate } from '@app/_interfaces/locker.interface';
-import { map } from 'rxjs/operators';
+import {
+  LockerBio,
+  LockerGallery,
+  LockerGalleryPhotos,
+  LockerContactInfo,
+  LockerDate,
+  LockerVideo
+} from '@app/_interfaces/locker.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -97,7 +104,6 @@ export class LockerService {
   /**
    * Dates
    */
-
   private mapDateValues(value: any): LockerDate {
     const data = value.payload.doc.data() as LockerDate;
     const id = value.payload.doc.id;
@@ -119,18 +125,18 @@ export class LockerService {
     }));
   }
 
-  public readLockerDateDocument(dateId: string): Observable<LockerDate> {
-    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${dateId}`);
+  public readLockerDateDocument(id: string): Observable<LockerDate> {
+    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${id}`);
     return lockerDatesDocument.valueChanges();
   }
 
-  public async createLockerDateDocument(data: { date: LockerDate, dateId?: string }): Promise<boolean> {
+  public async createLockerDateDocument(data: { date: LockerDate, id?: string }): Promise<boolean> {
     const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`);
     return await lockerDatesCollection.add(data.date).then(() => true);
   }
 
-  public async updateLockerDateDocument(data: { date: LockerDate, dateId: string }): Promise<boolean> {
-    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${data.dateId}`);
+  public async updateLockerDateDocument(data: { date: LockerDate, id: string }): Promise<boolean> {
+    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${data.id}`);
     return await lockerDatesDocument.update(data.date).then(() => true);
   }
 
@@ -139,4 +145,45 @@ export class LockerService {
     return await lockerGallery.delete().then(() => true);
   }
 
+  /**
+   * Videos
+   */
+  private mapVideoValues(value: any): LockerVideo {
+    const data = value.payload.doc.data() as LockerVideo;
+    const id = value.payload.doc.id;
+    return {
+      id,
+      title: data.title,
+      url: data.url
+    };
+  }
+
+  public listVideosCollection(): Observable<Array<LockerVideo>> {
+    const videosCollection = this.afs.collection<LockerVideo>(`videos`);
+    return videosCollection.snapshotChanges().pipe(map(actions => {
+      return actions.map(value => {
+        return this.mapVideoValues(value);
+      });
+    }));
+  }
+
+  public readVideoDocument(id: string): Observable<LockerVideo> {
+    const videosDocument = this.afs.doc<LockerVideo>(`videos/${id}`);
+    return videosDocument.valueChanges();
+  }
+
+  public async createVideoDocument(data: { video: LockerVideo, id?: string  }): Promise<boolean> {
+    const videosCollection = this.afs.collection<LockerVideo>(`videos`);
+    return await videosCollection.add(data.video).then(() => true);
+  }
+
+  public async updateVideoDocument(data: { video: LockerVideo, id: string }): Promise<boolean> {
+    const videoDocument = this.afs.doc<LockerVideo>(`videos/${data.id}`);
+    return await videoDocument.update(data.video).then(() => true);
+  }
+
+  public async deleteVideoDocument(dateId: string): Promise<boolean> {
+    const videoDocument = this.afs.doc(`videos/${dateId}`);
+    return await videoDocument.delete().then(() => true);
+  }
 }
