@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { GsFormsService, GsFormsComponent, GFormFields, GFormOptions } from 'gs-forms';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 
 import { LockerFormOptions, VideoForm } from '@app/_forms/locker.forms';
 import { LockerService } from '@app/services/locker.service';
@@ -61,22 +61,20 @@ export class LockerVideoComponent implements OnDestroy, OnInit {
       });
   }
 
-  public readVideo(videoId: string): void {
+  public async readVideo(videoId: string): Promise<void> {
     this.loader.start();
-    this.viewContent = null;
 
-    this.lockerService.readVideoDocument(videoId)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(video => {
-        this.updateView(ViewType.DETAIL);
+    await this.lockerService.readVideoDocument(videoId)
+      .pipe(take(1))
+      .toPromise()
+      .then(video => {
+        this.viewContent = ViewType.DETAIL;
         this.video = video;
         this.video.id = videoId;
         this.formFields = this.gsFormService.patchFormValues(VideoForm, video);
-        this.loader.stop();
-      }, error => {
-        console.error(error, 'LockerVideoComponent.readVideo');
-        this.loader.stop();
-      });
+      })
+      .catch(error => console.error(error, 'LockerVideoComponent.readVideo'))
+      .finally(() => this.loader.stop());
   }
 
   public writeVideo(form: FormGroup): void {
@@ -85,30 +83,28 @@ export class LockerVideoComponent implements OnDestroy, OnInit {
     this.lockerService[this.video ? 'updateVideoDocument' : 'createVideoDocument']({
       video: {
         title: form.value.title,
-        url: form.value.location
+        url: form.value.url
       },
       id: this.video ? this.video.id : null
-    }).then(() => {
-      this.updateView(null);
-      this.loader.stop();
-    }, error => {
-      console.error(error, 'LockerVideoComponent.writeVideo');
-      this.loader.stop();
-    });
+    })
+      .then(() => {
+        this.viewContent = null;
+        this.video = null;
+      })
+      .catch(error => console.error(error, 'LockerVideoComponent.writeVideo'))
+      .finally(() => this.loader.stop());
   }
 
   public deleteVideo(): void {
     this.loader.start();
     this.lockerService.deleteVideoDocument(this.video.id)
       .then(() => {
-        this.updateView(null);
-        this.closeAlert('deleteDateAlert');
-        this.loader.stop();
+        this.viewContent = null;
+        this.video = null;
+        this.closeAlert('deleteVideoAlert');
       })
-      .catch(error => {
-        console.error(error, 'LockerVideoComponent.deleteDate');
-        this.loader.stop();
-      });
+      .catch(error => console.error(error, 'LockerVideoComponent.deleteDate'))
+      .finally(() => this.loader.stop());
   }
 
   public openAlert(alertId: string): void {
@@ -119,12 +115,16 @@ export class LockerVideoComponent implements OnDestroy, OnInit {
     this.alertService.close(alertId);
   }
 
-  public updateView(viewType: ViewType): void {
-    this.viewContent = viewType;
+  public showEmptyForm(): void {
+    this.loader.start();
+    this.viewContent = ViewType.ADD;
     this.video = null;
 
-    if (this.formComponent) {
-      this.formComponent.formActions('reset');
-    }
+    setTimeout(() => {
+      if (this.formComponent) {
+        this.formComponent.formActions('reset');
+      }
+      this.loader.stop();
+    }, 500);
   }
 }

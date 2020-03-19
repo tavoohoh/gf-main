@@ -6,7 +6,7 @@ import { LockerService } from '@app/services/locker.service';
 import { AlertService } from '@app/_widgets/alert';
 import { GFormFields, GFormOptions, GsFormsService, GsFormsComponent } from 'gs-forms';
 import { DateForm, LockerFormOptions } from '@app/_forms/locker.forms';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { LockerDate } from '@app/_interfaces';
 import { ViewType } from '@app/_enums';
 import { FormGroup } from '@angular/forms';
@@ -61,22 +61,20 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
       });
   }
 
-  public readDate(dateId: string): void {
+  public async readDate(dateId: string): Promise<void> {
     this.loader.start();
-    this.viewContent = null;
 
-    this.lockerService.readLockerDateDocument(dateId)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(date => {
-        this.updateView(ViewType.DETAIL);
+    await this.lockerService.readLockerDateDocument(dateId)
+      .pipe(take(1))
+      .toPromise()
+      .then(date => {
+        this.viewContent = ViewType.DETAIL;
         this.date = date;
         this.date.id = dateId;
         this.formFields = this.gsFormService.patchFormValues(DateForm, date);
-        this.loader.stop();
-      }, error => {
-        console.error(error, 'LockerDatesComponent.readDate');
-        this.loader.stop();
-      });
+      })
+      .catch(error => console.error(error, 'LockerDatesComponent.readDate'))
+      .finally(() => this.loader.stop());
   }
 
   public writeDate(form: FormGroup): void {
@@ -90,27 +88,25 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
         published: form.value.published
       },
       id: this.date ? this.date.id : null
-    }).then(() => {
-      this.updateView(null);
-      this.loader.stop();
-    }, error => {
-      console.error(error, 'LockerDatesComponent.writeDate');
-      this.loader.stop();
-    });
+    })
+      .then(() => {
+        this.viewContent = null;
+        this.date = null;
+      })
+      .catch(error => console.error(error, 'LockerDatesComponent.writeVideo'))
+      .finally(() => this.loader.stop());
   }
 
   public deleteDate(): void {
     this.loader.start();
     this.lockerService.deleteLockerDateDocument(this.date.id)
       .then(() => {
-        this.updateView(null);
+        this.viewContent = null;
+        this.date = null;
         this.closeAlert('deleteDateAlert');
-        this.loader.stop();
       })
-      .catch(error => {
-        console.error(error, 'LockerDatesComponent.deleteDate');
-        this.loader.stop();
-      });
+      .catch(error => console.error(error, 'LockerDatesComponent.deleteDate'))
+      .finally(() => this.loader.stop());
   }
 
   public openAlert(id: string): void {
@@ -121,13 +117,17 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
     this.alertService.close(id);
   }
 
-  public updateView(viewType: ViewType): void {
-    this.viewContent = viewType;
+  public showEmptyForm(): void {
+    this.loader.start();
+    this.viewContent = ViewType.ADD;
     this.date = null;
 
-    if (this.formComponent) {
-      this.formComponent.formActions('reset');
-    }
+    setTimeout(() => {
+      if (this.formComponent) {
+        this.formComponent.formActions('reset');
+      }
+      this.loader.stop();
+    }, 500);
   }
 
 }

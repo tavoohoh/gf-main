@@ -4,7 +4,7 @@
     "BIO": "Bio",
     "GALLERY": "Gallery",
     "MUSIC": "Music",
-    "VIDEO": "Video",
+    "VIDEO": "Videos",
     "DATES": "Dates",
     "CONTACT": "Contact",
     "GENERAL": "General"
@@ -17,7 +17,7 @@
     "BIO": "Edit bio",
     "GALLERY": "Edit gallery",
     "MUSIC": "Edit music",
-    "VIDEO": "Edit video",
+    "VIDEO": "Edit videos",
     "DATES": "Edit dates",
     "CONTACT": "Edit contact",
     "GENERAL": "General settings"
@@ -40,7 +40,8 @@
     "LOCATION": "Location",
     "DATE": "Date",
     "PUBLISH": "Publish",
-    "PUBLISHED": "Published"
+    "PUBLISHED": "Published",
+    "YOUTUBE_URL": "YouTube Url of the video"
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Download promotional PDF",
@@ -55,6 +56,10 @@
     "CONFIRM_DELETE_DATE": {
       "TITLE": "Remove date",
       "CONTENT": "This date will be permanently deleted. Are you sure you want to continue?"
+    },
+    "CONFIRM_DELETE_VIDEO": {
+      "TITLE": "Remove video",
+      "CONTENT": "This video will be permanently deleted. Are you sure you want to continue?"
     }
   },
   "CONTACT": {

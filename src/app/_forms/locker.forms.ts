@@ -143,8 +143,8 @@ export const VideoForm: GFormFields = [
   }),
   new GTextField({
     model: 'url',
-    label: 'FORM.URL',
-    placeholder: 'FORM.URL',
+    label: 'FORM.YOUTUBE_URL',
+    placeholder: 'FORM.YOUTUBE_URL',
     value: '',
     validators: {
       [GFieldValidatorType.REQUIRED]: true

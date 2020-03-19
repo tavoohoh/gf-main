@@ -1,3 +1,57 @@
 <h2 class="page-title">
   {{ 'EDIT.VIDEO' | translate }}
 </h2>
+
+<div class="locker-view-editor locker-videos">
+
+  <!-- menu -->
+  <div class="collections">
+    <button
+      class="locker-btn add-btn"
+      type="button"
+      (click)="showEmptyForm()">
+        {{ 'FORM.ADD' | translate }}
+    </button>
+    <ng-container *ngIf="videosCollection">
+      <ng-container *ngFor="let document of videosCollection">
+        <button
+          class="locker-btn"
+          [class.active]="video?.id === document.id"
+          type="button"
+          (click)="readVideo(document.id)">
+          {{ document.title }}
+        </button>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- content -->
+  <div class="content">
+    <ng-container *ngIf="viewContent === viewType.DETAIL || viewContent === viewType.ADD">
+      <gs-form
+        *ngIf="formFields && formOptions"
+        [formFields]="formFields"
+        [formOptions]="formOptions"
+        (form)="writeVideo($event)">
+      </gs-form>
+      <button *ngIf="viewContent === viewType.DETAIL" 
+        class="locker-btn delete-btn centered-btn" (click)="openAlert('deleteVideoAlert')">
+        {{ 'FORM.DELETE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>
+
+<!-- delete date alert -->
+<app-alert id="deleteVideoAlert" [title]="'ACTIONS.CONFIRM_DELETE_VIDEO.TITLE' | translate">
+  <p>{{ 'ACTIONS.CONFIRM_DELETE_VIDEO.CONTENT' | translate }}</p>
+
+  <div class="gs-alert-actions">
+    <button (click)="closeAlert('deleteVideoAlert')">
+      {{ 'FORM.CANCEL' | translate }}
+    </button>
+    <button class="btn-confirm" (click)="deleteVideo()">
+      {{ 'FORM.DELETE' | translate }}
+    </button>
+  </div>
+</app-alert>
