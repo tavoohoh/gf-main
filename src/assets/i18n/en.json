@@ -5,7 +5,7 @@
     "GALLERY": "Gallery",
     "MUSIC": "Music",
     "VIDEO": "Videos",
-    "DATES": "Dates",
+    "DATES": "Shows",
     "CONTACT": "Contact",
     "GENERAL": "General"
   },
@@ -18,7 +18,7 @@
     "GALLERY": "Edit gallery",
     "MUSIC": "Edit music",
     "VIDEO": "Edit videos",
-    "DATES": "Edit dates",
+    "DATES": "Edit shows",
     "CONTACT": "Edit contact",
     "GENERAL": "General settings"
   },
@@ -37,6 +37,10 @@
     "CANCEL": "Cancel",
     "PHONE": "Phone",
     "TITLE": "Title",
+    "SONG_TITLE": "Song title",
+    "SONG_SUBTITLE": "Album title/Subtitle",
+    "BACKGROUND_COLOR": "Background color",
+    "SONG_URL": "Song url",
     "LOCATION": "Location",
     "DATE": "Date",
     "PUBLISH": "Publish",
@@ -54,16 +58,23 @@
       "CONTENT": "This gallery will be permanently deleted. Are you sure you want to continue?"
     },
     "CONFIRM_DELETE_DATE": {
-      "TITLE": "Remove date",
-      "CONTENT": "This date will be permanently deleted. Are you sure you want to continue?"
+      "TITLE": "Remove show",
+      "CONTENT": "This show will be permanently deleted. Are you sure you want to continue?"
     },
     "CONFIRM_DELETE_VIDEO": {
       "TITLE": "Remove video",
       "CONTENT": "This video will be permanently deleted. Are you sure you want to continue?"
+    },
+    "CONFIRM_DELETE_MUSIC": {
+      "TITLE": "Remove song",
+      "CONTENT": "This song will be permanently deleted. Are you sure you want to continue?"
     }
   },
   "CONTACT": {
     "FOR_BOOKING_INQUIRIES": "For booking inquiries"
+  },
+  "DATES": {
+    "EMPTY": "New shows to be announced soon."
   },
   "ADMIN": {
     "LOGIN": "Login",

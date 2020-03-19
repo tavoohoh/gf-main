@@ -1,3 +1,57 @@
 <h2 class="page-title">
   {{ 'EDIT.MUSIC' | translate }}
 </h2>
+
+<div class="locker-view-editor locker-music">
+
+  <!-- menu -->
+  <div class="collections">
+    <button
+      class="locker-btn add-btn"
+      type="button"
+      (click)="showEmptyForm()">
+        {{ 'FORM.ADD' | translate }}
+    </button>
+    <ng-container *ngIf="musicCollection">
+      <ng-container *ngFor="let document of musicCollection">
+        <button
+          class="locker-btn"
+          [class.active]="music?.id === document.id"
+          type="button"
+          (click)="readMusic(document.id)">
+          {{ document.title }}
+        </button>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- content -->
+  <div class="content">
+    <ng-container *ngIf="viewContent === viewType.DETAIL || viewContent === viewType.ADD">
+      <gs-form
+        *ngIf="formFields && formOptions"
+        [formFields]="formFields"
+        [formOptions]="formOptions"
+        (form)="writeMusic($event)">
+      </gs-form>
+      <button *ngIf="viewContent === viewType.DETAIL" 
+        class="locker-btn delete-btn centered-btn" (click)="openAlert('deleteMusicAlert')">
+        {{ 'FORM.DELETE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>
+
+<!-- delete date alert -->
+<app-alert id="deleteMusicAlert" [title]="'ACTIONS.CONFIRM_DELETE_MUSIC.TITLE' | translate">
+  <p>{{ 'ACTIONS.CONFIRM_DELETE_MUSIC.CONTENT' | translate }}</p>
+
+  <div class="gs-alert-actions">
+    <button (click)="closeAlert('deleteMusicAlert')">
+      {{ 'FORM.CANCEL' | translate }}
+    </button>
+    <button class="btn-confirm" (click)="deleteMusic()">
+      {{ 'FORM.DELETE' | translate }}
+    </button>
+  </div>
+</app-alert>

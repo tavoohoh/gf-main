@@ -38,3 +38,11 @@ export interface LockerVideo {
   url: string;
   id?: string;
 }
+
+export interface LockerMusic {
+  title: string;
+  subtitle: string;
+  backgroundColor: string;
+  url: string;
+  id?: string;
+}

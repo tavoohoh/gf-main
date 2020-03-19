@@ -5,7 +5,7 @@
     "GALLERY": "Galería",
     "MUSIC": "Música",
     "VIDEO": "Videos",
-    "DATES": "Fechas",
+    "DATES": "Shows",
     "CONTACT": "Contacto",
     "GENERAL": "General"
   },
@@ -14,7 +14,7 @@
     "GALLERY": "Editar galería",
     "MUSIC": "Editar música",
     "VIDEO": "Editar videos",
-    "DATES": "Editar fechas",
+    "DATES": "Editar shows",
     "CONTACT": "Editar contácto",
     "GENERAL": "Configuración general"
   },
@@ -37,6 +37,10 @@
     "CANCEL": "Cancelar",
     "PHONE": "Teléfono",
     "TITLE": "Título",
+    "SONG_TITLE": "Título de la canción",
+    "SONG_SUBTITLE": "Titulo del álbum/subtítulo",
+    "BACKGROUND_COLOR": "Color de fondo",
+    "SONG_URL": "Url de la canción",
     "LOCATION": "Ubicación",
     "DATE": "Fecha",
     "PUBLISH": "Publicar",
@@ -54,16 +58,23 @@
       "CONTENT": "Esta galaría se eleminara de forma permanente ¿Esta seguro que desea continuar?"
     },
     "CONFIRM_DELETE_DATE": {
-      "TITLE": "Eliminar fecha",
-      "CONTENT": "Esta fecha se eleminara de forma permanente ¿Esta seguro que desea continuar?"
+      "TITLE": "Eliminar show",
+      "CONTENT": "Esta show se eleminara de forma permanente ¿Esta seguro que desea continuar?"
     },
     "CONFIRM_DELETE_VIDEO": {
       "TITLE": "Eliminar video",
       "CONTENT": "Esta video se eleminara de forma permanente ¿Esta seguro que desea continuar?"
+    },
+    "CONFIRM_DELETE_MUSIC": {
+      "TITLE": "Eliminar canción",
+      "CONTENT": "Esta canción se eleminara de forma permanente ¿Esta seguro que desea continuar?"
     }
   },
   "CONTACT": {
-    "FOR_BOOKING_INQUIRIES": "Para consultas de reservas"
+    "FOR_BOOKING_INQUIRIES": "Para contrataciones"
+  },
+  "DATES": {
+    "EMPTY": "Nuevos shows serán anunciadas próximamente."
   },
   "ADMIN": {
     "LOGIN": "Ingresar",

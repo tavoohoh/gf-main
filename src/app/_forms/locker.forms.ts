@@ -151,3 +151,42 @@ export const VideoForm: GFormFields = [
     },
   }),
 ];
+
+export const MusicForm: GFormFields = [
+  new GTextField({
+    model: 'title',
+    label: 'FORM.SONG_TITLE',
+    placeholder: 'FORM.SONG_TITLE',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'subtitle',
+    label: 'FORM.SONG_SUBTITLE',
+    placeholder: 'FORM.SONG_SUBTITLE',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'backgroundColor',
+    label: 'FORM.BACKGROUND_COLOR',
+    placeholder: 'FORM.BACKGROUND_COLOR',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'url',
+    label: 'FORM.SONG_URL',
+    placeholder: 'FORM.SONG_URL',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+];

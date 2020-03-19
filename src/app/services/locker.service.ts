@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { map } from 'rxjs/operators';
 import 'firebase/firestore';
-import 'firebase/storage';
 
 import {
   LockerBio,
@@ -13,7 +11,8 @@ import {
   LockerGalleryPhotos,
   LockerContactInfo,
   LockerDate,
-  LockerVideo
+  LockerVideo,
+  LockerMusic
 } from '@app/_interfaces/locker.interface';
 
 @Injectable({
@@ -22,7 +21,6 @@ import {
 export class LockerService {
   constructor(
     private afs: AngularFirestore,
-    private storage: AngularFireStorage,
     private sanitizer: DomSanitizer
   ) {}
 
@@ -30,13 +28,13 @@ export class LockerService {
    * Bio
    */
   public readLockerBioDocument(language: string): Observable<LockerBio> {
-    const lockerBioDocument = this.afs.doc<LockerBio>(`bio/${language}`);
-    return lockerBioDocument.valueChanges();
+    const document = this.afs.doc<LockerBio>(`bio/${language}`);
+    return document.valueChanges();
   }
 
   public updateLockerBioDocument(bioContent: string, language: string): Promise<void> {
-    const lockerBioDocument  = this.afs.doc<LockerBio>(`bio/${language}`);
-    return lockerBioDocument.update({ content: bioContent });
+    const document  = this.afs.doc<LockerBio>(`bio/${language}`);
+    return document.update({ content: bioContent });
   }
 
   /**
@@ -50,13 +48,13 @@ export class LockerService {
   }
 
   public listLockerGalleryCollection(): Observable<Array<LockerGallery>> {
-    const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
-    return lockerGalleryCollection.valueChanges();
+    const collection = this.afs.collection<LockerGallery>(`gallery`);
+    return collection.valueChanges();
   }
 
   public getLockerGalleryDocument(galleryId: string): Observable<LockerGalleryPhotos[]> {
-    const lockerGalleryDocument = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
-    return lockerGalleryDocument.snapshotChanges().pipe(map(actions => {
+    const document = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
+    return document.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapGalleryValues(value);
       });
@@ -64,41 +62,41 @@ export class LockerService {
   }
 
   public async createLockerGallery(gallery: LockerGallery): Promise<boolean> {
-    const lockerGalleryCollection = this.afs.collection<LockerGallery>(`gallery`);
-    return await lockerGalleryCollection.doc(gallery.id).set(gallery).then(() => true);
+    const collection = this.afs.collection<LockerGallery>(`gallery`);
+    return await collection.doc(gallery.id).set(gallery).then(() => true);
   }
 
   public async updateLockerGallery(gallery: LockerGallery): Promise<boolean> {
-    const lockerGalleryCollection = this.afs.doc<LockerDate>(`gallery/${gallery.id}`);
-    return await lockerGalleryCollection.update({ title: gallery.title }).then(() => true);
+    const collection = this.afs.doc<LockerDate>(`gallery/${gallery.id}`);
+    return await collection.update({ title: gallery.title }).then(() => true);
   }
 
   public async deleteLockerGallery(galleryId: string): Promise<boolean> {
-    const lockerGallery = this.afs.doc(`gallery/${galleryId}`);
-    return await lockerGallery.delete().then(() => true);
+    const document = this.afs.doc(`gallery/${galleryId}`);
+    return await document.delete().then(() => true);
   }
 
   public async createLockerGalleryImage(galleryId: string, img?: string): Promise<boolean> {
-    const lockerGalleryImage = this.afs.collection<{ img: string }>(`gallery/${galleryId}/photos`);
-    return await lockerGalleryImage.add({ img }).then(() => true);
+    const collection = this.afs.collection<{ img: string }>(`gallery/${galleryId}/photos`);
+    return await collection.add({ img }).then(() => true);
   }
 
   public async deleteLockerGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {
-    const lockerGalleryImage = this.afs.doc(`gallery/${galleryId}/photos/${galleryImageId}`);
-    return await lockerGalleryImage.delete().then(() => true);
+    const document = this.afs.doc(`gallery/${galleryId}/photos/${galleryImageId}`);
+    return await document.delete().then(() => true);
   }
 
   /**
    * Contact
    */
   public readLockerContactInfo(): Observable<LockerContactInfo> {
-    const lockerContactInfo = this.afs.doc<LockerContactInfo>(`contact/info`);
-    return lockerContactInfo.valueChanges();
+    const document = this.afs.doc<LockerContactInfo>(`contact/info`);
+    return document.valueChanges();
   }
 
   public updateLockerContactInfo(contactInfo: LockerContactInfo): Promise<void> {
-    const lockerContactInfo = this.afs.doc<LockerContactInfo>(`contact/info`);
-    return lockerContactInfo.update(contactInfo);
+    const document = this.afs.doc<LockerContactInfo>(`contact/info`);
+    return document.update(contactInfo);
   }
 
   /**
@@ -126,23 +124,23 @@ export class LockerService {
   }
 
   public readLockerDateDocument(id: string): Observable<LockerDate> {
-    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${id}`);
-    return lockerDatesDocument.valueChanges();
+    const document = this.afs.doc<LockerDate>(`dates/${id}`);
+    return document.valueChanges();
   }
 
   public async createLockerDateDocument(data: { date: LockerDate, id?: string }): Promise<boolean> {
-    const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`);
-    return await lockerDatesCollection.add(data.date).then(() => true);
+    const collection = this.afs.collection<LockerDate>(`dates`);
+    return await collection.add(data.date).then(() => true);
   }
 
   public async updateLockerDateDocument(data: { date: LockerDate, id: string }): Promise<boolean> {
-    const lockerDatesDocument = this.afs.doc<LockerDate>(`dates/${data.id}`);
-    return await lockerDatesDocument.update(data.date).then(() => true);
+    const document = this.afs.doc<LockerDate>(`dates/${data.id}`);
+    return await document.update(data.date).then(() => true);
   }
 
   public async deleteLockerDateDocument(dateId: string): Promise<boolean> {
-    const lockerGallery = this.afs.doc(`dates/${dateId}`);
-    return await lockerGallery.delete().then(() => true);
+    const document = this.afs.doc(`dates/${dateId}`);
+    return await document.delete().then(() => true);
   }
 
   /**
@@ -159,8 +157,8 @@ export class LockerService {
   }
 
   public listVideosCollection(): Observable<Array<LockerVideo>> {
-    const videosCollection = this.afs.collection<LockerVideo>(`videos`);
-    return videosCollection.snapshotChanges().pipe(map(actions => {
+    const collection = this.afs.collection<LockerVideo>(`videos`);
+    return collection.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapVideoValues(value);
       });
@@ -168,22 +166,66 @@ export class LockerService {
   }
 
   public readVideoDocument(id: string): Observable<LockerVideo> {
-    const videosDocument = this.afs.doc<LockerVideo>(`videos/${id}`);
-    return videosDocument.valueChanges();
+    const document = this.afs.doc<LockerVideo>(`videos/${id}`);
+    return document.valueChanges();
   }
 
   public async createVideoDocument(data: { video: LockerVideo, id?: string  }): Promise<boolean> {
-    const videosCollection = this.afs.collection<LockerVideo>(`videos`);
-    return await videosCollection.add(data.video).then(() => true);
+    const collection = this.afs.collection<LockerVideo>(`videos`);
+    return await collection.add(data.video).then(() => true);
   }
 
   public async updateVideoDocument(data: { video: LockerVideo, id: string }): Promise<boolean> {
-    const videoDocument = this.afs.doc<LockerVideo>(`videos/${data.id}`);
-    return await videoDocument.update(data.video).then(() => true);
+    const document = this.afs.doc<LockerVideo>(`videos/${data.id}`);
+    return await document.update(data.video).then(() => true);
   }
 
   public async deleteVideoDocument(dateId: string): Promise<boolean> {
-    const videoDocument = this.afs.doc(`videos/${dateId}`);
-    return await videoDocument.delete().then(() => true);
+    const document = this.afs.doc(`videos/${dateId}`);
+    return await document.delete().then(() => true);
+  }
+
+  /**
+   * Music
+   */
+  private mapMusicValues(value: any): LockerMusic {
+    const data = value.payload.doc.data() as LockerMusic;
+    const id = value.payload.doc.id;
+    return {
+      id,
+      title: data.title,
+      subtitle: data.subtitle,
+      backgroundColor: data.backgroundColor,
+      url: data.url
+    };
+  }
+
+  public listMusicCollection(): Observable<Array<LockerMusic>> {
+    const collection = this.afs.collection<LockerMusic>(`music`);
+    return collection.snapshotChanges().pipe(map(actions => {
+      return actions.map(value => {
+        return this.mapMusicValues(value);
+      });
+    }));
+  }
+
+  public readMusicDocument(id: string): Observable<LockerMusic> {
+    const document = this.afs.doc<LockerMusic>(`music/${id}`);
+    return document.valueChanges();
+  }
+
+  public async createMusicDocument(data: { music: LockerMusic, id?: string  }): Promise<boolean> {
+    const collection = this.afs.collection<LockerMusic>(`music`);
+    return await collection.add(data.music).then(() => true);
+  }
+
+  public async updateMusicDocument(data: { music: LockerMusic, id: string }): Promise<boolean> {
+    const document = this.afs.doc<LockerMusic>(`music/${data.id}`);
+    return await document.update(data.music).then(() => true);
+  }
+
+  public async deleteMusicDocument(dateId: string): Promise<boolean> {
+    const document = this.afs.doc(`music/${dateId}`);
+    return await document.delete().then(() => true);
   }
 }
