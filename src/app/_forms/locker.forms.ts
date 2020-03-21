@@ -8,7 +8,8 @@ import {
   GFieldCountryCode,
   GDivider,
   GDatePickerField,
-  GToggleField
+  GToggleField,
+  GColorPickerField
 } from 'gs-forms';
 
 export const LockerFormOptions: GFormOptions = {
@@ -171,7 +172,7 @@ export const MusicForm: GFormFields = [
       [GFieldValidatorType.REQUIRED]: true
     },
   }),
-  new GTextField({
+  new GColorPickerField({
     model: 'backgroundColor',
     label: 'FORM.BACKGROUND_COLOR',
     placeholder: 'FORM.BACKGROUND_COLOR',
