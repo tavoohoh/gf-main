@@ -9,7 +9,8 @@ import {
   GDivider,
   GDatePickerField,
   GToggleField,
-  GColorPickerField
+  GColorPickerField,
+  GFieldFile
 } from 'gs-forms';
 
 export const LockerFormOptions: GFormOptions = {
@@ -151,6 +152,15 @@ export const VideoForm: GFormFields = [
       [GFieldValidatorType.REQUIRED]: true
     },
   }),
+  new GFieldFile({
+    model: 'image',
+    label: 'FORM.IMAGE',
+    placeholder: 'FORM.IMAGE',
+    returnFile: true,
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
 ];
 
 export const MusicForm: GFormFields = [
@@ -190,4 +200,14 @@ export const MusicForm: GFormFields = [
       [GFieldValidatorType.REQUIRED]: true
     },
   }),
+  new GFieldFile({
+    model: 'image',
+    label: 'FORM.SONG_IMAGE',
+    placeholder: 'FORM.SELECT_SONG_IMAGE',
+    returnFile: true,
+    accept: '.jpg, .jpeg, .png',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  })
 ];

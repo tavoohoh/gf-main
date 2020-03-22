@@ -1,14 +1,18 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { takeUntil, finalize, take } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+import 'firebase/storage';
+
 import { ViewType } from '@app/_enums';
 import { LockerMusic } from '@app/_interfaces';
 import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
 import { MusicForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { LockerService } from '@app/services/locker.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AlertService } from '@app/_widgets/alert';
-import { takeUntil, take } from 'rxjs/operators';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-locker-music',
@@ -32,6 +36,7 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
   @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
 
   constructor(
+    private storage: AngularFireStorage,
     private lockerService: LockerService,
     private loader: NgxUiLoaderService,
     private gsFormService: GsFormsService,
@@ -62,29 +67,67 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
 
   public async readMusic(musicId: string): Promise<void> {
     this.loader.start();
+    this.formFields = null;
 
     await this.lockerService.readMusicDocument(musicId)
       .pipe(take(1))
       .toPromise()
       .then(music => {
         this.viewContent = ViewType.DETAIL;
-        this.music = music;
+        this.music = this.mapMusicValues(music);
         this.music.id = musicId;
-        this.formFields = this.gsFormService.patchFormValues(MusicForm, music);
+        this.formFields = this.gsFormService.patchFormValues(MusicForm, this.music);
       })
       .catch(error => console.error(error, 'LockerMusicComponent.readMusic'))
       .finally(() => this.loader.stop());
   }
 
+  private mapMusicValues(data: LockerMusic): LockerMusic {
+    return {
+      title: data.title,
+      subtitle: data.subtitle,
+      backgroundColor: data.backgroundColor,
+      url: data.url,
+      image: data.image ? {
+        isImage: true,
+        type: '',
+        name: '',
+        path: data.image || ''
+      } : '/'
+    };
+  }
+
   public writeMusic(form: FormGroup): void {
     this.loader.start();
 
+    if (!this.music || (form.value.image !== this.music.image)) {
+      const file: File = form.value.image;
+      const fileRef = this.storage.ref(file.name);
+      const task = this.storage.upload(file.name, file);
+
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(imageUrl => {
+            this.onWriteMusic(form, imageUrl);
+          });
+        })
+      ).subscribe(() => null, error => {
+        this.loader.stop();
+        console.error(error, 'LockerMusicComponent.writeMusic at task.snapshotChanges');
+      });
+    } else {
+      this.onWriteMusic(form);
+    }
+  }
+
+  private onWriteMusic(form: FormGroup, image?: string): void {
     this.lockerService[this.music ? 'updateMusicDocument' : 'createMusicDocument']({
       music: {
         title: form.value.title,
         subtitle: form.value.subtitle,
         backgroundColor: form.value.backgroundColor,
-        url: form.value.url
+        url: form.value.url,
+        image: image ? image : ((this.music && this.music.image) ? this.music.image.path : null)
       },
       id: this.music ? this.music.id : null
     })
@@ -92,7 +135,7 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
         this.viewContent = null;
         this.music = null;
       })
-      .catch(error => console.error(error, 'LockerMusicComponent.writeMusic'))
+      .catch(error => console.error(error, 'LockerMusicComponent.onWriteMusic'))
       .finally(() => this.loader.stop());
   }
 

@@ -39,6 +39,8 @@
     "TITLE": "Title",
     "SONG_TITLE": "Song title",
     "SONG_SUBTITLE": "Album title/Subtitle",
+    "SONG_IMAGE": "Cover",
+    "SELECT_SONG_IMAGE": "Select cover",
     "BACKGROUND_COLOR": "Background color",
     "SONG_URL": "Song url",
     "LOCATION": "Location",

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import 'firebase/firestore';
+import 'firebase/storage';
 
 import {
   LockerBio,
@@ -196,7 +198,8 @@ export class LockerService {
       title: data.title,
       subtitle: data.subtitle,
       backgroundColor: data.backgroundColor,
-      url: data.url
+      url: data.url,
+      image: data.image || ''
     };
   }
 

@@ -44,5 +44,11 @@ export interface LockerMusic {
   subtitle: string;
   backgroundColor: string;
   url: string;
+  image?: {
+    isImage: boolean;
+    type: string;
+    name: string;
+    path: string | any;
+  } | any;
   id?: string;
 }

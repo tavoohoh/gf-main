@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LockerService } from '@app/services/locker.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { takeUntil, finalize } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AngularFireStorage } from '@angular/fire/storage';
-import 'firebase/firestore';
 
+import 'firebase/storage';
+
+import { LockerService } from '@app/services/locker.service';
 import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
 import { GFormFields, GFormOptions } from 'gs-forms';
 import { LockerFormOptions, AddGalleryForm } from '@app/_forms/locker.forms';

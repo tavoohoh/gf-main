@@ -39,6 +39,8 @@
     "TITLE": "Título",
     "SONG_TITLE": "Título de la canción",
     "SONG_SUBTITLE": "Titulo del álbum/subtítulo",
+    "SONG_IMAGE": "Portada",
+    "SELECT_SONG_IMAGE": "Selecciona la portada",
     "BACKGROUND_COLOR": "Color de fondo",
     "SONG_URL": "Url de la canción",
     "LOCATION": "Ubicación",
