@@ -6,6 +6,11 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+interface ImageDisplayedType {
+  gallery: Array<LockerGalleryPhotos>;
+  position: number;
+}
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -15,7 +20,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
   private destroyed$ = new Subject();
   public resourcesLinks = ResourcesLinks;
   public galleries: Array<{ title: string, images: Array<LockerGalleryPhotos> }> = [];
-  public imageDisplayed: string;
+  public imageDisplayed: ImageDisplayedType;
 
   constructor(
     private lockerService: LockerService,
@@ -59,7 +64,6 @@ export class GalleryComponent implements OnDestroy, OnInit {
           images
         });
 
-        console.log('gallery', this.galleries);
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerGalleryComponent.getGalleryPhotos');
@@ -67,8 +71,24 @@ export class GalleryComponent implements OnDestroy, OnInit {
       });
   }
 
-  public openImage(imageSrc: string) {
-    this.imageDisplayed = imageSrc;
+  public openImage(imageDisplayed: ImageDisplayedType) {
+    this.imageDisplayed = imageDisplayed;
+  }
+
+  public nextImage() {
+    if (!this.imageDisplayed.gallery[this.imageDisplayed.position + 1].src) {
+      return;
+    }
+
+    this.imageDisplayed.position = ++this.imageDisplayed.position;
+  }
+
+  public previousImage() {
+    if (!this.imageDisplayed.gallery[this.imageDisplayed.position - 1].src) {
+      return;
+    }
+
+    this.imageDisplayed.position = --this.imageDisplayed.position;
   }
 
   public closeImage() {

@@ -5,10 +5,11 @@
       <h2>{{ gallery.title }}</h2>
       <div class="gallery-images">
         <img 
-          [src]="image.src"
+          *ngFor="let image of gallery.images; let i = index"
           class="image"
-          (click)="openImage(image.src)"
-          *ngFor="let image of gallery.images">
+          [src]="image.src"
+          (click)="openImage({ gallery: gallery.images, position: i })"
+          >
       </div>
     </div>
 
@@ -33,6 +34,26 @@
   </div>
 </div>
 
-<div class="image-displayer" (click)="closeImage()" *ngIf="imageDisplayed">
-  <img [src]="imageDisplayed">
-</div>
+<ng-container *ngIf="imageDisplayed">
+  <!-- image displayer background -->
+  <div class="image-displayer-background" (click)="closeImage()"></div>
+  
+  <!-- image displayed -->
+  <img class="image-displayed" [src]="imageDisplayed.gallery[imageDisplayed.position].src">
+
+  <!-- navigate right -->
+  <button class="navigate-right" type="button"
+    (click)="nextImage()" *ngIf="imageDisplayed.gallery[imageDisplayed.position + 1]">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+    </svg>
+  </button>
+
+  <!-- navigate left -->
+  <button class="navigate-left" type="button"
+    (click)="previousImage()" *ngIf="imageDisplayed.gallery[imageDisplayed.position - 1]">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/>
+    </svg>
+  </button>
+</ng-container>
