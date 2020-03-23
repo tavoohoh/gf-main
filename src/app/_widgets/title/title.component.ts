@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-title',
   template: `
-    <div class="view-title">
+    <div class="view-title" *ngIf="activeUrl && activeUrl !== 'gallery'">
       <h2>{{ activeUrl | translate }}</h2>
     </div>
   `,

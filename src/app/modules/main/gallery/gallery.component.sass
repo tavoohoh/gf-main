@@ -1,1 +1,79 @@
 @import 'variables'
+
+$imageSize: 288px
+$colRepeat: 3
+
+.gallery-page
+  color: $white
+
+.gallery
+
+  h2
+    color: $white
+    padding: 2rem 0
+    text-transform: uppercase
+
+  .gallery-images
+    display: grid
+    grid-template-columns: repeat(3, $imageSize)
+    position: relative
+    margin: 1rem auto 5rem
+    gap: 1rem
+
+    .image
+      height: $imageSize
+      width: $imageSize
+      object-fit: cover
+      background-color: $black
+      cursor: pointer
+      transition: $transition
+      opacity: 1
+
+      &:hover
+        opacity: 0.7
+
+    @media screen and ( max-width: 1000px )
+      $imageSize: 240px
+
+      max-width: calc((240px * 3) + 2rem)
+      grid-template-columns: repeat($colRepeat, $imageSize)
+
+      .image
+        height: $imageSize
+        width: $imageSize
+
+    @media screen and ( max-width: 820px )
+      $imageSize: 300px
+      $colRepeat: 2
+
+      max-width: calc((300px * 2) + 1rem)
+      grid-template-columns: repeat($colRepeat, $imageSize)
+
+      .image
+        height: $imageSize
+        width: $imageSize
+
+    @media screen and ( max-width: 700px )
+      $imageSize: 320px
+      $colRepeat: 1
+
+      max-width: 320px
+      grid-template-columns: repeat($colRepeat, $imageSize)
+
+      .image
+        height: $imageSize
+        width: $imageSize
+
+.image-displayer
+  position: fixed
+  padding: 3rem
+  top: 0
+  right: 0
+  left: 0
+  bottom: 0
+  background-color: rgba(0,0,0,.8)
+
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain

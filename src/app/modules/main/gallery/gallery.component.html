@@ -1,0 +1,38 @@
+<div class="gallery-page">
+  <div class="content" *ngIf="galleries && galleries.length > 0">
+
+    <div class="gallery" *ngFor="let gallery of galleries">
+      <h2>{{ gallery.title }}</h2>
+      <div class="gallery-images">
+        <img 
+          [src]="image.src"
+          class="image"
+          (click)="openImage(image.src)"
+          *ngFor="let image of gallery.images">
+      </div>
+    </div>
+
+    <div class="page-links">
+      <p class="call-to-action">
+        {{ 'ACTIONS.CALL_TO_ACTION_GALLERY'  | translate }}:
+      </p>
+  
+      <div class="links">
+        <a class="gf-button" target="_blank" rel="noopener noreferrer"
+          [href]="resourcesLinks.FACEBOOK">
+          {{ 'ACTIONS.GOTO_FACEBOOK' | translate }}
+        </a>
+    
+        <a class="gf-button" target="_blank" rel="noopener noreferrer"
+          [href]="resourcesLinks.INSTAGRAM">
+          {{ 'ACTIONS.GOTO_INSTAGRAM' | translate }}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="image-displayer" (click)="closeImage()" *ngIf="imageDisplayed">
+  <img [src]="imageDisplayed">
+</div>

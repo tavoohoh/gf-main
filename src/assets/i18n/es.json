@@ -51,6 +51,9 @@
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Descargar PDF promocional",
+    "CALL_TO_ACTION_GALLERY": "Para más fotos visite las redes sociales de Gian Faraone",
+    "GOTO_FACEBOOK": "Ir a Facebook",
+    "GOTO_INSTAGRAM": "Ir a Instagram",
     "CONFIRM_DELETE_GALLERY_PHOTO": {
       "TITLE": "Eliminar imagen de la galería",
       "CONTENT": "Esta imagen se eleminara de forma permanente ¿Esta seguro que desea continuar?"

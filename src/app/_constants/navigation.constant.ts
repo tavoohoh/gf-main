@@ -9,10 +9,10 @@ export const NAVIGATION: Array<NavigationInterface> = [
     text: 'NAVIGATION.BIO',
     url: '/bio'
   },
-  // {
-  //   text: 'NAVIGATION.GALLERY',
-  //   url: '/gallery'
-  // },
+  {
+    text: 'NAVIGATION.GALLERY',
+    url: '/gallery'
+  },
   // {
   //   text: 'NAVIGATION.MUSIC',
   //   url: '/music'

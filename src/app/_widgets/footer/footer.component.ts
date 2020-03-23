@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NewsletterService } from '@app/services/newsletter.service';
 import { HelperService } from '@app/services/helper.service';
+import { ResourcesLinks } from '@app/_enums';
 
 @Component({
   selector: 'app-footer',
@@ -9,6 +10,7 @@ import { HelperService } from '@app/services/helper.service';
   styleUrls: ['./footer.component.sass']
 })
 export class FooterComponent implements OnInit {
+  public resourcesLinks = ResourcesLinks;
   public newsLetterForm: FormGroup;
   public newsLetterFormSuccess: string;
   public newsLetterSubmited: boolean;

@@ -10,6 +10,7 @@ export interface LockerGallery {
 export interface LockerGalleryPhotos {
   id: string;
   img: any;
+  src?: string;
 }
 
 export interface LockerPhoneModel {

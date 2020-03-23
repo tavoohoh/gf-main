@@ -45,8 +45,9 @@ export class LockerService {
   private mapGalleryValues(value: any): LockerGalleryPhotos {
     const data = value.payload.doc.data() as LockerGalleryPhotos;
     const img = this.sanitizer.bypassSecurityTrustStyle(`url(${data.img})`);
+    const src = data.img;
     const id = value.payload.doc.id;
-    return { id, img };
+    return { id, img, src };
   }
 
   public listLockerGalleryCollection(): Observable<Array<LockerGallery>> {

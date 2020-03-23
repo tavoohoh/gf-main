@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LockerService } from '@app/services/locker.service';
 import { Subject } from 'rxjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ResourcesLinks } from '@app/_enums';
 
 @Component({
   selector: 'app-bio',
@@ -10,6 +11,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class BioComponent implements OnInit, OnDestroy {
   public bio: string;
+  public resourcesLinks = ResourcesLinks;
   public currentLang = window.localStorage.getItem('userLanguage');
   private destroyed$ = new Subject();
 
