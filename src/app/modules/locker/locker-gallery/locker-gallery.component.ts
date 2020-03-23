@@ -1,18 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeUntil, finalize } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-
-import 'firebase/storage';
-
-import { LockerService } from '@app/services/locker.service';
-import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
-import { GFormFields, GFormOptions } from 'gs-forms';
-import { LockerFormOptions, AddGalleryForm } from '@app/_forms/locker.forms';
 import { FormGroup } from '@angular/forms';
-import { AlertService } from '@app/_widgets/alert';
 import { ViewType } from '@app/_enums';
+import { AddGalleryForm, LockerFormOptions } from '@app/_forms/locker.forms';
+import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
+import { AlertService } from '@app/_widgets/alert';
+import { LockerService } from '@app/services/locker.service';
+import 'firebase/storage';
+import { GFormFields, GFormOptions } from 'gs-forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject } from 'rxjs';
+import { finalize, take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-locker-gallery',
@@ -53,7 +51,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
   private getGalleryCollections() {
     this.loader.start();
     this.lockerService.listLockerGalleryCollection()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(galleryCollections => {
         this.galleryCollections = galleryCollections;
         this.loader.stop();
@@ -66,7 +64,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
   public getGalleryPhotos(gallery: LockerGallery) {
     this.loader.start();
     this.lockerService.getLockerGalleryDocument(gallery.id)
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
         this.galleryId = gallery.id;
         this.viewContent = ViewType.DETAIL;

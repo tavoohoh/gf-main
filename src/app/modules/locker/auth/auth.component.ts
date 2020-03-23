@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-
-import { GFormFields, GFormOptions } from 'gs-forms';
+import { Router } from '@angular/router';
 import { AuthForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { AuthService } from '@app/services/auth.service';
+import { GFormFields, GFormOptions } from 'gs-forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-auth',

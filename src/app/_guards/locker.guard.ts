@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

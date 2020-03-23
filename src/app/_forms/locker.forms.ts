@@ -1,16 +1,16 @@
 import {
-  GTextField,
-  GPasswordField,
-  GFormFields,
-  GFieldValidatorType,
-  GFormOptions,
-  GPhoneField,
-  GFieldCountryCode,
-  GDivider,
-  GDatePickerField,
-  GToggleField,
   GColorPickerField,
-  GFieldFile
+  GDatePickerField,
+  GDivider,
+  GFieldCountryCode,
+  GFieldFile,
+  GFieldValidatorType,
+  GFormFields,
+  GFormOptions,
+  GPasswordField,
+  GPhoneField,
+  GTextField,
+  GToggleField
 } from 'gs-forms';
 
 export const LockerFormOptions: GFormOptions = {

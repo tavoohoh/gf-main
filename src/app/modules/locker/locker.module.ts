@@ -1,30 +1,31 @@
-import { NgModule } from '@angular/core';
+import { FroalaEditorModule } from 'angular-froala-wysiwyg';
+
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 // import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-import { GsFormsModule } from 'gs-forms';
+import { RouterModule, Routes } from '@angular/router';
 // import { GsTablesModule } from 'gs-tables';
 import { gsFormStyles } from '@app/_constants';
-import { FroalaEditorModule } from 'angular-froala-wysiwyg';
-import 'froala-editor/js/plugins.pkgd.min.js';
-
-// Modules
+import { LockerGuard } from '@app/_guards/locker.guard';
 import { AlertModule } from '@app/_widgets/alert';
-
-// components
-import { LockerGeneralComponent } from './locker-general/locker-general.component';
+import { HelperService } from '@app/services/helper.service';
+import { TranslateModule } from '@ngx-translate/core';
+import 'froala-editor/js/plugins.pkgd.min.js';
+import { GsFormsModule } from 'gs-forms';
+import { AuthComponent } from './auth/auth.component';
 import { LockerBioComponent } from './locker-bio/locker-bio.component';
 import { LockerContactComponent } from './locker-contact/locker-contact.component';
 import { LockerDatesComponent } from './locker-dates/locker-dates.component';
 import { LockerGalleryComponent } from './locker-gallery/locker-gallery.component';
+import { LockerGeneralComponent } from './locker-general/locker-general.component';
 import { LockerMusicComponent } from './locker-music/locker-music.component';
 import { LockerVideoComponent } from './locker-video/locker-video.component';
-import { AuthComponent } from './auth/auth.component';
 import { LockerComponent } from './locker.component';
-import { HelperService } from '@app/services/helper.service';
-import { LockerGuard } from '@app/_guards/locker.guard';
+
+// Modules
+
+// components
 
 const routes: Routes = [
   {

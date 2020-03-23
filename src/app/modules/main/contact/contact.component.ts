@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LockerContactInfo, LockerPhoneModel } from '@app/_interfaces/locker.interface';
+import { LockerService } from '@app/services/locker.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-
-import { LockerService } from '@app/services/locker.service';
-import { LockerContactInfo, LockerPhoneModel } from '@app/_interfaces/locker.interface';
 
 @Component({
   selector: 'app-contact',

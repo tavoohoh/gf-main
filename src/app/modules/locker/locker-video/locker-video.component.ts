@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { GsFormsService, GsFormsComponent, GFormFields, GFormOptions } from 'gs-forms';
-import { takeUntil, take } from 'rxjs/operators';
-
-import { LockerFormOptions, VideoForm } from '@app/_forms/locker.forms';
-import { LockerService } from '@app/services/locker.service';
-import { AlertService } from '@app/_widgets/alert';
-import { LockerVideo } from '@app/_interfaces';
 import { ViewType } from '@app/_enums';
+import { LockerFormOptions, VideoForm } from '@app/_forms/locker.forms';
+import { LockerVideo } from '@app/_interfaces';
+import { AlertService } from '@app/_widgets/alert';
+import { LockerService } from '@app/services/locker.service';
+import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject, Subscription } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-locker-video',

@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import 'firebase/firestore';
-import 'firebase/storage';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   LockerBio,
-  LockerGallery,
-  LockerGalleryPhotos,
   LockerContactInfo,
   LockerDate,
-  LockerVideo,
-  LockerMusic
+  LockerGallery,
+  LockerGalleryPhotos,
+  LockerMusic,
+  LockerVideo
 } from '@app/_interfaces/locker.interface';
+import 'firebase/firestore';
+import 'firebase/storage';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +22,7 @@ export class LockerService {
   constructor(
     private afs: AngularFirestore,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   /**
    * Bio

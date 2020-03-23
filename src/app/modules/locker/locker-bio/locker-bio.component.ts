@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { LockerService } from '@app/services/locker.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-locker-bio',

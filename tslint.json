@@ -1,5 +1,11 @@
 {
-  "extends": "tslint:recommended",
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules"
+  ],
+  "linterOptions": {
+    "exclude": []
+  },
   "rules": {
     "array-type": false,
     "arrow-parens": false,
@@ -67,7 +73,6 @@
       "as-needed"
     ],
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
     "quotemark": [
       true,
       "single"
@@ -84,7 +89,55 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "no-duplicate-imports": [true, {"allow-namespace-imports": true}],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-rest-spread",
+      "check-type",
+      "check-typecast",
+      "check-type-operator",
+      "check-preblock",
+      "check-postbrace"
+    ],
+    "import-destructuring-spacing": true,
+    "import-spacing": true,
+    "ordered-imports": [
+      true,
+      {
+        "module-source-path": "full",
+        "grouped-imports": true,
+        "groups": [
+          {
+            "name": "angular",
+            "match": "^angular.*",
+            "order": 1
+          },
+          {
+            "name": "node_modules",
+            "match": ".*",
+            "order": 2
+          },
+          {
+            "name": "internal modules",
+            "match": "^@app.*",
+            "order": 3
+          },
+          {
+            "name": "relative dir",
+            "match": "^[.].*",
+            "order": 4
+          }
+        ]
+      }
+    ],
+    "no-constant-condition": true,
+    "indent": [true, "spaces", 2]
   },
   "rulesDirectory": [
     "codelyzer"

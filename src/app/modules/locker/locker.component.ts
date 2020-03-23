@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { HelperService } from '@app/services/helper.service';
-import { AuthService } from '@app/services/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '@app/services/auth.service';
+import { HelperService } from '@app/services/helper.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

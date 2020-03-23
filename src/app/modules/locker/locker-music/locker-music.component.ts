@@ -1,18 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { takeUntil, finalize, take } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-
-import 'firebase/storage';
-
+import { FormGroup } from '@angular/forms';
 import { ViewType } from '@app/_enums';
+import { LockerFormOptions, MusicForm } from '@app/_forms/locker.forms';
 import { LockerMusic } from '@app/_interfaces';
-import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
-import { MusicForm, LockerFormOptions } from '@app/_forms/locker.forms';
-import { LockerService } from '@app/services/locker.service';
 import { AlertService } from '@app/_widgets/alert';
+import { LockerService } from '@app/services/locker.service';
+import 'firebase/storage';
+import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject } from 'rxjs';
+import { finalize, take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-locker-music',

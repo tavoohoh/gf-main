@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { GsPlayerModule } from 'gs-player';
-
-import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { PlayerComponent } from './player/player.component';
 import { TitleComponent } from './title/title.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [

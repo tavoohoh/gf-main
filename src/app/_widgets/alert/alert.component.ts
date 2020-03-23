@@ -1,5 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AlertService } from './alert.service';
 
 @Component({

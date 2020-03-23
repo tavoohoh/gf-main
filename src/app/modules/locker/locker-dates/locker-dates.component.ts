@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-
-import { LockerService } from '@app/services/locker.service';
-import { AlertService } from '@app/_widgets/alert';
-import { GFormFields, GFormOptions, GsFormsService, GsFormsComponent } from 'gs-forms';
-import { DateForm, LockerFormOptions } from '@app/_forms/locker.forms';
-import { takeUntil, take } from 'rxjs/operators';
-import { LockerDate } from '@app/_interfaces';
-import { ViewType } from '@app/_enums';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ViewType } from '@app/_enums';
+import { DateForm, LockerFormOptions } from '@app/_forms/locker.forms';
+import { LockerDate } from '@app/_interfaces';
+import { AlertService } from '@app/_widgets/alert';
+import { LockerService } from '@app/services/locker.service';
+import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-locker-dates',

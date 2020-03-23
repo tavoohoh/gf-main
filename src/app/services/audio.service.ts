@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-
 import { PlayerFile } from 'gs-player';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

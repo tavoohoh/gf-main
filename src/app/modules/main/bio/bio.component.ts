@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LockerService } from '@app/services/locker.service';
-import { Subject } from 'rxjs';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ResourcesLinks } from '@app/_enums';
+import { LockerService } from '@app/services/locker.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-bio',

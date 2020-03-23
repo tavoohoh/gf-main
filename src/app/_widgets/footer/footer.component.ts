@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { NewsletterService } from '@app/services/newsletter.service';
-import { HelperService } from '@app/services/helper.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResourcesLinks } from '@app/_enums';
+import { HelperService } from '@app/services/helper.service';
+import { NewsletterService } from '@app/services/newsletter.service';
 
 @Component({
   selector: 'app-footer',

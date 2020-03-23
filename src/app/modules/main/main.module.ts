@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { FroalaViewModule } from 'angular-froala-wysiwyg';
 
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { WidgetsModule } from '@app/_widgets/widgets.module';
-
-import { MainComponent } from './main.component';
-import { HomeComponent } from './home/home.component';
+import { TranslateModule } from '@ngx-translate/core';
 import { BioComponent } from './bio/bio.component';
 import { ContactComponent } from './contact/contact.component';
 import { DatesComponent } from './dates/dates.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { HomeComponent } from './home/home.component';
+import { MainComponent } from './main.component';
 import { MusicComponent } from './music/music.component';
 import { VideoComponent } from './video/video.component';
 

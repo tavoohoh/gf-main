@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ResourcesLinks } from '@app/_enums';
+import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces';
-import { ResourcesLinks } from '@app/_enums';
 
 @Component({
   selector: 'app-gallery',

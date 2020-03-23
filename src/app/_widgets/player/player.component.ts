@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerFile, PlayerTheme, PlayerConfig } from 'gs-player';
 import { AudioService } from '@app/services/audio.service';
+import { PlayerConfig, PlayerFile, PlayerTheme } from 'gs-player';
 
 @Component({
   selector: 'app-player',
