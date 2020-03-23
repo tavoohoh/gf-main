@@ -1,7 +1,7 @@
 <section class="view">
   <app-navigation></app-navigation>
   <div class="body">
-    <div class="player">
+    <div class="player" [style.bottom]="isHome ? '30px' : 'unset'">
       <app-player></app-player>
     </div>
     <div class="content" [style.display]="isHome ? 'none' : 'block'">
