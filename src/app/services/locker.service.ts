@@ -197,6 +197,7 @@ export class LockerService {
       title: data.title,
       subtitle: data.subtitle,
       backgroundColor: data.backgroundColor,
+      isColorWhite: data.isColorWhite,
       url: data.url,
       image: data.image || ''
     };

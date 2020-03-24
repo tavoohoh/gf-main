@@ -1,1 +1,91 @@
 @import 'variables'
+
+.music-page
+  margin-top: 2rem
+
+.music-card
+  margin: 0 -2rem
+
+  .card-content
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 1rem
+    height: 500px
+    width: 100%
+    max-width: 690px
+    margin: auto
+  
+    .music-card-info
+      grid-column: 1
+      grid-row: 1
+
+      display: grid
+      gap: 0.5rem
+      grid-template-rows: 1fr 40px 1fr
+
+      .music-card-info-title
+        align-self: end
+        text-align: center
+        font-size: 1.8rem
+        text-transform: uppercase
+        font-weight: bold
+
+      .music-card-info-subtitle
+        align-self: start
+        text-align: center
+        font-size: 1rem
+
+      .music-card-info-link
+        align-self: start
+        margin: 0 auto
+
+    .music-card-image
+      grid-column: 2
+      grid-row: 1
+      display: grid
+
+      img
+        align-self: center
+        margin: 0 auto
+        width: 360px
+        height: 360px
+        object-fit: cover
+
+    @media screen and ( max-width: 720px )
+      display: grid
+      grid-template-columns: auto
+      grid-template-rows: auto 1fr
+      height: unset
+
+      .music-card-info
+        grid-column: 1!important
+        grid-row: 2!important
+
+        grid-template-rows: auto 40px 1fr
+        padding: 0 1rem 3rem
+
+      .music-card-image
+        grid-column: 1
+        grid-row: 1!important
+
+        padding: 3rem 1rem 1rem
+
+        img
+          width: 300px
+          height: 300px
+
+    @media screen and ( max-width: 400px )
+      
+      .music-card-image img
+        width: 250px
+        height: 250px
+      
+  &:nth-child(even) .card-content
+    .music-card-info
+      grid-column: 2
+
+    .music-card-image
+      grid-column: 1
+
+.font-white, .font-white *
+  color: $white

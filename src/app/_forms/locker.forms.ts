@@ -191,6 +191,11 @@ export const MusicForm: GFormFields = [
       [GFieldValidatorType.REQUIRED]: true
     },
   }),
+  new GToggleField({
+    model: 'isColorWhite',
+    label: 'FORM.WHITE_FONT',
+    value: false
+  }),
   new GTextField({
     model: 'url',
     label: 'FORM.SONG_URL',

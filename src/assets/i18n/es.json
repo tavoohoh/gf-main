@@ -47,13 +47,15 @@
     "DATE": "Fecha",
     "PUBLISH": "Publicar",
     "PUBLISHED": "Publicado",
-    "YOUTUBE_URL": "Url del video en YouTube"
+    "YOUTUBE_URL": "Url del video en YouTube",
+    "WHITE_FONT": "¿La fuente es de color blanco?"
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Descargar PDF promocional",
     "CALL_TO_ACTION_GALLERY": "Para más fotos visite las redes sociales de Gian Faraone",
     "GOTO_FACEBOOK": "Ir a Facebook",
     "GOTO_INSTAGRAM": "Ir a Instagram",
+    "BUY_NOW": "Comprar",
     "CONFIRM_DELETE_GALLERY_PHOTO": {
       "TITLE": "Eliminar imagen de la galería",
       "CONTENT": "Esta imagen se eleminara de forma permanente ¿Esta seguro que desea continuar?"

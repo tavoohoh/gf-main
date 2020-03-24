@@ -36,7 +36,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
     this.destroyed$.complete();
   }
 
-  private getGalleryCollections() {
+  private getGalleryCollections(): void {
     this.loader.start();
     this.lockerService.listLockerGalleryCollection()
       .pipe(takeUntil(this.destroyed$))
@@ -53,7 +53,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
       });
   }
 
-  public getGalleryPhotos(gallery: LockerGallery) {
+  public getGalleryPhotos(gallery: LockerGallery): void {
     this.loader.start();
     this.lockerService.getLockerGalleryDocument(gallery.id)
       .pipe(takeUntil(this.destroyed$))
@@ -71,11 +71,11 @@ export class GalleryComponent implements OnDestroy, OnInit {
       });
   }
 
-  public openImage(imageDisplayed: ImageDisplayedType) {
+  public openImage(imageDisplayed: ImageDisplayedType): void {
     this.imageDisplayed = imageDisplayed;
   }
 
-  public nextImage() {
+  public nextImage(): void {
     if (!this.imageDisplayed.gallery[this.imageDisplayed.position + 1].src) {
       return;
     }
@@ -83,7 +83,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
     this.imageDisplayed.position = ++this.imageDisplayed.position;
   }
 
-  public previousImage() {
+  public previousImage(): void {
     if (!this.imageDisplayed.gallery[this.imageDisplayed.position - 1].src) {
       return;
     }
@@ -91,7 +91,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
     this.imageDisplayed.position = --this.imageDisplayed.position;
   }
 
-  public closeImage() {
+  public closeImage(): void {
     this.imageDisplayed = null;
   }
 }

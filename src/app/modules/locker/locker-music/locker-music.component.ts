@@ -85,6 +85,7 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
       title: data.title,
       subtitle: data.subtitle,
       backgroundColor: data.backgroundColor,
+      isColorWhite: data.isColorWhite,
       url: data.url,
       image: data.image ? {
         isImage: true,
@@ -124,6 +125,7 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
         title: form.value.title,
         subtitle: form.value.subtitle,
         backgroundColor: form.value.backgroundColor,
+        isColorWhite: form.value.isColorWhite,
         url: form.value.url,
         image: image ? image : ((this.music && this.music.image) ? this.music.image.path : null)
       },

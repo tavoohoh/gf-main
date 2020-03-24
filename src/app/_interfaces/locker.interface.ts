@@ -43,6 +43,7 @@ export interface LockerVideo {
 export interface LockerMusic {
   title: string;
   subtitle: string;
+  isColorWhite: boolean;
   backgroundColor: string;
   url: string;
   image?: {

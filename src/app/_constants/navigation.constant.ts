@@ -13,10 +13,10 @@ export const NAVIGATION: Array<NavigationInterface> = [
     text: 'NAVIGATION.GALLERY',
     url: '/gallery'
   },
-  // {
-  //   text: 'NAVIGATION.MUSIC',
-  //   url: '/music'
-  // },
+  {
+    text: 'NAVIGATION.MUSIC',
+    url: '/music'
+  },
   // {
   //   text: 'NAVIGATION.VIDEO',
   //   url: '/video'

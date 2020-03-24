@@ -1,0 +1,28 @@
+<div class="music-page">
+  <div *ngIf="music && music.length > 0">
+
+    <div class="music-card" *ngFor="let song of music"
+      [style.background-color]="song.backgroundColor" 
+      [class.font-white]="song.isColorWhite">
+
+      <div class="card-content">
+        <div class="music-card-info">
+          <span class="music-card-info-title">
+            {{ song.title }}
+          </span>
+          <span class="music-card-info-subtitle">
+            ({{ song.subtitle }})
+          </span>
+          <a class="music-card-info-link gf-button" [href]="song.url" 
+            target="_blank" rel="noopener noreferrer">
+            {{ 'ACTIONS.BUY_NOW' | translate }}
+          </a>
+        </div>
+        <div class="music-card-image">
+          <img [src]="song.image">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
