@@ -151,16 +151,7 @@ export const VideoForm: GFormFields = [
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
-  }),
-  new GFieldFile({
-    model: 'image',
-    label: 'FORM.IMAGE',
-    placeholder: 'FORM.IMAGE',
-    returnFile: true,
-    validators: {
-      [GFieldValidatorType.REQUIRED]: true
-    },
-  }),
+  })
 ];
 
 export const MusicForm: GFormFields = [
