@@ -33,11 +33,10 @@ export class MusicComponent implements OnDestroy, OnInit {
     this.lockerService.listMusicCollection()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(musicCollection => {
-        console.log(musicCollection);
         this.music = musicCollection;
         this.loader.stop();
       }, error => {
-        console.error(error, 'LockerMusicComponent.listMusic');
+        console.error(error, 'MusicComponent.listMusic');
         this.loader.stop();
       });
   }

@@ -1,0 +1,17 @@
+<div class="video-page">
+  <ng-container *ngIf="videos && videos.length > 0">
+    <div class="video-content" *ngFor="let video of videos">
+      <iframe
+        class="video-frame"
+        width="560" 
+        height="315" 
+        [src]="video.url" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+      <span class="video-title">
+        {{ video.title }}
+      </span>
+    </div>
+  </ng-container>
+</div>

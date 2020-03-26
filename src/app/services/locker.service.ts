@@ -153,7 +153,7 @@ export class LockerService {
     return {
       id,
       title: data.title,
-      url: data.url
+      url: this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${data.url}`)
     };
   }
 

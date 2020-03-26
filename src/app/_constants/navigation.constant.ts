@@ -17,10 +17,10 @@ export const NAVIGATION: Array<NavigationInterface> = [
     text: 'NAVIGATION.MUSIC',
     url: '/music'
   },
-  // {
-  //   text: 'NAVIGATION.VIDEO',
-  //   url: '/video'
-  // },
+  {
+    text: 'NAVIGATION.VIDEO',
+    url: '/video'
+  },
   // {
   //   text: 'NAVIGATION.DATES',
   //   url: '/dates'
