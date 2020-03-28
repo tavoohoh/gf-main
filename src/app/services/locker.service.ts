@@ -27,12 +27,12 @@ export class LockerService {
   /**
    * Bio
    */
-  public readLockerBioDocument(language: string): Observable<LockerBio> {
+  public readBioDocument(language: string): Observable<LockerBio> {
     const document = this.afs.doc<LockerBio>(`bio/${language}`);
     return document.valueChanges();
   }
 
-  public updateLockerBioDocument(bioContent: string, language: string): Promise<void> {
+  public updateBioDocument(bioContent: string, language: string): Promise<void> {
     const document  = this.afs.doc<LockerBio>(`bio/${language}`);
     return document.update({ content: bioContent });
   }
@@ -48,12 +48,12 @@ export class LockerService {
     return { id, img, src };
   }
 
-  public listLockerGalleryCollection(): Observable<Array<LockerGallery>> {
+  public listGalleryCollection(): Observable<Array<LockerGallery>> {
     const collection = this.afs.collection<LockerGallery>(`gallery`);
     return collection.valueChanges();
   }
 
-  public getLockerGalleryDocument(galleryId: string): Observable<LockerGalleryPhotos[]> {
+  public getGalleryDocument(galleryId: string): Observable<LockerGalleryPhotos[]> {
     const document = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
     return document.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
@@ -62,27 +62,27 @@ export class LockerService {
     }));
   }
 
-  public async createLockerGallery(gallery: LockerGallery): Promise<boolean> {
+  public async createGallery(gallery: LockerGallery): Promise<boolean> {
     const collection = this.afs.collection<LockerGallery>(`gallery`);
     return await collection.doc(gallery.id).set(gallery).then(() => true);
   }
 
-  public async updateLockerGallery(gallery: LockerGallery): Promise<boolean> {
+  public async updateGallery(gallery: LockerGallery): Promise<boolean> {
     const collection = this.afs.doc<LockerDate>(`gallery/${gallery.id}`);
     return await collection.update({ title: gallery.title }).then(() => true);
   }
 
-  public async deleteLockerGallery(galleryId: string): Promise<boolean> {
+  public async deleteGallery(galleryId: string): Promise<boolean> {
     const document = this.afs.doc(`gallery/${galleryId}`);
     return await document.delete().then(() => true);
   }
 
-  public async createLockerGalleryImage(galleryId: string, img?: string): Promise<boolean> {
+  public async createGalleryImage(galleryId: string, img?: string): Promise<boolean> {
     const collection = this.afs.collection<{ img: string }>(`gallery/${galleryId}/photos`);
     return await collection.add({ img }).then(() => true);
   }
 
-  public async deleteLockerGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {
+  public async deleteGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {
     const document = this.afs.doc(`gallery/${galleryId}/photos/${galleryImageId}`);
     return await document.delete().then(() => true);
   }
@@ -90,12 +90,12 @@ export class LockerService {
   /**
    * Contact
    */
-  public readLockerContactInfo(): Observable<LockerContactInfo> {
+  public readContactInfo(): Observable<LockerContactInfo> {
     const document = this.afs.doc<LockerContactInfo>(`contact/info`);
     return document.valueChanges();
   }
 
-  public updateLockerContactInfo(contactInfo: LockerContactInfo): Promise<void> {
+  public updateContactInfo(contactInfo: LockerContactInfo): Promise<void> {
     const document = this.afs.doc<LockerContactInfo>(`contact/info`);
     return document.update(contactInfo);
   }
@@ -115,8 +115,8 @@ export class LockerService {
     };
   }
 
-  public listLockerDatesCollection(): Observable<Array<LockerDate>> {
-    const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`);
+  public listDatesCollection(): Observable<Array<LockerDate>> {
+    const lockerDatesCollection = this.afs.collection<LockerDate>(`dates`, ref => ref.orderBy('date', 'desc'));
     return lockerDatesCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapDateValues(value);
@@ -124,22 +124,22 @@ export class LockerService {
     }));
   }
 
-  public readLockerDateDocument(id: string): Observable<LockerDate> {
+  public readDateDocument(id: string): Observable<LockerDate> {
     const document = this.afs.doc<LockerDate>(`dates/${id}`);
     return document.valueChanges();
   }
 
-  public async createLockerDateDocument(data: { date: LockerDate, id?: string }): Promise<boolean> {
+  public async createDateDocument(data: { date: LockerDate, id?: string }): Promise<boolean> {
     const collection = this.afs.collection<LockerDate>(`dates`);
     return await collection.add(data.date).then(() => true);
   }
 
-  public async updateLockerDateDocument(data: { date: LockerDate, id: string }): Promise<boolean> {
+  public async updateDateDocument(data: { date: LockerDate, id: string }): Promise<boolean> {
     const document = this.afs.doc<LockerDate>(`dates/${data.id}`);
     return await document.update(data.date).then(() => true);
   }
 
-  public async deleteLockerDateDocument(dateId: string): Promise<boolean> {
+  public async deleteDateDocument(dateId: string): Promise<boolean> {
     const document = this.afs.doc(`dates/${dateId}`);
     return await document.delete().then(() => true);
   }

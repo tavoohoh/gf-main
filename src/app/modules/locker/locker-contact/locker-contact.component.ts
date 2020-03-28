@@ -43,7 +43,7 @@ export class LockerContactComponent implements OnInit, OnDestroy {
 
   public getContactInfo(): void {
     this.loader.start();
-    this.lockerService.readLockerContactInfo()
+    this.lockerService.readContactInfo()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(contactInfo => {
         this.setForm(contactInfo);
@@ -55,7 +55,7 @@ export class LockerContactComponent implements OnInit, OnDestroy {
 
   public setContactInfo(form: FormGroup): void {
     this.loader.start();
-    this.lockerService.updateLockerContactInfo({
+    this.lockerService.updateContactInfo({
       usaEmail: form.value.usaEmail,
       usaPhone: form.value.usaPhone,
       venEmail: form.value.venEmail,

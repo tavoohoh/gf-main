@@ -53,7 +53,7 @@ export class LockerBioComponent implements OnInit, OnDestroy {
 
   private getBioContent(): void {
     this.loader.start();
-    this.lockerService.readLockerBioDocument(this.currentLang)
+    this.lockerService.readBioDocument(this.currentLang)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(bio => {
         this.form.controls.bio.patchValue(bio.content);
@@ -67,7 +67,7 @@ export class LockerBioComponent implements OnInit, OnDestroy {
 
   public setBioContent(): void {
     this.loader.start();
-    this.lockerService.updateLockerBioDocument(this.form.value.bio, this.currentLang)
+    this.lockerService.updateBioDocument(this.form.value.bio, this.currentLang)
       .then(() => {
         this.loader.stop();
       }, error => {

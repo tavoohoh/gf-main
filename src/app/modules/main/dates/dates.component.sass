@@ -1,1 +1,60 @@
 @import 'variables'
+
+.dates-page
+  color: $white
+  margin: 3rem auto
+
+  .dates
+    display: grid
+    grid-template-columns: 190px 60px 1fr
+    gap: 0.4rem 1rem
+    padding-bottom: 3rem
+    max-width: 600px
+    margin: auto
+
+    .date-when
+      grid-column: 1
+      grid-row: 1 / 3
+      align-self: center
+      font-size: 1.5rem
+      text-transform: uppercase
+      font-weight: bold
+      letter-spacing: 1px
+
+    .date-divider
+      grid-column: 1
+      grid-row: 1 / 3
+
+    .date-title
+      grid-column: 3
+      grid-row: 1
+      align-self: center
+      font-size: 1.3rem
+      font-weight: bold
+      letter-spacing: 1px
+
+    .date-where
+      grid-column: 3
+      grid-row: 2
+      align-self: start
+      font-size: 0.9rem
+
+    @media screen and (max-width: 640px)
+      grid-template-columns: auto
+
+      .date-when
+        grid-column: 1
+        grid-row: 1
+
+      .date-divider
+        display: none
+      
+      .date-title
+        padding-top: 0.5rem
+        font-size: 1.1rem
+        grid-column: 1
+        grid-row: 2
+
+      .date-where
+        grid-column: 1
+        grid-row: 3

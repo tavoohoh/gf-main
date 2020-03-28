@@ -50,7 +50,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   private getGalleryCollections() {
     this.loader.start();
-    this.lockerService.listLockerGalleryCollection()
+    this.lockerService.listGalleryCollection()
       .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(galleryCollections => {
         this.galleryCollections = galleryCollections;
@@ -63,7 +63,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   public getGalleryPhotos(gallery: LockerGallery) {
     this.loader.start();
-    this.lockerService.getLockerGalleryDocument(gallery.id)
+    this.lockerService.getGalleryDocument(gallery.id)
       .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
         this.galleryId = gallery.id;
@@ -90,7 +90,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
       title: form.value.name
     };
 
-    this.lockerService.createLockerGallery(galley)
+    this.lockerService.createGallery(galley)
       .then(() => {
         this.formAddGalleryFields = AddGalleryForm;
         this.getGalleryPhotos(galley);
@@ -115,7 +115,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(imageUrl => {
-          this.lockerService.createLockerGalleryImage(this.galleryId, imageUrl)
+          this.lockerService.createGalleryImage(this.galleryId, imageUrl)
           .then(() => this.loader.stop()).catch(error => {
             console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
             this.loader.stop();
@@ -140,7 +140,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   public onDeleteGallery() {
     this.loader.start();
-    this.lockerService.deleteLockerGallery(this.galleryId)
+    this.lockerService.deleteGallery(this.galleryId)
       .then(() => {
         this.closeAlert('deleteGalleryAlert');
         this.galleryId = null;
@@ -158,7 +158,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     this.loader.start();
     const photo = this.alertContext;
 
-    this.lockerService.deleteLockerGalleryImage(this.galleryId, photo.id)
+    this.lockerService.deleteGalleryImage(this.galleryId, photo.id)
       .then(() => {
         this.closeAlert('deleteGalleryImageAlert');
         this.loader.stop();

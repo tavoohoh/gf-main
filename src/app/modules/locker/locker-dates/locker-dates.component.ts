@@ -49,7 +49,7 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
 
   private listDates(): void {
     this.loader.start();
-    this.lockerService.listLockerDatesCollection()
+    this.lockerService.listDatesCollection()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(dateCollections => {
         this.dateCollections = dateCollections;
@@ -63,7 +63,7 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
   public async readDate(dateId: string): Promise<void> {
     this.loader.start();
 
-    await this.lockerService.readLockerDateDocument(dateId)
+    await this.lockerService.readDateDocument(dateId)
       .pipe(take(1))
       .toPromise()
       .then(date => {
@@ -98,7 +98,7 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
 
   public deleteDate(): void {
     this.loader.start();
-    this.lockerService.deleteLockerDateDocument(this.date.id)
+    this.lockerService.deleteDateDocument(this.date.id)
       .then(() => {
         this.viewContent = null;
         this.date = null;

@@ -21,10 +21,10 @@ export const NAVIGATION: Array<NavigationInterface> = [
     text: 'NAVIGATION.VIDEO',
     url: '/video'
   },
-  // {
-  //   text: 'NAVIGATION.DATES',
-  //   url: '/dates'
-  // },
+  {
+    text: 'NAVIGATION.DATES',
+    url: '/dates'
+  },
   {
     text: 'NAVIGATION.CONTACT',
     url: '/contact'

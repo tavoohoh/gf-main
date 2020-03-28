@@ -5,7 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
   selector: 'app-title',
   template: `
     <div class="view-title page-container" *ngIf="activeUrl && activeUrl !== 'gallery'">
-      <h2>{{ activeUrl | translate }}</h2>
+      <h2>{{ title | translate }}</h2>
     </div>
   `,
   styleUrls: ['./title.component.sass']
@@ -13,18 +13,25 @@ import { NavigationEnd, Router } from '@angular/router';
 export class TitleComponent implements OnInit {
   public showMenu: boolean;
   public activeUrl: string;
+  public title: string;
 
   constructor(
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.activeUrl = this.router.url.replace('/', '');
+    this.setTemplateVariables(this.router.url.replace('/', ''));
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.activeUrl = event.url.replace('/', '');
+        this.setTemplateVariables(event.url.replace('/', ''));
       }
     });
+  }
+
+  private setTemplateVariables(url: string) {
+    this.activeUrl = url;
+    this.title = `NAVIGATION.${url.toUpperCase()}`;
   }
 
 }

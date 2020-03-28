@@ -35,11 +35,10 @@ export class VideoComponent implements OnDestroy, OnInit {
     this.lockerService.listVideosCollection()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(videosCollection => {
-        console.log(videosCollection);
         this.videos = videosCollection;
         this.loader.stop();
       }, error => {
-        console.error(error, 'VideoComponent.listVideos');
+        console.error(error, 'VideoComponent.getVideos');
         this.loader.stop();
       });
   }

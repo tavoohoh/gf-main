@@ -38,7 +38,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
 
   private getGalleryCollections(): void {
     this.loader.start();
-    this.lockerService.listLockerGalleryCollection()
+    this.lockerService.listGalleryCollection()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(galleryCollections => {
 
@@ -55,7 +55,7 @@ export class GalleryComponent implements OnDestroy, OnInit {
 
   public getGalleryPhotos(gallery: LockerGallery): void {
     this.loader.start();
-    this.lockerService.getLockerGalleryDocument(gallery.id)
+    this.lockerService.getGalleryDocument(gallery.id)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(images => {
 

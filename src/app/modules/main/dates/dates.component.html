@@ -1,0 +1,28 @@
+<div class="dates-page page-container">
+  <div class="content">
+    <ng-container *ngIf="dates && dates.length > 0; else noShows">
+      <div class="dates" *ngFor="let show of dates">
+        <ng-container *ngIf="show.published">
+          <span class="date-when">
+            {{ show.date | date:'mediumDate' }}
+          </span>
+          <span class="date-divider"></span>
+          <span class="date-title">
+            {{ show.title }}
+          </span>
+          <span class="date-where">
+            {{ show.location }}
+          </span>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #noShows>
+  <div class="page-links">
+    <p class="call-to-action">
+      {{ 'ACTIONS.CALL_TO_ACTION_SHOWS'  | translate }}.
+    </p>
+  </div>
+</ng-template>
