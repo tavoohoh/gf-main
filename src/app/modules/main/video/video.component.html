@@ -1,17 +1,28 @@
 <div class="video-page">
-  <ng-container *ngIf="videos && videos.length > 0">
+  <div class="content" *ngIf="videos && videos.length > 0">
     <div class="video-content" *ngFor="let video of videos">
       <iframe
         class="video-frame"
-        width="560" 
-        height="315" 
-        [src]="video.url" 
-        frameborder="0" 
+        [src]="video.url"
+        frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
       </iframe>
-      <span class="video-title">
+      <h3 class="video-title">
         {{ video.title }}
-      </span>
+      </h3>
     </div>
-  </ng-container>
+
+    <div class="page-links">
+      <p class="call-to-action">
+        {{ 'ACTIONS.CALL_TO_ACTION_GALLERY'  | translate }}:
+      </p>
+
+      <div class="links">
+        <a class="gf-button" target="_blank" rel="noopener noreferrer"
+          [href]="resourcesLinks.YOUTUBE">
+          {{ 'ACTIONS.GOTO_YOUTUBE' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

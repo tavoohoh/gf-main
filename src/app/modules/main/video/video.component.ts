@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ResourcesLinks } from '@app/_enums/index';
 import { LockerVideo } from '@app/_interfaces';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -13,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 export class VideoComponent implements OnDestroy, OnInit {
   private destroyed$ = new Subject();
   public videos: Array<LockerVideo>;
+  public resourcesLinks = ResourcesLinks;
 
   constructor(
     private lockerService: LockerService,

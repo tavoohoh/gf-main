@@ -53,8 +53,10 @@
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Download promotional PDF",
     "CALL_TO_ACTION_GALLERY": "For more photos visit Gian Faraone's social networks",
+    "CALL_TO_ACTION_VIDEOS": "For more videos subscribe to Gian Faraone's YouTube channel",
     "GOTO_FACEBOOK": "Go to Facebook",
     "GOTO_INSTAGRAM": "Go to Instagram",
+    "GOTO_YOUTUBE": "Go to YouTube",
     "BUY_NOW": "Buy now",
     "CONFIRM_DELETE_GALLERY_PHOTO": {
       "TITLE": "Remove image from gallery",
