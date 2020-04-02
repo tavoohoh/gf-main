@@ -7,6 +7,7 @@ import {
   GFieldValidatorType,
   GFormFields,
   GFormOptions,
+  GNumberField,
   GPasswordField,
   GPhoneField,
   GTextField,
@@ -151,6 +152,16 @@ export const VideoForm: GFormFields = [
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
+  }),
+  new GNumberField({
+    model: 'position',
+    label: 'FORM.POSITION',
+    placeholder: 'FORM.POSITION',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true,
+      [GFieldValidatorType.MIN]: 1,
+      [GFieldValidatorType.MAX]: 300
+    },
   })
 ];
 
@@ -173,6 +184,35 @@ export const MusicForm: GFormFields = [
       [GFieldValidatorType.REQUIRED]: true
     },
   }),
+  new GTextField({
+    model: 'url',
+    label: 'FORM.SONG_URL',
+    placeholder: 'FORM.SONG_URL',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GNumberField({
+    model: 'position',
+    label: 'FORM.POSITION',
+    placeholder: 'FORM.POSITION',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true,
+      [GFieldValidatorType.MIN]: 1,
+      [GFieldValidatorType.MAX]: 300
+    },
+  }),
+  new GFieldFile({
+    model: 'image',
+    label: 'FORM.SONG_IMAGE',
+    placeholder: 'FORM.SELECT_SONG_IMAGE',
+    returnFile: true,
+    accept: '.jpg, .jpeg, .png',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
   new GColorPickerField({
     model: 'backgroundColor',
     label: 'FORM.BACKGROUND_COLOR',
@@ -186,24 +226,5 @@ export const MusicForm: GFormFields = [
     model: 'isColorWhite',
     label: 'FORM.WHITE_FONT',
     value: false
-  }),
-  new GTextField({
-    model: 'url',
-    label: 'FORM.SONG_URL',
-    placeholder: 'FORM.SONG_URL',
-    value: '',
-    validators: {
-      [GFieldValidatorType.REQUIRED]: true
-    },
-  }),
-  new GFieldFile({
-    model: 'image',
-    label: 'FORM.SONG_IMAGE',
-    placeholder: 'FORM.SELECT_SONG_IMAGE',
-    returnFile: true,
-    accept: '.jpg, .jpeg, .png',
-    validators: {
-      [GFieldValidatorType.REQUIRED]: true
-    },
   })
 ];

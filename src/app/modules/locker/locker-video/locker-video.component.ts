@@ -60,10 +60,15 @@ export class LockerVideoComponent implements OnDestroy, OnInit {
       });
   }
 
-  public async readVideo(videoId: string): Promise<void> {
+  public readVideo(videoId: string): void {
     this.loader.start();
 
-    await this.lockerService.readVideoDocument(videoId)
+    this.formFields = null;
+    if (this.formComponent) {
+      this.formComponent.formActions('reset');
+    }
+
+    this.lockerService.readVideoDocument(videoId)
       .pipe(take(1))
       .toPromise()
       .then(video => {
@@ -78,11 +83,11 @@ export class LockerVideoComponent implements OnDestroy, OnInit {
 
   public writeVideo(form: FormGroup): void {
     this.loader.start();
-
     this.lockerService[this.video ? 'updateVideoDocument' : 'createVideoDocument']({
       video: {
         title: form.value.title,
-        url: form.value.url
+        url: form.value.url,
+        position: form.value.position
       },
       id: this.video ? this.video.id : null
     })

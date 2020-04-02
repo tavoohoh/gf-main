@@ -47,8 +47,9 @@
     "DATE": "Fecha",
     "PUBLISH": "Publicar",
     "PUBLISHED": "Publicado",
-    "YOUTUBE_URL": "Url del video en YouTube",
-    "WHITE_FONT": "¿La fuente es de color blanco?"
+    "YOUTUBE_URL": "ID del video en YouTube",
+    "WHITE_FONT": "¿La fuente es de color blanco?",
+    "POSITION": "Posición"
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Descargar PDF promocional",

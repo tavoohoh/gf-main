@@ -47,8 +47,9 @@
     "DATE": "Date",
     "PUBLISH": "Publish",
     "PUBLISHED": "Published",
-    "YOUTUBE_URL": "YouTube Url of the video",
-    "WHITE_FONT": "Is the font white?"
+    "YOUTUBE_URL": "ID of YouTube video",
+    "WHITE_FONT": "Is the font white?",
+    "POSITION": "Position"
   },
   "ACTIONS": {
     "DOWNLOAD_PROMO": "Download promotional PDF",

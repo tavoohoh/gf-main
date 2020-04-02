@@ -65,35 +65,23 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
 
   public async readMusic(musicId: string): Promise<void> {
     this.loader.start();
+
     this.formFields = null;
+    if (this.formComponent) {
+      this.formComponent.formActions('reset');
+    }
 
     await this.lockerService.readMusicDocument(musicId)
       .pipe(take(1))
       .toPromise()
       .then(music => {
         this.viewContent = ViewType.DETAIL;
-        this.music = this.mapMusicValues(music);
+        this.music = this.lockerService.mapMusicValues(music, true);
         this.music.id = musicId;
         this.formFields = this.gsFormService.patchFormValues(MusicForm, this.music);
       })
       .catch(error => console.error(error, 'LockerMusicComponent.readMusic'))
       .finally(() => this.loader.stop());
-  }
-
-  private mapMusicValues(data: LockerMusic): LockerMusic {
-    return {
-      title: data.title,
-      subtitle: data.subtitle,
-      backgroundColor: data.backgroundColor,
-      isColorWhite: data.isColorWhite,
-      url: data.url,
-      image: data.image ? {
-        isImage: true,
-        type: '',
-        name: '',
-        path: data.image || ''
-      } : '/'
-    };
   }
 
   public writeMusic(form: FormGroup): void {
@@ -127,6 +115,7 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
         backgroundColor: form.value.backgroundColor,
         isColorWhite: form.value.isColorWhite,
         url: form.value.url,
+        position: form.value.position,
         image: image ? image : ((this.music && this.music.image) ? this.music.image.path : null)
       },
       id: this.music ? this.music.id : null

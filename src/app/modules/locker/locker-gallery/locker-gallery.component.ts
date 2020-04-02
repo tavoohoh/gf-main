@@ -3,7 +3,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormGroup } from '@angular/forms';
 import { ViewType } from '@app/_enums';
 import { AddGalleryForm, LockerFormOptions } from '@app/_forms/locker.forms';
-import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces/locker.interface';
+import { LockerGallery, LockerGalleryPhoto } from '@app/_interfaces/locker.interface';
 import { AlertService } from '@app/_widgets/alert';
 import { LockerService } from '@app/services/locker.service';
 import 'firebase/storage';
@@ -25,7 +25,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
   private alertContext: any;
   public galleryId: string;
   public galleryCollections: Array<LockerGallery>;
-  public galleryPhotos: Array<LockerGalleryPhotos>;
+  public galleryPhotos: Array<LockerGalleryPhoto>;
   public viewContent: ViewType;
   public currentTitle = '';
   public viewType = ViewType;

@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ResourcesLinks } from '@app/_enums';
-import { LockerGallery, LockerGalleryPhotos } from '@app/_interfaces';
+import { LockerGallery, LockerGalleryPhoto } from '@app/_interfaces';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 interface ImageDisplayedType {
-  gallery: Array<LockerGalleryPhotos>;
+  gallery: Array<LockerGalleryPhoto>;
   position: number;
 }
 
@@ -19,7 +19,7 @@ interface ImageDisplayedType {
 export class GalleryComponent implements OnDestroy, OnInit {
   private destroyed$ = new Subject();
   public resourcesLinks = ResourcesLinks;
-  public galleries: Array<{ title: string, images: Array<LockerGalleryPhotos> }> = [];
+  public galleries: Array<{ title: string, images: Array<LockerGalleryPhoto> }> = [];
   public imageDisplayed: ImageDisplayedType;
 
   constructor(

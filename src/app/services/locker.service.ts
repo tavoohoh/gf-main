@@ -6,7 +6,7 @@ import {
   LockerContactInfo,
   LockerDate,
   LockerGallery,
-  LockerGalleryPhotos,
+  LockerGalleryPhoto,
   LockerMusic,
   LockerVideo
 } from '@app/_interfaces/locker.interface';
@@ -40,8 +40,8 @@ export class LockerService {
   /**
    * Gallery
    */
-  private mapGalleryValues(value: any): LockerGalleryPhotos {
-    const data = value.payload.doc.data() as LockerGalleryPhotos;
+  private mapGalleryValues(value: any): LockerGalleryPhoto {
+    const data = value.payload.doc.data() as LockerGalleryPhoto;
     const img = this.sanitizer.bypassSecurityTrustStyle(`url(${data.img})`);
     const src = data.img;
     const id = value.payload.doc.id;
@@ -49,12 +49,12 @@ export class LockerService {
   }
 
   public listGalleryCollection(): Observable<Array<LockerGallery>> {
-    const collection = this.afs.collection<LockerGallery>(`gallery`);
+    const collection = this.afs.collection<LockerGallery>('gallery');
     return collection.valueChanges();
   }
 
-  public getGalleryDocument(galleryId: string): Observable<LockerGalleryPhotos[]> {
-    const document = this.afs.collection<LockerGalleryPhotos>(`gallery/${galleryId}/photos`);
+  public getGalleryDocument(galleryId: string): Observable<LockerGalleryPhoto[]> {
+    const document = this.afs.collection<LockerGalleryPhoto>(`gallery/${galleryId}/photos`);
     return document.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapGalleryValues(value);
@@ -63,7 +63,7 @@ export class LockerService {
   }
 
   public async createGallery(gallery: LockerGallery): Promise<boolean> {
-    const collection = this.afs.collection<LockerGallery>(`gallery`);
+    const collection = this.afs.collection<LockerGallery>('gallery');
     return await collection.doc(gallery.id).set(gallery).then(() => true);
   }
 
@@ -91,12 +91,12 @@ export class LockerService {
    * Contact
    */
   public readContactInfo(): Observable<LockerContactInfo> {
-    const document = this.afs.doc<LockerContactInfo>(`contact/info`);
+    const document = this.afs.doc<LockerContactInfo>('contact/info');
     return document.valueChanges();
   }
 
   public updateContactInfo(contactInfo: LockerContactInfo): Promise<void> {
-    const document = this.afs.doc<LockerContactInfo>(`contact/info`);
+    const document = this.afs.doc<LockerContactInfo>('contact/info');
     return document.update(contactInfo);
   }
 
@@ -130,7 +130,7 @@ export class LockerService {
   }
 
   public async createDateDocument(data: { date: LockerDate, id?: string }): Promise<boolean> {
-    const collection = this.afs.collection<LockerDate>(`dates`);
+    const collection = this.afs.collection<LockerDate>('dates');
     return await collection.add(data.date).then(() => true);
   }
 
@@ -153,12 +153,13 @@ export class LockerService {
     return {
       id,
       title: data.title,
+      position: data.position,
       url: this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${data.url}`)
     };
   }
 
   public listVideosCollection(): Observable<Array<LockerVideo>> {
-    const collection = this.afs.collection<LockerVideo>(`videos`);
+    const collection = this.afs.collection<LockerVideo>(`videos`, ref => ref.orderBy('position', 'asc'));
     return collection.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapVideoValues(value);
@@ -172,7 +173,7 @@ export class LockerService {
   }
 
   public async createVideoDocument(data: { video: LockerVideo, id?: string  }): Promise<boolean> {
-    const collection = this.afs.collection<LockerVideo>(`videos`);
+    const collection = this.afs.collection<LockerVideo>('videos');
     return await collection.add(data.video).then(() => true);
   }
 
@@ -189,25 +190,39 @@ export class LockerService {
   /**
    * Music
    */
-  private mapMusicValues(value: any): LockerMusic {
-    const data = value.payload.doc.data() as LockerMusic;
-    const id = value.payload.doc.id;
-    return {
-      id,
+  public mapMusicValues(data: any, mapImage?: boolean, id?: string): LockerMusic {
+    const music = {
+      id: id || '',
       title: data.title,
       subtitle: data.subtitle,
       backgroundColor: data.backgroundColor,
       isColorWhite: data.isColorWhite,
       url: data.url,
-      image: data.image || ''
+      position: data.position,
+      image: data.image || '/'
     };
+
+    if (mapImage) {
+      music.image = {
+        isImage: true,
+        type: '',
+        name: '',
+        path: data.image
+      };
+    }
+
+    return music;
   }
 
   public listMusicCollection(): Observable<Array<LockerMusic>> {
-    const collection = this.afs.collection<LockerMusic>(`music`);
+    const collection = this.afs.collection<LockerMusic>('music', ref => ref.orderBy('position', 'asc'));
     return collection.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
-        return this.mapMusicValues(value);
+        return this.mapMusicValues(
+          value.payload.doc.data() as LockerMusic,
+          false,
+          value.payload.doc.id
+        );
       });
     }));
   }
@@ -218,7 +233,7 @@ export class LockerService {
   }
 
   public async createMusicDocument(data: { music: LockerMusic, id?: string  }): Promise<boolean> {
-    const collection = this.afs.collection<LockerMusic>(`music`);
+    const collection = this.afs.collection<LockerMusic>('music');
     return await collection.add(data.music).then(() => true);
   }
 

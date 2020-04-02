@@ -5,11 +5,13 @@ export interface LockerBio {
 export interface LockerGallery {
   id: string;
   title: string;
+  position?: number;
 }
 
-export interface LockerGalleryPhotos {
+export interface LockerGalleryPhoto {
   id: string;
   img: any;
+  position?: number;
   src?: string;
 }
 
@@ -37,6 +39,7 @@ export interface LockerDate {
 export interface LockerVideo {
   title: string;
   url: any;
+  position: number;
   id?: string;
 }
 
@@ -46,6 +49,7 @@ export interface LockerMusic {
   isColorWhite: boolean;
   backgroundColor: string;
   url: string;
+  position: number;
   image?: {
     isImage: boolean;
     type: string;
