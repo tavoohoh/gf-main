@@ -7,15 +7,20 @@
 
     .image-container
         display: grid
+        grid-template-rows: auto
         grid-template-columns: repeat(3, 180px)
         gap: 1rem
 
         .gallery-actions
-          padding: 1rem
+          grid-column: 1 / 4
+          grid-row: 1
 
           .gallery-actions-button
-            padding: 0
+            display: inline-block
+            padding: 1rem
             background: none
+            width: auto
+            border: none
 
         .image-card
           padding: 1rem
@@ -23,8 +28,36 @@
 
           .actions
             padding-top: 1rem
+            display: grid
+            grid-template-columns: auto 1fr
+
+            .image-position
+              align-self: center
+              display: grid
+              grid-template-columns: auto 26px
+              gap: 0.5rem
+
+              label
+                align-self: center
+                font-size: 0.8rem
+
+              input
+                text-align: center
+                padding: 0.3rem
+                align-self: center
+                background: none
+                border: none
+                background-color: lighten($black, 30)
+
+              input::-webkit-outer-spin-button,
+              input::-webkit-inner-spin-button
+                -webkit-appearance: none
+                margin: 0
+              input[type=number]
+                -moz-appearance: textfield
 
             button
+              align-self: center
               padding: 4px
               display: block
               width: max-content

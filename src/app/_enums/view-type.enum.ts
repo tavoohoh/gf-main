@@ -1,4 +1,5 @@
 export enum ViewType {
   ADD = 'ADD',
-  DETAIL = 'DETAIL'
+  DETAIL = 'DETAIL',
+  EDIT = 'EDIT'
 }

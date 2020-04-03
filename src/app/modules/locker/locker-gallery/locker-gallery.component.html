@@ -16,7 +16,7 @@
       <ng-container *ngFor="let collection of galleryCollections">
         <button
           class="locker-btn"
-          [class.active]="currentTitle === collection.title"
+          [class.active]="gallery?.title === collection.title"
           type="button"
           (click)="getGalleryPhotos(collection)">
             {{ collection.title }}
@@ -30,11 +30,38 @@
     <div class="content-detail" *ngIf="viewContent === viewType.DETAIL">
 
       <div class="image-container">
+        <!-- gallery actions -->
+        <div class="gallery-actions">          
+          <button (click)="readGallery(gallery.id)"
+            class="locker-btn gallery-actions-button"
+            type="button">
+            {{ 'FORM.EDIT_GALLERY' | translate }}
+          </button>
+
+          <button (click)="openAlert(gallery.id, 'deleteGalleryAlert')"
+            class="locker-btn delete-btn gallery-actions-button"
+            type="button">
+            {{ 'FORM.DELETE_GALLERY' | translate }}
+          </button>
+        </div>
 
         <!-- gallery images -->
-        <div class="image-card" *ngFor="let photo of galleryPhotos">
+        <div class="image-card" *ngFor="let photo of galleryPhotos; let i = index">
           <div class="image" [style.background-image]="photo.img"></div>
           <div class="actions">
+            <div class="image-position">
+              <label [for]="'photo-' + i">
+                {{ 'FORM.POSITION' | translate }}
+              </label>
+              <input 
+                type="number"
+                gsDigitOnly
+                [id]="'photo-' + i"
+                [min]="1"
+                [max]="300"
+                [value]="photo.position"
+                (change)="updateImagePosition($event, photo)">
+            </div>
             <button class="locker-btn" type="button" (click)="openAlert(photo, 'deleteGalleryImageAlert')">
               {{ 'FORM.DELETE' | translate }}
             </button>
@@ -55,24 +82,15 @@
               </span>
             </div>
         </button>
-
-        <!-- gallery actions -->
-        <div class="gallery-actions">
-          <button (click)="openAlert(galleryId, 'deleteGalleryAlert')"
-            class="locker-btn gallery-actions-button"
-            type="button">
-            {{ 'FORM.DELETE_GALLERY' | translate }}
-          </button>
-        </div>
       </div>
     </div>
 
-    <div class="content-add" *ngIf="viewContent === viewType.ADD">
+    <div class="content-add" *ngIf="viewContent === viewType.ADD || viewContent === viewType.EDIT">
       <gs-form
         *ngIf="formOptions"
-        [formFields]="formAddGalleryFields"
+        [formFields]="formFields"
         [formOptions]="formOptions"
-        (form)="onAddNewGallery($event)">
+        (form)="writeGallery($event)">
       </gs-form>
     </div>
 

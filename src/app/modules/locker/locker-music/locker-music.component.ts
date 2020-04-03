@@ -160,5 +160,4 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
       this.loader.stop();
     }, 500);
   }
-
 }

@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormGroup } from '@angular/forms';
 import { ViewType } from '@app/_enums';
-import { AddGalleryForm, LockerFormOptions } from '@app/_forms/locker.forms';
+import { GalleryForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { LockerGallery, LockerGalleryPhoto } from '@app/_interfaces/locker.interface';
 import { AlertService } from '@app/_widgets/alert';
 import { LockerService } from '@app/services/locker.service';
 import 'firebase/storage';
-import { GFormFields, GFormOptions } from 'gs-forms';
+import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { finalize, take, takeUntil } from 'rxjs/operators';
@@ -23,20 +23,22 @@ import { finalize, take, takeUntil } from 'rxjs/operators';
 export class LockerGalleryComponent implements OnDestroy, OnInit {
   private destroyed$ = new Subject();
   private alertContext: any;
-  public galleryId: string;
+  public gallery: LockerGallery;
   public galleryCollections: Array<LockerGallery>;
   public galleryPhotos: Array<LockerGalleryPhoto>;
   public viewContent: ViewType;
-  public currentTitle = '';
   public viewType = ViewType;
-  public formAddGalleryFields: GFormFields = AddGalleryForm;
+  public formFields: GFormFields = GalleryForm;
   public formOptions: GFormOptions = LockerFormOptions;
+
+  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
 
   constructor(
     private lockerService: LockerService,
     private storage: AngularFireStorage,
     private loader: NgxUiLoaderService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private gsFormService: GsFormsService
   ) { }
 
   ngOnInit() {
@@ -63,13 +65,12 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   public getGalleryPhotos(gallery: LockerGallery) {
     this.loader.start();
-    this.lockerService.getGalleryDocument(gallery.id)
+    this.lockerService.getGalleryPhotoDocument(gallery.id)
       .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
-        this.galleryId = gallery.id;
+        this.gallery = gallery;
         this.viewContent = ViewType.DETAIL;
         this.galleryPhotos = galleryDocuments;
-        this.currentTitle = gallery.title;
         this.loader.stop();
       }, error => {
         console.error(error, 'LockerGalleryComponent.getGalleryPhotos');
@@ -78,23 +79,33 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
   }
 
   public addNewGallery() {
-    this.viewContent = null;
+    this.loader.start();
     this.viewContent = ViewType.ADD;
-    this.currentTitle = '';
+    this.gallery = null;
+
+    setTimeout(() => {
+      if (this.formComponent) {
+        this.formComponent.formActions('reset');
+      }
+      this.loader.stop();
+    }, 500);
   }
 
-  public onAddNewGallery(form: FormGroup) {
+  public writeGallery(form: FormGroup) {
     this.loader.start();
-    const galley = {
-      id: form.value.name.replace(/ /g, '').toLowerCase(),
-      title: form.value.name
-    };
 
-    this.lockerService.createGallery(galley)
+    this.lockerService[this.gallery ? 'updateGallery' : 'createGallery']({
+      gallery: {
+        title: form.value.title,
+        position: form.value.position
+      }, id: this.gallery ? this.gallery.id : form.value.title.replace(/ /g, '').toLowerCase(),
+    })
       .then(() => {
-        this.formAddGalleryFields = AddGalleryForm;
-        this.getGalleryPhotos(galley);
+        this.formFields = GalleryForm;
+        this.viewContent = null;
+        this.gallery = null;
         this.loader.stop();
+        this.getGalleryCollections();
       })
       .catch(error => {
         this.loader.stop();
@@ -115,11 +126,14 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(imageUrl => {
-          this.lockerService.createGalleryImage(this.galleryId, imageUrl)
-          .then(() => this.loader.stop()).catch(error => {
-            console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
-            this.loader.stop();
-          });
+          this.lockerService.createGalleryImage(this.gallery.id, { img: imageUrl, position: 20 })
+            .then(() => {
+              this.loader.stop();
+              this.getGalleryPhotos(this.gallery);
+            }).catch(error => {
+              console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
+              this.loader.stop();
+            });
         });
       })
     ).subscribe(() => null, error => {
@@ -140,12 +154,13 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
 
   public onDeleteGallery() {
     this.loader.start();
-    this.lockerService.deleteGallery(this.galleryId)
+    this.lockerService.deleteGallery(this.gallery.id)
       .then(() => {
         this.closeAlert('deleteGalleryAlert');
-        this.galleryId = null;
+        this.gallery = null;
         this.viewContent = null;
         this.loader.stop();
+        this.getGalleryCollections();
       })
       .catch(error => {
         console.error(error, 'LockerGalleryComponent.onDeleteGallery');
@@ -158,9 +173,10 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     this.loader.start();
     const photo = this.alertContext;
 
-    this.lockerService.deleteGalleryImage(this.galleryId, photo.id)
+    this.lockerService.deleteGalleryImage(this.gallery.id, photo.id)
       .then(() => {
         this.closeAlert('deleteGalleryImageAlert');
+        this.getGalleryPhotos(this.gallery);
         this.loader.stop();
       })
       .catch(error => {
@@ -168,6 +184,46 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
         this.closeAlert('deleteGalleryImageAlert');
         this.loader.stop();
       });
+  }
+
+  public readGallery(galleryId: string): void {
+    this.loader.start();
+
+    this.formFields = null;
+    if (this.formComponent) {
+      this.formComponent.formActions('reset');
+    }
+
+    this.lockerService.readGalleryDocument(galleryId)
+      .pipe(take(1))
+      .toPromise()
+      .then(gallery => {
+        this.viewContent = ViewType.EDIT;
+        this.gallery = gallery;
+        this.gallery.id = galleryId;
+        this.formFields = this.gsFormService.patchFormValues(GalleryForm, gallery);
+      })
+      .catch(error => console.error(error, 'LockerGalleryComponent.readGallery'))
+      .finally(() => this.loader.stop());
+  }
+
+  public updateImagePosition(event: { target: { value: number } }, photo: LockerGalleryPhoto) {
+    this.loader.start();
+
+    this.lockerService.changeGalleryImagePosition(
+      this.gallery.id,
+      photo.id,
+      {
+        img: photo.src,
+        position: Number(event.target.value)
+      }
+    ).then(() => {
+      this.loader.stop();
+      this.getGalleryPhotos(this.gallery);
+    }).catch(error => {
+      console.error(error, 'LockerGalleryComponent.updateImagePosition');
+      this.loader.stop();
+    });
   }
 
 }

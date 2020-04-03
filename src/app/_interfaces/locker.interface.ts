@@ -3,15 +3,15 @@ export interface LockerBio {
 }
 
 export interface LockerGallery {
-  id: string;
   title: string;
   position?: number;
+  id?: string;
 }
 
 export interface LockerGalleryPhoto {
-  id: string;
   img: any;
-  position?: number;
+  position: number;
+  id?: string;
   src?: string;
 }
 

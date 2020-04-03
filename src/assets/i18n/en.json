@@ -31,6 +31,7 @@
     "ADD": "Add",
     "ADD_IMAGE": "Add image",
     "ADD_GALLERY": "Add gallery",
+    "EDIT_GALLERY": "Edit gallery",
     "GALLERY_NAME": "Gallery name",
     "DELETE": "Delete",
     "DELETE_GALLERY": "Delete gallery",

@@ -40,36 +40,56 @@ export class LockerService {
   /**
    * Gallery
    */
-  private mapGalleryValues(value: any): LockerGalleryPhoto {
+  private mapGalleryValues(value: any): LockerGallery {
+    const data = value.payload.doc.data() as LockerGallery;
+    return {
+      id: value.payload.doc.id,
+      title: data.title,
+      position: data.position
+    };
+  }
+
+  private mapGalleryPhotoValues(value: any): LockerGalleryPhoto {
     const data = value.payload.doc.data() as LockerGalleryPhoto;
-    const img = this.sanitizer.bypassSecurityTrustStyle(`url(${data.img})`);
-    const src = data.img;
-    const id = value.payload.doc.id;
-    return { id, img, src };
+    return {
+      id: value.payload.doc.id,
+      img: this.sanitizer.bypassSecurityTrustStyle(`url(${data.img})`),
+      position: data.position,
+      src: data.img
+    };
   }
 
   public listGalleryCollection(): Observable<Array<LockerGallery>> {
-    const collection = this.afs.collection<LockerGallery>('gallery');
-    return collection.valueChanges();
-  }
-
-  public getGalleryDocument(galleryId: string): Observable<LockerGalleryPhoto[]> {
-    const document = this.afs.collection<LockerGalleryPhoto>(`gallery/${galleryId}/photos`);
-    return document.snapshotChanges().pipe(map(actions => {
+    const collection = this.afs.collection<LockerGallery>('gallery', ref => ref.orderBy('position', 'asc'));
+    return collection.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapGalleryValues(value);
       });
     }));
   }
 
-  public async createGallery(gallery: LockerGallery): Promise<boolean> {
-    const collection = this.afs.collection<LockerGallery>('gallery');
-    return await collection.doc(gallery.id).set(gallery).then(() => true);
+  public getGalleryPhotoDocument(galleryId: string): Observable<LockerGalleryPhoto[]> {
+    const document = this.afs.collection<LockerGalleryPhoto>(`gallery/${galleryId}/photos`, ref => ref.orderBy('position', 'asc'));
+    return document.snapshotChanges().pipe(map(actions => {
+      return actions.map(value => {
+        return this.mapGalleryPhotoValues(value);
+      });
+    }));
   }
 
-  public async updateGallery(gallery: LockerGallery): Promise<boolean> {
-    const collection = this.afs.doc<LockerDate>(`gallery/${gallery.id}`);
-    return await collection.update({ title: gallery.title }).then(() => true);
+  public readGalleryDocument(id: string): Observable<LockerGallery> {
+    const document = this.afs.doc<LockerGallery>(`gallery/${id}`);
+    return document.valueChanges();
+  }
+
+  public async createGallery(data: { gallery: LockerGallery, id?: string }): Promise<boolean> {
+    const collection = this.afs.collection<LockerGallery>('gallery');
+    return await collection.doc(data.id).set(data.gallery).then(() => true);
+  }
+
+  public async updateGallery(data: { gallery: LockerGallery, id: string }): Promise<boolean> {
+    const collection = this.afs.doc<LockerDate>(`gallery/${data.id}`);
+    return await collection.update(data.gallery).then(() => true);
   }
 
   public async deleteGallery(galleryId: string): Promise<boolean> {
@@ -77,14 +97,19 @@ export class LockerService {
     return await document.delete().then(() => true);
   }
 
-  public async createGalleryImage(galleryId: string, img?: string): Promise<boolean> {
+  public async createGalleryImage(galleryId: string, photo?: LockerGalleryPhoto): Promise<boolean> {
     const collection = this.afs.collection<{ img: string }>(`gallery/${galleryId}/photos`);
-    return await collection.add({ img }).then(() => true);
+    return await collection.add(photo).then(() => true);
   }
 
   public async deleteGalleryImage(galleryId: string, galleryImageId: string): Promise<boolean> {
     const document = this.afs.doc(`gallery/${galleryId}/photos/${galleryImageId}`);
     return await document.delete().then(() => true);
+  }
+
+  public async changeGalleryImagePosition(galleryId: string, photoId: string, photo: LockerGalleryPhoto): Promise<boolean> {
+    const document = this.afs.doc(`gallery/${galleryId}/photos/${photoId}`);
+    return await document.update(photo).then(() => true);
   }
 
   /**
