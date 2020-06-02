@@ -8,7 +8,7 @@ export enum ResourcesLinks {
   DEAR_SINATRA = 'https://dearsinatra.com',
   TAVOOHOH = 'http://tavoohoh.com',
   // tslint:disable-next-line: max-line-length
-  PROMO_EN = 'https://firebasestorage.googleapis.com/v0/b/gianfaraoneweb.appspot.com/o/GF%20promo%20-%20en.pdf?alt=media&token=44b66531-a4dd-47b2-ace4-177550f61fc2',
+  PROMO_EN = 'https://firebasestorage.googleapis.com/v0/b/gianfaraoneweb.appspot.com/o/GF%20promo%20-%20en.pdf?alt=media&token=c6a36219-d97e-444d-b7b8-f00a0227f2a2',
   // tslint:disable-next-line: max-line-length
   PROMO_ES = 'https://firebasestorage.googleapis.com/v0/b/gianfaraoneweb.appspot.com/o/GF%20promo%20-%20es.pdf?alt=media&token=e1d99458-b121-4edd-84ab-6310f63c56aa'
 }
