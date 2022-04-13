@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { ContactInfoForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { LockerContactInfo } from '@app/_interfaces/locker.interface';
 import { LockerService } from '@app/services/locker.service';
-import { GFormFields, GFormOptions, GsFormsService } from 'gs-forms';
+import { GFormFields, GFormOptions, GsFormsService } from '@gs/ng-forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

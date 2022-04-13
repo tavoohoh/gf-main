@@ -6,8 +6,8 @@ import { LockerFormOptions, MusicForm } from '@app/_forms/locker.forms';
 import { LockerMusic } from '@app/_interfaces';
 import { AlertService } from '@app/_widgets/alert';
 import { LockerService } from '@app/services/locker.service';
+import { GFormFields, GFormOptions, GsFormComponent, GsFormsService } from '@gs/ng-forms';
 import 'firebase/storage';
-import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { finalize, take, takeUntil } from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class LockerMusicComponent implements OnDestroy, OnInit {
   public formFields: GFormFields = MusicForm;
   public formOptions: GFormOptions = LockerFormOptions;
 
-  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
+  @ViewChild(GsFormComponent, { static: false }) formComponent: GsFormComponent;
 
   constructor(
     private storage: AngularFireStorage,

@@ -1,4 +1,4 @@
-import { GStyles } from 'gs-forms';
+import { GStyles } from '@gs/ng-forms';
 
 export const gsFormStyles: GStyles = {
   color: {

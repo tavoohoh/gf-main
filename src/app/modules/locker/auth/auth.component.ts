@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { AuthService } from '@app/services/auth.service';
-import { GFormFields, GFormOptions } from 'gs-forms';
+import { GFormFields, GFormOptions } from '@gs/ng-forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
@@ -37,7 +37,8 @@ export class AuthComponent implements OnInit {
         this.authService.setCurrentUser(data.user.email);
         this.loader.stop();
         this.router.navigateByUrl('admin');
-      }).catch(() => {
+      }).catch((error) => {
+        console.log('auth error', error);
         this.loader.stop();
         this.error = true;
       });

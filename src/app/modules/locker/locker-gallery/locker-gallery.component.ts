@@ -6,8 +6,8 @@ import { GalleryForm, LockerFormOptions } from '@app/_forms/locker.forms';
 import { LockerGallery, LockerGalleryPhoto } from '@app/_interfaces/locker.interface';
 import { AlertService } from '@app/_widgets/alert';
 import { LockerService } from '@app/services/locker.service';
+import { GFormFields, GFormOptions, GsFormComponent, GsFormsService } from '@gs/ng-forms';
 import 'firebase/storage';
-import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { finalize, take, takeUntil } from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
   public formFields: GFormFields = GalleryForm;
   public formOptions: GFormOptions = LockerFormOptions;
 
-  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
+  @ViewChild(GsFormComponent, { static: false }) formComponent: GsFormComponent;
 
   constructor(
     private lockerService: LockerService,

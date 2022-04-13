@@ -12,7 +12,7 @@ import {
   GPhoneField,
   GTextField,
   GToggleField
-} from 'gs-forms';
+} from '@gs/ng-forms';
 
 export const LockerFormOptions: GFormOptions = {
   onErrorDisableSubmit: true,

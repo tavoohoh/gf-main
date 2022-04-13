@@ -5,9 +5,9 @@ import { LockerFormOptions, VideoForm } from '@app/_forms/locker.forms';
 import { LockerVideo } from '@app/_interfaces';
 import { AlertService } from '@app/_widgets/alert';
 import { LockerService } from '@app/services/locker.service';
-import { GFormFields, GFormOptions, GsFormsComponent, GsFormsService } from 'gs-forms';
+import { GFormFields, GFormOptions, GsFormComponent, GsFormsService } from '@gs/ng-forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -29,7 +29,7 @@ export class LockerVideoComponent implements OnDestroy, OnInit {
   public formFields: GFormFields = VideoForm;
   public formOptions: GFormOptions = LockerFormOptions;
 
-  @ViewChild(GsFormsComponent, { static: false }) formComponent: GsFormsComponent;
+  @ViewChild(GsFormComponent, { static: false }) formComponent: GsFormComponent;
 
   constructor(
     private lockerService: LockerService,

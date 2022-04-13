@@ -1,4 +1,4 @@
-import { GFormFields, GTextField, GFieldValidatorType } from 'gs-forms';
+import { GFormFields, GTextField, GFieldValidatorType } from '@gs/ng-forms';
 
 /**
  * Add gallery form
