@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -11,7 +11,8 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: [
     './locker-bio.component.sass',
     '../locker.styles.sass'
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class LockerBioComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
@@ -26,7 +27,7 @@ export class LockerBioComponent implements OnInit, OnDestroy {
     // https://www.froala.com/wysiwyg-editor/docs/options#toolbarBottom
     toolbarButtons: {
       moreText: {
-        buttons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'clearFormatting']
+        buttons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'clearFormatting', 'textColor']
       },
       moreParagraph: {
         buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'lineHeight', 'quote']

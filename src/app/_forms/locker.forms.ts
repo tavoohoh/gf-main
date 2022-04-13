@@ -74,14 +74,17 @@ export const ContactInfoForm: GFormFields = [
   }),
   new GPhoneField({
     model: 'usaPhone',
+    label: 'FORM.PHONE',
     placeholder: 'FORM.PHONE',
+    country: GFieldCountryCode.US,
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
-    country: GFieldCountryCode.US
+    editCountry: false
   }),
   new GTextField({
     model: 'usaEmail',
+    label: 'FORM.EMAIL',
     placeholder: 'FORM.EMAIL',
     validators: {
       [GFieldValidatorType.REQUIRED]: true,
@@ -94,14 +97,17 @@ export const ContactInfoForm: GFormFields = [
   }),
   new GPhoneField({
     model: 'venPhone',
+    label: 'FORM.PHONE',
     placeholder: 'FORM.PHONE',
+    country: GFieldCountryCode.VE,
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
-    country: GFieldCountryCode.VE
+    editCountry: false
   }),
   new GTextField({
     model: 'venEmail',
+    label: 'FORM.EMAIL',
     placeholder: 'FORM.EMAIL',
     validators: {
       [GFieldValidatorType.REQUIRED]: true,

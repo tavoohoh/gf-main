@@ -14,17 +14,18 @@ export const gsFormStyles: GStyles = {
       padding: '.6rem .8rem',
       color: '#fcf9f8',
       background: '#333333',
-      borderSize: '0'
+      borderSize: '0',
+      borderRadius: '0'
     },
     primaryButton: {
-      padding: '.6rem .8rem',
+      padding: '.7rem .8rem',
       color: '#181818',
       background: '#faba53',
       borderColor: '#faba53',
       borderRadius: '0'
     },
     secondaryButton: {
-      padding: '.6rem .8rem',
+      padding: '.7rem .8rem',
       color: '#181818',
       background: '#b0a89b',
       borderColor: '#b0a89b',
