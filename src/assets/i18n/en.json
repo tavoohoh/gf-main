@@ -6,7 +6,7 @@
     "MUSIC": "Music",
     "VIDEO": "Videos",
     "DATES": "Shows",
-    "CONTACT": "Contact",
+    "CONTACT": "Booking",
     "GENERAL": "General"
   },
   "TOAST": {
@@ -19,7 +19,7 @@
     "MUSIC": "Edit music",
     "VIDEO": "Edit videos",
     "DATES": "Edit shows",
-    "CONTACT": "Edit contact",
+    "CONTACT": "Edit booking",
     "GENERAL": "General settings"
   },
   "FORM": {

@@ -3,29 +3,18 @@
     <div class="logo">
       <img src="./assets/logo/gf.svg" alt="GF Logo">
     </div>
-  
+
     <div class="info" *ngIf="contactInfo">
       <b>
         {{ 'CONTACT.FOR_BOOKING_INQUIRIES' | translate }}:
       </b>
       <p>
-        USA<span class="pipe-divider">|</span>
         <a href="tel:{{ contactInfo.usaPhone.link }}">
           {{ contactInfo.usaPhone.text }}
-        </a> 
+        </a>
         <span class="pipe-divider">|</span>
         <a href="mailto:{{ contactInfo.usaEmail }}">
           {{ contactInfo.usaEmail }}
-        </a>
-      </p>
-      <p>
-        VEN<span class="pipe-divider">|</span>
-        <a href="tel:{{ contactInfo.venPhone.link }}">
-          {{ contactInfo.venPhone.text }}
-        </a> 
-        <span class="pipe-divider">|</span>
-        <a href="mailto:{{ contactInfo.venEmail }}">
-          {{ contactInfo.venEmail }}
         </a>
       </p>
     </div>
