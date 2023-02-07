@@ -10,8 +10,9 @@ import {
   GNumberField,
   GPasswordField,
   GPhoneField,
+  GTextareaField,
   GTextField,
-  GToggleField
+  GToggleField,
 } from '@gs/ng-forms';
 
 export const LockerFormOptions: GFormOptions = {
@@ -69,8 +70,8 @@ export const GalleryForm: GFormFields = [
 
 export const ContactInfoForm: GFormFields = [
   new GDivider({
-    model: 'usa',
-    seccionName: 'USA'
+    model: 'title',
+    seccionName: 'Contact info'
   }),
   new GPhoneField({
     model: 'usaPhone',
@@ -91,29 +92,6 @@ export const ContactInfoForm: GFormFields = [
       [GFieldValidatorType.EMAIL]: true
     },
   }),
-  new GDivider({
-    model: 'ven',
-    seccionName: 'VEN'
-  }),
-  new GPhoneField({
-    model: 'venPhone',
-    label: 'FORM.PHONE',
-    placeholder: 'FORM.PHONE',
-    country: GFieldCountryCode.VE,
-    validators: {
-      [GFieldValidatorType.REQUIRED]: true
-    },
-    editCountry: false
-  }),
-  new GTextField({
-    model: 'venEmail',
-    label: 'FORM.EMAIL',
-    placeholder: 'FORM.EMAIL',
-    validators: {
-      [GFieldValidatorType.REQUIRED]: true,
-      [GFieldValidatorType.EMAIL]: true
-    },
-  })
 ];
 
 export const DateForm: GFormFields = [
@@ -244,4 +222,45 @@ export const MusicForm: GFormFields = [
     label: 'FORM.WHITE_FONT',
     value: false
   })
+];
+
+export const BookingSectionForm: GFormFields = [
+  new GTextField({
+    model: 'title',
+    label: 'Title',
+    placeholder: 'Specify title',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'type',
+    label: 'Section Type',
+    placeholder: 'One of "TEXT" | "GALLERY" | "VIDEO"',
+    value: '',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true
+    },
+  }),
+  new GTextField({
+    model: 'videoUrl',
+    label: 'Url',
+    placeholder: 'Video url',
+    value: '',
+    displayIf: {
+      model: 'type',
+      hasValue: 'VIDEO'
+    }
+  }),
+  new GTextareaField({
+    model: 'TEXT',
+    label: 'Content',
+    placeholder: 'Type content',
+    value: '',
+    displayIf: {
+      model: 'type',
+      hasValue: 'TEXT'
+    }
+  }),
 ];

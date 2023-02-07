@@ -31,7 +31,7 @@
 
       <div class="image-container">
         <!-- gallery actions -->
-        <div class="gallery-actions">          
+        <div class="gallery-actions">
           <button (click)="readGallery(gallery.id)"
             class="locker-btn gallery-actions-button"
             type="button">
@@ -53,7 +53,7 @@
               <label [for]="'photo-' + i">
                 {{ 'FORM.POSITION' | translate }}
               </label>
-              <input 
+              <input
                 type="number"
                 gsDigitOnly
                 [id]="'photo-' + i"

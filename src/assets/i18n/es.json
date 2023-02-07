@@ -6,7 +6,8 @@
     "MUSIC": "Música",
     "VIDEO": "Videos",
     "DATES": "Shows",
-    "CONTACT": "Reservas",
+    "CONTACT": "Contacto",
+    "BOOKING": "Reservas",
     "GENERAL": "General"
   },
   "EDIT": {
@@ -15,7 +16,8 @@
     "MUSIC": "Editar música",
     "VIDEO": "Editar videos",
     "DATES": "Editar shows",
-    "CONTACT": "Editar reservas",
+    "CONTACT": "Editar contacto",
+    "BOOKING": "Editar reservas",
     "GENERAL": "Configuración general"
   },
   "TOAST": {

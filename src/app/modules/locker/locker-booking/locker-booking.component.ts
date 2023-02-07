@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormGroup } from '@angular/forms';
 import { ViewType } from '@app/_enums';
-import { GalleryForm, LockerFormOptions } from '@app/_forms/locker.forms';
-import { LockerGallery, LockerGalleryPhoto } from '@app/_interfaces/locker.interface';
+import { BookingSectionForm, LockerFormOptions } from '@app/_forms/locker.forms';
+import { LockerBookingSection, LockerBookingSectionPhoto } from '@app/_interfaces/locker.interface';
 import { AlertService } from '@app/_widgets/alert';
 import { LockerService } from '@app/services/locker.service';
 import { GFormFields, GFormOptions, GsFormComponent, GsFormsService } from '@gs/ng-forms';
@@ -13,22 +13,22 @@ import { Subject } from 'rxjs';
 import { finalize, take, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-locker-gallery',
-  templateUrl: './locker-gallery.component.html',
+  selector: 'app-locker-booking',
+  templateUrl: './locker-booking.component.html',
   styleUrls: [
-    './locker-gallery.component.sass',
+    './locker-booking.component.sass',
     '../locker.styles.sass'
   ]
 })
-export class LockerGalleryComponent implements OnDestroy, OnInit {
+export class LockerBookingComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
   private alertContext: any;
-  public gallery: LockerGallery;
-  public galleryCollections: Array<LockerGallery>;
-  public galleryPhotos: Array<LockerGalleryPhoto>;
+  public bookingSection: LockerBookingSection;
+  public bookingSectionCollections: Array<LockerBookingSection>;
+  public bookingSectionPhotos: Array<LockerBookingSectionPhoto>;
   public viewContent: ViewType;
   public viewType = ViewType;
-  public formFields: GFormFields = GalleryForm;
+  public formFields: GFormFields = BookingSectionForm;
   public formOptions: GFormOptions = LockerFormOptions;
 
   @ViewChild(GsFormComponent, { static: false }) formComponent: GsFormComponent;
@@ -40,9 +40,8 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     private alertService: AlertService,
     private gsFormService: GsFormsService
   ) { }
-
   ngOnInit() {
-    this.getGalleryCollections();
+    this.getSectionCollections();
   }
 
   ngOnDestroy() {
@@ -50,38 +49,38 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     this.destroyed$.complete();
   }
 
-  private getGalleryCollections() {
+  private getSectionCollections() {
     this.loader.start();
-    this.lockerService.listGalleryCollection()
+    this.lockerService.listBookingSectionCollection()
       .pipe(take(1), takeUntil(this.destroyed$))
-      .subscribe(galleryCollections => {
-        this.galleryCollections = galleryCollections;
+      .subscribe(sectionCollections => {
+        this.bookingSectionCollections = sectionCollections;
         this.loader.stop();
       }, error => {
-        console.error(error, 'LockerGalleryComponent.getGallery');
+        console.error(error, 'LockerBookingComponent.getBookingSection');
         this.loader.stop();
       });
   }
 
-  public getGalleryPhotos(gallery: LockerGallery) {
+  public getBookingSectionPhotos(bookingSection: LockerBookingSection) {
     this.loader.start();
-    this.lockerService.getGalleryPhotoDocument(gallery.id)
+    this.lockerService.getBookingSectionPhotoDocument(bookingSection.id)
       .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(galleryDocuments => {
-        this.gallery = gallery;
+        this.bookingSection = bookingSection;
         this.viewContent = ViewType.DETAIL;
-        this.galleryPhotos = galleryDocuments;
+        this.bookingSectionPhotos = galleryDocuments;
         this.loader.stop();
       }, error => {
-        console.error(error, 'LockerGalleryComponent.getGalleryPhotos');
+        console.error(error, 'LockerBookingComponent.getBookingSectionPhotos');
         this.loader.stop();
       });
   }
 
-  public addNewGallery() {
+  public addNewBookingSection() {
     this.loader.start();
     this.viewContent = ViewType.ADD;
-    this.gallery = null;
+    this.bookingSection = null;
 
     setTimeout(() => {
       if (this.formComponent) {
@@ -91,25 +90,26 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     }, 500);
   }
 
-  public writeGallery(form: FormGroup) {
+  public writeBookingSection(form: FormGroup) {
     this.loader.start();
 
-    this.lockerService[this.gallery ? 'updateGallery' : 'createGallery']({
-      gallery: {
+    this.lockerService[this.bookingSection ? 'updateBookingSection' : 'createBookingSection']({
+      bookingSection: {
         title: form.value.title,
+        type: form.value.type,
         position: form.value.position
-      }, id: this.gallery ? this.gallery.id : form.value.title.replace(/ /g, '').toLowerCase(),
+      }, id: this.bookingSection ? this.bookingSection.id : form.value.title.replace(/ /g, '').toLowerCase(),
     })
       .then(() => {
-        this.formFields = GalleryForm;
+        this.formFields = BookingSectionForm;
         this.viewContent = null;
-        this.gallery = null;
+        this.bookingSection = null;
         this.loader.stop();
-        this.getGalleryCollections();
+        this.getSectionCollections();
       })
       .catch(error => {
         this.loader.stop();
-        console.error(error, 'LockerGalleryComponent.onAddNewGallery');
+        console.error(error, 'LockerBookingComponent.onAddNewBookingSection');
       });
   }
 
@@ -126,19 +126,19 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(imageUrl => {
-          this.lockerService.createGalleryImage(this.gallery.id, { img: imageUrl, position: 20 })
+          this.lockerService.createBookingSectionImage(this.bookingSection.id, { img: imageUrl, position: 20 })
             .then(() => {
               this.loader.stop();
-              this.getGalleryPhotos(this.gallery);
+              this.getBookingSectionPhotos(this.bookingSection);
             }).catch(error => {
-              console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
-              this.loader.stop();
-            });
+            console.error(error, 'LockerBookingComponent.onAddImage at lockerService.createLockerBookingSectionImage');
+            this.loader.stop();
+          });
         });
       })
     ).subscribe(() => null, error => {
       this.loader.stop();
-      console.error(error, 'LockerGalleryComponent.onAddImage at task.snapshotChanges');
+      console.error(error, 'LockerBookingComponent.onAddImage at task.snapshotChanges');
     });
   }
 
@@ -152,41 +152,41 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     this.alertService.close(id);
   }
 
-  public onDeleteGallery() {
+  public onDeleteBookingSection() {
     this.loader.start();
-    this.lockerService.deleteGallery(this.gallery.id)
+    this.lockerService.deleteBookingSection(this.bookingSection.id)
       .then(() => {
-        this.closeAlert('deleteGalleryAlert');
-        this.gallery = null;
+        this.closeAlert('deleteBookingSectionAlert');
+        this.bookingSection = null;
         this.viewContent = null;
         this.loader.stop();
-        this.getGalleryCollections();
+        this.getSectionCollections();
       })
       .catch(error => {
-        console.error(error, 'LockerGalleryComponent.onDeleteGallery');
-        this.closeAlert('deleteGalleryAlert');
+        console.error(error, 'LockerBookingComponent.onDeleteBookingSection');
+        this.closeAlert('deleteBookingSectionAlert');
         this.loader.stop();
       });
   }
 
-  public onDeleteGalleryPhoto() {
+  public onDeleteBookingSectionPhoto() {
     this.loader.start();
     const photo = this.alertContext;
 
-    this.lockerService.deleteGalleryImage(this.gallery.id, photo.id)
+    this.lockerService.deleteBookingSectionImage(this.bookingSection.id, photo.id)
       .then(() => {
-        this.closeAlert('deleteGalleryImageAlert');
-        this.getGalleryPhotos(this.gallery);
+        this.closeAlert('deleteBookingSectionImageAlert');
+        this.getBookingSectionPhotos(this.bookingSection);
         this.loader.stop();
       })
       .catch(error => {
-        console.error(error, 'LockerGalleryComponent.onDeleteGalleryPhoto');
-        this.closeAlert('deleteGalleryImageAlert');
+        console.error(error, 'LockerBookingComponent.onDeleteBookingSectionPhoto');
+        this.closeAlert('deleteBookingSectionImageAlert');
         this.loader.stop();
       });
   }
 
-  public readGallery(galleryId: string): void {
+  public readBookingSection(galleryId: string): void {
     this.loader.start();
 
     this.formFields = null;
@@ -194,24 +194,24 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
       this.formComponent.formActions('reset');
     }
 
-    this.lockerService.readGalleryDocument(galleryId)
+    this.lockerService.readBookingSectionDocument(galleryId)
       .pipe(take(1))
       .toPromise()
-      .then(gallery => {
+      .then(bookingSection => {
         this.viewContent = ViewType.EDIT;
-        this.gallery = gallery;
-        this.gallery.id = galleryId;
-        this.formFields = this.gsFormService.patchFormValues(GalleryForm, gallery);
+        this.bookingSection = bookingSection;
+        this.bookingSection.id = galleryId;
+        this.formFields = this.gsFormService.patchFormValues(BookingSectionForm, bookingSection);
       })
-      .catch(error => console.error(error, 'LockerGalleryComponent.readGallery'))
+      .catch(error => console.error(error, 'LockerBookingComponent.readBookingSection'))
       .finally(() => this.loader.stop());
   }
 
-  public updateImagePosition(event: any, photo: LockerGalleryPhoto) {
+  public updateImagePosition(event: any, photo: LockerBookingSectionPhoto) {
     this.loader.start();
 
-    this.lockerService.changeGalleryImagePosition(
-      this.gallery.id,
+    this.lockerService.changeBookingSectionImagePosition(
+      this.bookingSection.id,
       photo.id,
       {
         img: photo.src,
@@ -219,9 +219,9 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
       }
     ).then(() => {
       this.loader.stop();
-      this.getGalleryPhotos(this.gallery);
+      this.getBookingSectionPhotos(this.bookingSection);
     }).catch(error => {
-      console.error(error, 'LockerGalleryComponent.updateImagePosition');
+      console.error(error, 'LockerBookingComponent.updateImagePosition');
       this.loader.stop();
     });
   }

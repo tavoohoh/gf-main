@@ -23,6 +23,10 @@ export class LockerComponent implements OnDestroy, OnInit {
       name: 'NAVIGATION.BIO'
     },
     {
+      url: '/admin/booking',
+      name: 'NAVIGATION.BOOKING'
+    },
+    {
       url: '/admin/contact',
       name: 'NAVIGATION.CONTACT'
     },

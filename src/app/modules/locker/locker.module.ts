@@ -20,6 +20,7 @@ import { LockerGeneralComponent } from './locker-general/locker-general.componen
 import { LockerMusicComponent } from './locker-music/locker-music.component';
 import { LockerVideoComponent } from './locker-video/locker-video.component';
 import { LockerComponent } from './locker.component';
+import {LockerBookingComponent} from "@app/modules/locker/locker-booking/locker-booking.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'contact',
         component: LockerContactComponent
+      },
+      {
+        path: 'booking',
+        component: LockerBookingComponent
       },
       {
         path: 'dates',
@@ -70,6 +75,7 @@ const routes: Routes = [
     LockerComponent,
     LockerGeneralComponent,
     LockerBioComponent,
+    LockerBookingComponent,
     LockerContactComponent,
     LockerDatesComponent,
     LockerGalleryComponent,

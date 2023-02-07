@@ -39,7 +39,6 @@ export class LockerContactComponent implements OnInit, OnDestroy {
   private setForm(data: LockerContactInfo): void {
     const values: any = data;
     values.usaPhone = data.usaPhone.phone;
-    values.venPhone = data.venPhone.phone;
 
     this.formFields = this.gsFormService.patchFormValues(ContactInfoForm, data);
     this.loader.stop();

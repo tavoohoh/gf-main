@@ -58,3 +58,20 @@ export interface LockerMusic {
   } | any;
   id?: string;
 }
+
+export interface LockerBookingSectionPhoto {
+  img: any;
+  position: number;
+  id?: string;
+  src?: string;
+}
+
+export interface LockerBookingSection {
+  title: string;
+  type: 'TEXT' | 'VIDEO' | 'PHOTO';
+  position?: number;
+  id?: string;
+  text?: string;
+  videoUrl?: string;
+  images?: LockerBookingSectionPhoto[];
+}
