@@ -153,6 +153,13 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteBookingSection() {
+    if (!this.bookingSection) {
+      this.bookingSection = null;
+      this.viewContent = null;
+      this.closeAlert('deleteBookingSectionAlert');
+      return;
+    }
+
     this.loader.start();
     this.lockerService.deleteBookingSection(this.bookingSection.id)
       .then(() => {

@@ -35,9 +35,9 @@
       (form)="writeBookingSection($event)">
     </gs-form>
 
-    <!-- gallery actions -->
+    <!-- actions -->
     <div class="booking-section-actions">
-      <button (click)="openAlert(bookingSection.id, 'deleteBookingSectionAlert')"
+      <button (click)="openAlert(bookingSection?.id, 'deleteBookingSectionAlert')"
         class="locker-btn delete-btn"
         type="button">
         Delete
@@ -46,11 +46,16 @@
   </div>
 </div>
 
-<input
-  #imageInput
-  class="hiddenInput"
-  type="file"
-  id="imageInput"
-  accept="image/png, image/jpeg"
-  (change)="onAddImage($event)"
-/>
+<!-- delete gallery alert -->
+<app-alert id="deleteBookingSectionAlert" [title]="'Delete Section'">
+  <p>Are you sure you want to delete this section</p>
+
+  <div class="gs-alert-actions">
+    <button (click)="closeAlert('deleteBookingSectionAlert')">
+      {{ 'FORM.CANCEL' | translate }}
+    </button>
+    <button class="btn-confirm" (click)="onDeleteBookingSection()">
+      {{ 'FORM.DELETE' | translate }}
+    </button>
+  </div>
+</app-alert>

@@ -224,6 +224,16 @@ export const MusicForm: GFormFields = [
   })
 ];
 
+const bookingSectionFileConfig = {
+  label: 'Select an image',
+  returnFile: true,
+  accept: '.png, .jpg, .jpeg',
+  displayIf: {
+    model: 'type',
+    hasValue: 'GALLERY'
+  }
+};
+
 export const BookingSectionForm: GFormFields = [
   new GTextField({
     model: 'title',
@@ -233,6 +243,12 @@ export const BookingSectionForm: GFormFields = [
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
+  }),
+  new GTextareaField({
+    model: 'text',
+    label: 'Content',
+    placeholder: 'Type content',
+    value: ''
   }),
   new GTextField({
     model: 'type',
@@ -253,14 +269,40 @@ export const BookingSectionForm: GFormFields = [
       hasValue: 'VIDEO'
     }
   }),
-  new GTextareaField({
-    model: 'TEXT',
-    label: 'Content',
-    placeholder: 'Type content',
-    value: '',
+  new GDivider({
+    model: 'gallery',
+    seccionName: 'Images',
     displayIf: {
       model: 'type',
-      hasValue: 'TEXT'
+      hasValue: 'GALLERY'
     }
   }),
+  new GFieldFile({
+    model: 'image1',
+    ...bookingSectionFileConfig
+  }),
+  new GFieldFile({
+    model: 'image1',
+    ...bookingSectionFileConfig
+  }),
+  new GFieldFile({
+    model: 'image2',
+    ...bookingSectionFileConfig
+  }),
+  new GFieldFile({
+    model: 'image3',
+    ...bookingSectionFileConfig
+  }),
+  new GFieldFile({
+    model: 'image4',
+    ...bookingSectionFileConfig
+  }),
+  new GFieldFile({
+    model: 'image5',
+    ...bookingSectionFileConfig
+  }),
+  new GFieldFile({
+    model: 'image6',
+    ...bookingSectionFileConfig
+  })
 ];
