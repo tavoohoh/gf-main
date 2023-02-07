@@ -2,7 +2,7 @@
   {{ 'EDIT.GALLERY' | translate }}
 </h2>
 
-<div class="locker-view-editor locker-bookingSection">
+<div class="locker-view-editor locker-booking-section">
 
   <!-- menu -->
   <div class="collections">
@@ -27,19 +27,30 @@
   </div>
 
   <!-- content -->
-  <div class="content">
-    <div class="content-detail" *ngIf="viewContent === viewType.DETAIL">
-      detail
-    </div>
+  <div class="content" *ngIf="viewContent">
+    <gs-form
+      *ngIf="formOptions"
+      [formFields]="formFields"
+      [formOptions]="formOptions"
+      (form)="writeBookingSection($event)">
+    </gs-form>
 
-    <div class="content-add" *ngIf="viewContent === viewType.ADD || viewContent === viewType.EDIT">
-      <gs-form
-        *ngIf="formOptions"
-        [formFields]="formFields"
-        [formOptions]="formOptions"
-        (form)="writeBookingSection($event)">
-      </gs-form>
+    <!-- gallery actions -->
+    <div class="booking-section-actions">
+      <button (click)="openAlert(bookingSection.id, 'deleteBookingSectionAlert')"
+        class="locker-btn delete-btn"
+        type="button">
+        Delete
+      </button>
     </div>
-
   </div>
 </div>
+
+<input
+  #imageInput
+  class="hiddenInput"
+  type="file"
+  id="imageInput"
+  accept="image/png, image/jpeg"
+  (change)="onAddImage($event)"
+/>

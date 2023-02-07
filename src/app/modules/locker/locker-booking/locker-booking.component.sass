@@ -1,0 +1,83 @@
+@import 'variables'
+
+.locker-booking-section
+  .content
+    .booking-section-actions
+      display: grid
+      grid-column: 1
+      grid-row: 1
+
+      .locker-btn.delete-btn
+        text-align: center
+
+    .image-container-actions
+      margin-top: 2rem
+
+    .image-container
+      display: grid
+      grid-template-rows: auto
+      grid-template-columns: repeat(3, 180px)
+      gap: 1rem
+
+      .image-card
+        padding: 1rem
+        background-color: lighten($black, 10)
+
+        .actions
+          padding-top: 1rem
+          display: grid
+          grid-template-columns: auto 1fr
+
+          .image-position
+            align-self: center
+            display: grid
+            grid-template-columns: auto 26px
+            gap: 0.5rem
+
+            label
+              align-self: center
+              font-size: 0.8rem
+
+            input
+              text-align: center
+              padding: 0.3rem
+              align-self: center
+              background: none
+              border: none
+              background-color: lighten($black, 30)
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button
+              -webkit-appearance: none
+              margin: 0
+            input[type=number]
+              -moz-appearance: textfield
+
+          button
+            align-self: center
+            padding: 4px
+            display: block
+            width: max-content
+            margin-left: auto
+
+        .image
+          height: 150px
+          width: 100%
+          background-position: center
+          background-repeat: no-repeat
+          background-size: contain
+
+      .action-card
+        transition: $transition
+
+        &:hover
+          background-color: lighten($black, 15)
+
+        .image
+          width: 80px
+          margin: auto
+          display: block
+          fill: lighten($black, 2)
+
+.hiddenInput
+  display: none
