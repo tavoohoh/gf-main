@@ -194,6 +194,7 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
     this.loader.start();
 
     this.formFields = null;
+
     if (this.formComponent) {
       this.formComponent.formActions('reset');
     }
