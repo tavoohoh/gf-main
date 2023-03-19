@@ -126,14 +126,15 @@ export class LockerGalleryComponent implements OnDestroy, OnInit {
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(imageUrl => {
-          this.lockerService.createGalleryImage(this.gallery.id, { img: imageUrl, position: 20 })
-            .then(() => {
-              this.loader.stop();
-              this.getGalleryPhotos(this.gallery);
-            }).catch(error => {
-              console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
-              this.loader.stop();
-            });
+          this.lockerService.createGalleryImage(
+            this.gallery.id, { img: imageUrl, position: 20 }
+          ).then(() => {
+            this.loader.stop();
+            this.getGalleryPhotos(this.gallery);
+          }).catch(error => {
+            console.error(error, 'LockerGalleryComponent.onAddImage at lockerService.createLockerGalleryImage');
+            this.loader.stop();
+          });
         });
       })
     ).subscribe(() => null, error => {

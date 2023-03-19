@@ -10,7 +10,7 @@ import { GFormFields, GFormOptions, GsFormComponent, GsFormsService } from '@gs/
 import 'firebase/storage';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { finalize, take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-locker-booking',
@@ -29,6 +29,10 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
   public viewType = ViewType;
   public formFields: GFormFields = BookingSectionForm;
   public formOptions: GFormOptions = LockerFormOptions;
+  private modelTemplate = {
+    images: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6'],
+    urls: ['url1', 'url2', 'url3', 'url4', 'url5', 'url6'],
+  };
 
   @ViewChild(GsFormComponent, { static: false }) formComponent: GsFormComponent;
 
@@ -74,17 +78,70 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  public writeBookingSection(form: FormGroup) {
+  public async uploadImages(form: FormGroup) {
+    const models = this.modelTemplate.images;
+    const urls = [];
+
+    await Promise.all(models.map(async (image) => {
+      const file: File = form.value[image];
+
+      if (!Boolean(file)) {
+        return;
+      }
+
+      const fileRef = this.storage.ref(file.name);
+      const task = this.storage.upload(file.name, file);
+
+      await task.snapshotChanges().pipe(
+        finalize(
+          async () => fileRef.getDownloadURL().subscribe(url => urls.push(url))
+        )
+      ).toPromise();
+    }));
+
+    return urls;
+  }
+
+  public async writeBookingSection(form: FormGroup) {
     this.loader.start();
 
+    let body: any = {
+      title: form.value.title,
+      content: form.value.content,
+      type: form.value.type,
+      position: form.value.position
+    };
+
+    switch (form.value.type) {
+      case 'GALLERY':
+        const galleryUrls = await this.uploadImages(form);
+
+        body = {
+          ...body,
+          urls: galleryUrls
+        };
+
+        break;
+      case 'VIDEO':
+        const models = this.modelTemplate.urls;
+        models.forEach(model => {
+          const url = form.value[model];
+          const videoUrls = [];
+
+          if (Boolean(url)) {
+            videoUrls.push(url);
+          }
+
+          body = {
+            ...body,
+            urls: videoUrls
+          };
+        });
+        break;
+    }
+
     this.lockerService[this.bookingSection ? 'updateBookingSection' : 'createBookingSection']({
-      bookingSection: {
-        title: form.value.title,
-        content: form.value.content,
-        type: form.value.type,
-        position: form.value.position,
-        text: form.value.text
-      }, id: this.bookingSection ? this.bookingSection.id : form.value.title.replace(/ /g, '').toLowerCase(),
+      bookingSection: body, id: this.bookingSection ? this.bookingSection.id : form.value.title.replace(/ /g, '').toLowerCase(),
     })
       .then(() => {
         this.formFields = BookingSectionForm;
@@ -129,22 +186,6 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
       .catch(error => {
         console.error(error, 'LockerBookingComponent.onDeleteBookingSection');
         this.closeAlert('deleteBookingSectionAlert');
-        this.loader.stop();
-      });
-  }
-
-  public onDeleteBookingSectionPhoto() {
-    this.loader.start();
-    const photo = this.alertContext;
-
-    this.lockerService.deleteBookingSectionImage(this.bookingSection.id, photo.id)
-      .then(() => {
-        this.closeAlert('deleteBookingSectionImageAlert');
-        this.loader.stop();
-      })
-      .catch(error => {
-        console.error(error, 'LockerBookingComponent.onDeleteBookingSectionPhoto');
-        this.closeAlert('deleteBookingSectionImageAlert');
         this.loader.stop();
       });
   }

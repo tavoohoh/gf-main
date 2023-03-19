@@ -301,7 +301,7 @@ export class LockerService {
 
   public async createBookingSection(data: { bookingSection: LockerBookingSection, id?: string }): Promise<boolean> {
     const collection = this.afs.collection<LockerBookingSection>('bookingSection');
-    return await collection.doc(data.id).set(data.bookingSection).then(() => true);
+    return await collection.add(data.bookingSection).then(() => true);
   }
 
   public async updateBookingSection(data: { bookingSection: LockerBookingSection, id: string }): Promise<boolean> {
@@ -311,11 +311,6 @@ export class LockerService {
 
   public async deleteBookingSection(bookingSectionId: string): Promise<boolean> {
     const document = this.afs.doc(`bookingSection/${bookingSectionId}`);
-    return await document.delete().then(() => true);
-  }
-
-  public async deleteBookingSectionImage(bookingSectionId: string, bookingSectionImageId: string): Promise<boolean> {
-    const document = this.afs.doc(`bookingSection/${bookingSectionId}/photos/${bookingSectionImageId}`);
     return await document.delete().then(() => true);
   }
 }

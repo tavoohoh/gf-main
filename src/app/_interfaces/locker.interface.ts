@@ -59,17 +59,11 @@ export interface LockerMusic {
   id?: string;
 }
 
-export interface LockerBookingSectionUrl {
-  id?: string;
-  src?: string;
-}
-
 export interface LockerBookingSection {
   id?: string;
   title: string;
   content: string;
-  type: 'TEXT' | 'VIDEO' | 'PHOTO';
+  type: 'TEXT' | 'VIDEO' | 'GALLERY';
   position: number;
-  urls?: LockerBookingSectionUrl[];
-  text?: string;
+  urls?: string[];
 }

@@ -255,10 +255,20 @@ export const BookingSectionForm: GFormFields = [
     },
   }),
   new GTextareaField({
-    model: 'text',
+    model: 'content',
     label: 'Content',
     placeholder: 'Type content',
     value: ''
+  }),
+  new GNumberField({
+    model: 'position',
+    label: 'FORM.POSITION',
+    placeholder: 'FORM.POSITION',
+    validators: {
+      [GFieldValidatorType.REQUIRED]: true,
+      [GFieldValidatorType.MIN]: 1,
+      [GFieldValidatorType.MAX]: 20
+    },
   }),
   new GTextField({
     model: 'type',
