@@ -234,6 +234,16 @@ const bookingSectionFileConfig = {
   }
 };
 
+const bookingSectionUrlConfig = {
+  label: 'Url',
+  placeholder: 'Video url',
+  value: '',
+  displayIf: {
+    model: 'type',
+    hasValue: 'VIDEO'
+  }
+};
+
 export const BookingSectionForm: GFormFields = [
   new GTextField({
     model: 'title',
@@ -258,16 +268,6 @@ export const BookingSectionForm: GFormFields = [
     validators: {
       [GFieldValidatorType.REQUIRED]: true
     },
-  }),
-  new GTextField({
-    model: 'videoUrl',
-    label: 'Url',
-    placeholder: 'Video url',
-    value: '',
-    displayIf: {
-      model: 'type',
-      hasValue: 'VIDEO'
-    }
   }),
   new GDivider({
     model: 'gallery',
@@ -304,5 +304,37 @@ export const BookingSectionForm: GFormFields = [
   new GFieldFile({
     model: 'image6',
     ...bookingSectionFileConfig
-  })
+  }),
+  new GDivider({
+    model: 'videos',
+    seccionName: 'Videos',
+    displayIf: {
+      model: 'type',
+      hasValue: 'VIDEO'
+    }
+  }),
+  new GTextField({
+    model: 'url1',
+    ...bookingSectionUrlConfig
+  }),
+  new GTextField({
+    model: 'url2',
+    ...bookingSectionUrlConfig
+  }),
+  new GTextField({
+    model: 'url3',
+    ...bookingSectionUrlConfig
+  }),
+  new GTextField({
+    model: 'url4',
+    ...bookingSectionUrlConfig
+  }),
+  new GTextField({
+    model: 'url5',
+    ...bookingSectionUrlConfig
+  }),
+  new GTextField({
+    model: 'url6',
+    ...bookingSectionUrlConfig
+  }),
 ];

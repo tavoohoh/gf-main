@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
-  LockerBio, LockerBookingSection, LockerBookingSectionPhoto,
+  LockerBio, LockerBookingSection,
   LockerContactInfo,
   LockerDate,
   LockerGallery,
@@ -275,7 +275,7 @@ export class LockerService {
 
 
   /**
-   * Gallery
+   * Booking
    */
   private mapBookingSectionValues(value: any): LockerBookingSection {
     const data = value.payload.doc.data() as LockerBookingSection;
@@ -285,33 +285,11 @@ export class LockerService {
     };
   }
 
-  private mapBookingSectionPhotoValues(value: any): LockerBookingSectionPhoto {
-    const data = value.payload.doc.data() as LockerBookingSectionPhoto;
-    return {
-      id: value.payload.doc.id,
-      img: this.sanitizer.bypassSecurityTrustStyle(`url(${data.img})`),
-      position: data.position,
-      src: data.img
-    };
-  }
-
   public listBookingSectionCollection(): Observable<Array<LockerBookingSection>> {
     const collection = this.afs.collection<LockerBookingSection>('bookingSection', ref => ref.orderBy('position', 'asc'));
     return collection.snapshotChanges().pipe(map(actions => {
       return actions.map(value => {
         return this.mapBookingSectionValues(value);
-      });
-    }));
-  }
-
-  public getBookingSectionPhotoDocument(bookingSectionId: string): Observable<LockerBookingSectionPhoto[]> {
-    const document = this.afs.collection<LockerBookingSectionPhoto>(
-      `bookingSection/${bookingSectionId}/photos`,
-        ref => ref.orderBy('position', 'asc')
-    );
-    return document.snapshotChanges().pipe(map(actions => {
-      return actions.map(value => {
-        return this.mapGalleryPhotoValues(value);
       });
     }));
   }
@@ -336,22 +314,8 @@ export class LockerService {
     return await document.delete().then(() => true);
   }
 
-  public async createBookingSectionImage(bookingSectionId: string, photo?: LockerBookingSectionPhoto): Promise<boolean> {
-    const collection = this.afs.collection<{ img: string }>(`bookingSection/${bookingSectionId}/photos`);
-    return await collection.add(photo).then(() => true);
-  }
-
   public async deleteBookingSectionImage(bookingSectionId: string, bookingSectionImageId: string): Promise<boolean> {
     const document = this.afs.doc(`bookingSection/${bookingSectionId}/photos/${bookingSectionImageId}`);
     return await document.delete().then(() => true);
-  }
-
-  public async changeBookingSectionImagePosition(
-    bookingSectionId: string,
-    photoId: string,
-    photo: LockerBookingSectionPhoto
-  ): Promise<boolean> {
-    const document = this.afs.doc(`bookingSection/${bookingSectionId}/photos/${photoId}`);
-    return await document.update(photo).then(() => true);
   }
 }
