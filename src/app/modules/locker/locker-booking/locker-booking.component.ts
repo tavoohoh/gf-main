@@ -31,7 +31,7 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
   public formOptions: GFormOptions = LockerFormOptions;
   private modelTemplate = {
     images: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6'],
-    urls: ['url1', 'url2', 'url3', 'url4', 'url5', 'url6'],
+    urls: ['id1', 'id2', 'id3', 'id4', 'id5', 'id6'],
   };
 
   @ViewChild(GsFormComponent, { static: false }) formComponent: GsFormComponent;
@@ -199,7 +199,24 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
       .toPromise()
       .then(bookingSection => {
         if (bookingSection.urls && (typeof bookingSection.urls === 'string')) {
-          bookingSection.urls = JSON.parse(bookingSection.urls as string) || [];
+          const urls = JSON.parse(bookingSection.urls as string) || [];
+          let key = '';
+
+          switch (bookingSection.type) {
+            case 'VIDEO':
+              key = 'id';
+              break;
+            case 'GALLERY':
+              key = 'image';
+              break;
+          }
+
+          urls.forEach((o, i) => {
+            bookingSection = {
+              ...bookingSection,
+              [`${key}${i + 1}`]: o
+            };
+          });
         }
 
         this.viewContent = ViewType.EDIT;

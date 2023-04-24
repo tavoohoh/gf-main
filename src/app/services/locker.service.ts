@@ -301,6 +301,13 @@ export class LockerService {
 
   public async createBookingSection(data: { bookingSection: LockerBookingSection, id?: string }): Promise<boolean> {
     const collection = this.afs.collection<LockerBookingSection>('bookingSection');
+
+    if (data.bookingSection.raw_urls) {
+      data.bookingSection.urls = JSON.stringify(data.bookingSection.raw_urls);
+
+      delete data.bookingSection.raw_urls;
+    }
+
     return await collection.add(data.bookingSection).then(() => true);
   }
 

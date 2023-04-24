@@ -235,8 +235,8 @@ const bookingSectionFileConfig = {
 };
 
 const bookingSectionUrlConfig = {
-  label: 'Url',
-  placeholder: 'Video url',
+  label: 'Id',
+  placeholder: 'Video id',
   value: '',
   displayIf: {
     model: 'type',
@@ -324,27 +324,27 @@ export const BookingSectionForm: GFormFields = [
     }
   }),
   new GTextField({
-    model: 'url1',
+    model: 'id1',
     ...bookingSectionUrlConfig
   }),
   new GTextField({
-    model: 'url2',
+    model: 'id2',
     ...bookingSectionUrlConfig
   }),
   new GTextField({
-    model: 'url3',
+    model: 'id3',
     ...bookingSectionUrlConfig
   }),
   new GTextField({
-    model: 'url4',
+    model: 'id4',
     ...bookingSectionUrlConfig
   }),
   new GTextField({
-    model: 'url5',
+    model: 'id5',
     ...bookingSectionUrlConfig
   }),
   new GTextField({
-    model: 'url6',
+    model: 'id6',
     ...bookingSectionUrlConfig
   }),
 ];
