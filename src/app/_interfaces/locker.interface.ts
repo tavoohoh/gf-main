@@ -65,5 +65,6 @@ export interface LockerBookingSection {
   content: string;
   type: 'TEXT' | 'VIDEO' | 'GALLERY';
   position: number;
-  urls?: string[];
+  urls?: string | string[];
+  raw_urls?: string[];
 }

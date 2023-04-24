@@ -305,8 +305,15 @@ export class LockerService {
   }
 
   public async updateBookingSection(data: { bookingSection: LockerBookingSection, id: string }): Promise<boolean> {
-    const collection = this.afs.doc<LockerDate>(`bookingSection/${data.id}`);
-    return await collection.update(data.bookingSection).then(() => true);
+    const collection = this.afs.doc<LockerBookingSection>(`bookingSection/${data.id}`);
+
+    if (data.bookingSection.raw_urls) {
+      data.bookingSection.urls = JSON.stringify(data.bookingSection.raw_urls);
+
+      delete data.bookingSection.raw_urls;
+    }
+
+    return await collection.set(data.bookingSection).then(() => true);
   }
 
   public async deleteBookingSection(bookingSectionId: string): Promise<boolean> {

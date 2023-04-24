@@ -78,7 +78,7 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  public async uploadImages(form: FormGroup) {
+  public async uploadImages(form: FormGroup): Promise<string[]> {
     const models = this.modelTemplate.images;
     const urls = [];
 
@@ -94,7 +94,9 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
 
       await task.snapshotChanges().pipe(
         finalize(
-          async () => fileRef.getDownloadURL().subscribe(url => urls.push(url))
+          async () => fileRef.getDownloadURL().subscribe(
+            url => urls.push(url.toString())
+          )
         )
       ).toPromise();
     }));
@@ -105,37 +107,30 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
   public async writeBookingSection(form: FormGroup) {
     this.loader.start();
 
-    let body: any = {
+    const body: any = {
       title: form.value.title,
       content: form.value.content,
       type: form.value.type,
-      position: form.value.position
+      position: form.value.position,
+      raw_urls: [],
+      urls: ''
     };
 
     switch (form.value.type) {
       case 'GALLERY':
-        const galleryUrls = await this.uploadImages(form);
+        const urls = await this.uploadImages(form);
 
-        body = {
-          ...body,
-          urls: galleryUrls
-        };
+        body.raw_urls = urls;
 
         break;
       case 'VIDEO':
         const models = this.modelTemplate.urls;
         models.forEach(model => {
           const url = form.value[model];
-          const videoUrls = [];
 
           if (Boolean(url)) {
-            videoUrls.push(url);
+            body.raw_urls.push(url);
           }
-
-          body = {
-            ...body,
-            urls: videoUrls
-          };
         });
         break;
     }
@@ -203,9 +198,14 @@ export class LockerBookingComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .toPromise()
       .then(bookingSection => {
+        if (bookingSection.urls && (typeof bookingSection.urls === 'string')) {
+          bookingSection.urls = JSON.parse(bookingSection.urls as string) || [];
+        }
+
         this.viewContent = ViewType.EDIT;
         this.bookingSection = bookingSection;
         this.bookingSection.id = galleryId;
+
         this.formFields = this.gsFormService.patchFormValues(BookingSectionForm, bookingSection);
       })
       .catch(error => console.error(error, 'LockerBookingComponent.readBookingSection'))
