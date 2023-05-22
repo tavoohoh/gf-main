@@ -6,11 +6,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.sass']
+  selector: 'app-booking',
+  templateUrl: './booking.component.html',
+  styleUrls: ['./booking.component.sass']
 })
-export class ContactComponent implements OnInit, OnDestroy {
+export class BookingComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
   public contactInfo: {
     usaEmail: string,

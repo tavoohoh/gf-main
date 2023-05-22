@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WidgetsModule } from '@app/_widgets/widgets.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { BioComponent } from './bio/bio.component';
-import { ContactComponent } from './contact/contact.component';
+import { BookingComponent } from './booking/booking.component';
 import { DatesComponent } from './dates/dates.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HomeComponent } from './home/home.component';
@@ -24,8 +24,8 @@ const routes: Routes = [
         component: BioComponent
       },
       {
-        path: 'contact',
-        component: ContactComponent
+        path: 'booking',
+        component: BookingComponent
       },
       {
         path: 'dates',
@@ -51,7 +51,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     BioComponent,
-    ContactComponent,
+    BookingComponent,
     DatesComponent,
     GalleryComponent,
     HomeComponent,

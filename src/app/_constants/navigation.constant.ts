@@ -26,7 +26,7 @@ export const NAVIGATION: Array<NavigationInterface> = [
     url: '/dates'
   },
   {
-    text: 'NAVIGATION.CONTACT',
-    url: '/contact'
+    text: 'NAVIGATION.BOOKING',
+    url: '/booking'
   }
 ];
