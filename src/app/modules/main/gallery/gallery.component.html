@@ -4,12 +4,13 @@
     <div class="gallery" *ngFor="let gallery of galleries">
       <h2>{{ gallery.title }}</h2>
       <div class="gallery-images">
-        <img 
+        <img
           *ngFor="let image of gallery.images; let i = index"
           class="image"
           [src]="image.src"
           (click)="openImage({ gallery: gallery.images, position: i })"
-          >
+           alt=""
+        >
       </div>
     </div>
 
@@ -17,13 +18,13 @@
       <p class="call-to-action">
         {{ 'ACTIONS.CALL_TO_ACTION_GALLERY'  | translate }}:
       </p>
-  
+
       <div class="links">
         <a class="gf-button" target="_blank" rel="noopener noreferrer"
           [href]="resourcesLinks.FACEBOOK">
           {{ 'ACTIONS.GOTO_FACEBOOK' | translate }}
         </a>
-    
+
         <a class="gf-button" target="_blank" rel="noopener noreferrer"
           [href]="resourcesLinks.INSTAGRAM">
           {{ 'ACTIONS.GOTO_INSTAGRAM' | translate }}
@@ -37,7 +38,7 @@
 <ng-container *ngIf="imageDisplayed">
   <!-- image displayer background -->
   <div class="image-displayer-background" (click)="closeImage()"></div>
-  
+
   <!-- image displayed -->
   <img class="image-displayed" [src]="imageDisplayed.gallery[imageDisplayed.position].src">
 

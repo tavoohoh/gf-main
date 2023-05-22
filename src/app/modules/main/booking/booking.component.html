@@ -1,5 +1,29 @@
 <div class="booking-page page-container">
-  <div class="content">
+  <!-- sections -->
+  <div class="section" *ngFor="let section of sections">
+    <span class="section-title">
+      {{ section.title }}
+    </span>
+
+    <span class="section-content">
+      {{ section.content }}
+    </span>
+
+    <ng-container *ngIf="section.type === 'GALLERY'">
+      <div class="section-images">
+        <img
+          *ngFor="let url of section.urls; let i = index"
+          class="image"
+          [src]="url"
+          (click)="openImage({ gallery: section.urls, position: i })"
+          alt=""
+        >
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- signature -->
+  <div class="signature">
     <div class="logo">
       <img src="./assets/logo/gf.svg" alt="GF Logo">
     </div>
@@ -20,3 +44,28 @@
     </div>
   </div>
 </div>
+
+<!-- modals -->
+<ng-container *ngIf="imageDisplayed">
+  <!-- image displayer background -->
+  <div class="image-displayer-background" (click)="closeImage()"></div>
+
+  <!-- image displayed -->
+  <img class="image-displayed" [src]="imageDisplayed.gallery[imageDisplayed.position]">
+
+  <!-- navigate right -->
+  <button class="navigate-right" type="button"
+          (click)="nextImage()" *ngIf="imageDisplayed.gallery[imageDisplayed.position + 1]">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+    </svg>
+  </button>
+
+  <!-- navigate left -->
+  <button class="navigate-left" type="button"
+          (click)="previousImage()" *ngIf="imageDisplayed.gallery[imageDisplayed.position - 1]">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/>
+    </svg>
+  </button>
+</ng-container>

@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LockerContactInfo, LockerPhoneModel } from '@app/_interfaces/locker.interface';
+import { LockerContactInfo, LockerGalleryPhoto, LockerPhoneModel } from '@app/_interfaces/locker.interface';
 import { LockerService } from '@app/services/locker.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
+
+interface ImageDisplayedType {
+  gallery: Array<LockerGalleryPhoto>;
+  position: number;
+}
 
 @Component({
   selector: 'app-booking',
@@ -18,6 +23,14 @@ export class BookingComponent implements OnInit, OnDestroy {
     usaPhone: { text: string, link: string }
     venPhone: { text: string, link: string }
   };
+  public sections: Array<{
+    title: string;
+    content: string;
+    type: 'TEXT' | 'VIDEO' | 'GALLERY';
+    position: number;
+    urls?: string | string[];
+  }>;
+  public imageDisplayed: ImageDisplayedType;
 
   constructor(
     private loader: NgxUiLoaderService,
@@ -31,6 +44,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getContactInfo();
+    this.getBookingInfo();
   }
 
   private maskPhoneNumber(val: LockerPhoneModel): string {
@@ -54,15 +68,53 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.loader.stop();
   }
 
-  public getContactInfo() {
+  private getContactInfo() {
     this.loader.start();
     this.lockerService.readContactInfo()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(contactInfo => {
         this.setViewData(contactInfo);
       }, error => {
-        console.error(error, 'ContactComponent.getContactInfo');
+        console.error(error, 'BookingComponent.getContactInfo');
         this.loader.stop();
       });
   }
+
+  private getBookingInfo() {
+    this.lockerService.listBookingSectionCollection()
+      .pipe(take(1), takeUntil(this.destroyed$))
+      .subscribe(sectionCollections => {
+        this.sections = sectionCollections;
+        console.log(sectionCollections)
+        this.loader.stop();
+      }, error => {
+        console.error(error, 'BookingComponent.getBookingInfo');
+        this.loader.stop();
+      });
+  }
+
+  public openImage(imageDisplayed: ImageDisplayedType): void {
+    this.imageDisplayed = imageDisplayed;
+  }
+
+  public nextImage(): void {
+    if (!this.imageDisplayed.gallery[this.imageDisplayed.position + 1]) {
+      return;
+    }
+
+    this.imageDisplayed.position = ++this.imageDisplayed.position;
+  }
+
+  public previousImage(): void {
+    if (!this.imageDisplayed.gallery[this.imageDisplayed.position - 1]) {
+      return;
+    }
+
+    this.imageDisplayed.position = --this.imageDisplayed.position;
+  }
+
+  public closeImage(): void {
+    this.imageDisplayed = null;
+  }
 }
+

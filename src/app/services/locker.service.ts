@@ -279,6 +279,15 @@ export class LockerService {
    */
   private mapBookingSectionValues(value: any): LockerBookingSection {
     const data = value.payload.doc.data() as LockerBookingSection;
+
+    try {
+      if (data.urls && typeof data.urls === 'string') {
+        data.urls = JSON.parse(data.urls);
+      }
+    } catch {
+      console.warn('Unable to parse data urls');
+    }
+
     return {
       id: value.payload.doc.id,
       ...data
