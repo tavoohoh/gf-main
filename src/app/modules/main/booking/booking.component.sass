@@ -120,6 +120,30 @@ $colRepeat: 3
           height: $imageSize
           width: $imageSize
 
+    &-video
+      $videoHeight: 38vw
+      $videoWidth: 64vw
+
+      display: grid
+      grid-template-rows: auto 1fr
+      width: $videoWidth
+      margin: 3rem auto
+
+      .video-frame
+        width: $videoWidth
+        height: $videoHeight
+
+      @media screen and (max-width: 1024px)
+        $videoHeight: 54vw
+        $videoWidth: 80vw
+
+        width: $videoWidth
+
+        .video-frame
+          width: $videoWidth
+          height: $videoHeight
+
+
 .image-displayed,
 .image-displayer-background,
 .navigate-right,

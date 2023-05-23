@@ -20,6 +20,17 @@
         >
       </div>
     </ng-container>
+
+    <ng-container *ngIf="section.type === 'VIDEO'">
+      <div class="section-video" *ngFor="let url of section.urls">
+        <iframe
+          class="video-frame"
+          [src]="url"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+      </div>
+    </ng-container>
   </div>
 
   <!-- signature -->

@@ -283,6 +283,16 @@ export class LockerService {
     try {
       if (data.urls && typeof data.urls === 'string') {
         data.urls = JSON.parse(data.urls);
+
+        if (data.type === 'VIDEO' && typeof data.urls === 'object') {
+          console.log('here');
+          // @ts-ignore
+          data.urls = data.urls.map(
+            url => this.sanitizer.bypassSecurityTrustResourceUrl(
+              `https://www.youtube.com/embed/${url}`
+            )
+          );
+        }
       }
     } catch {
       console.warn('Unable to parse data urls');

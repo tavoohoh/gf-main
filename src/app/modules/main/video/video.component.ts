@@ -36,6 +36,7 @@ export class VideoComponent implements OnDestroy, OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(videosCollection => {
         this.videos = videosCollection;
+        console.log(videosCollection)
         this.loader.stop();
       }, error => {
         console.error(error, 'VideoComponent.getVideos');
