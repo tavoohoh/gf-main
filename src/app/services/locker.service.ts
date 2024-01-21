@@ -285,7 +285,6 @@ export class LockerService {
         data.urls = JSON.parse(data.urls);
 
         if (data.type === 'VIDEO' && typeof data.urls === 'object') {
-          console.log('here');
           // @ts-ignore
           data.urls = data.urls.map(
             url => this.sanitizer.bypassSecurityTrustResourceUrl(

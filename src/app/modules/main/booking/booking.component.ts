@@ -85,10 +85,8 @@ export class BookingComponent implements OnInit, OnDestroy {
       .pipe(take(1), takeUntil(this.destroyed$))
       .subscribe(sectionCollections => {
         this.sections = sectionCollections;
-        console.log(sectionCollections)
         this.loader.stop();
       }, error => {
-        console.error(error, 'BookingComponent.getBookingInfo');
         this.loader.stop();
       });
   }

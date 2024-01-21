@@ -79,7 +79,7 @@ export class LockerDatesComponent implements OnDestroy, OnInit {
   public writeDate(form: FormGroup): void {
     this.loader.start();
 
-    this.lockerService[this.date ? 'updateLockerDateDocument' : 'createLockerDateDocument']({
+    this.lockerService[this.date ? 'updateDateDocument' : 'createDateDocument']({
       date: {
         title: form.value.title,
         location: form.value.location,
